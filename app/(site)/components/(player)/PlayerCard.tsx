@@ -1,0 +1,31 @@
+'use client';
+
+import CardContent from '@/components/CardContent';
+import Like from '@/components/Like';
+import OptionContent from '@/components/OptionContent';
+import usePlayer from '@/hooks/(player)/usePlayer';
+
+const PlayerCard = () => {
+   const { currentSong } = usePlayer();
+   return (
+      <div className="h-20 flex gap-5 items-center justify-between pr-10  ">
+         <CardContent
+            height="h-14"
+            data={currentSong}
+            className="justify-center   overflow-hidden w-28 hidden md:flex"
+            classNameTitle=" animate-run whitespace-nowrap "
+            play
+         />
+         <div className="hidden lg:flex gap-2 items-center ">
+            <OptionContent
+               image={currentSong?.image}
+               like={currentSong?.favorites}
+               size={20}
+               className="w-8 h-8 hover:bg-playerFocus"
+               song={currentSong}
+            />
+         </div>
+      </div>
+   );
+};
+export default PlayerCard;

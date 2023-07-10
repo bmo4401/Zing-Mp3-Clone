@@ -29,7 +29,8 @@ const Search: React.FC<SearchProps> = () => {
    return (
       <div
          className={clsx(
-            'relative w-40 sm:w-60 md:w-80 lg:w-90 xl:w-100    rounded-full  bg-search h-9  ',
+            'relative  sm:w-60 md:w-80 lg:w-90 xl:w-100    rounded-full  bg-search h-9',
+            showSearch ? 'fixed top-0 w-72' : 'w-40',
          )}
       >
          <div
@@ -85,6 +86,7 @@ const Search: React.FC<SearchProps> = () => {
                <Result
                   songs={songs}
                   showSearch={showSearch}
+                  setShowSearch={setShowSearch}
                />
             </div>
          </div>
@@ -119,7 +121,13 @@ function Suggestions() {
    ));
 }
 
-function Songs({ songs }: { songs: Song[] }) {
+function Songs({
+   songs,
+   setShowSearch,
+}: {
+   songs: Song[];
+   setShowSearch: (value: boolean) => void;
+}) {
    const {
       showPlayer,
       setShowPlayer,
@@ -138,6 +146,7 @@ function Songs({ songs }: { songs: Song[] }) {
                song?.src === currentSong?.src
                   ? setContinue()
                   : (setPlaying(song, true), song && setPlaylist(song));
+               setShowSearch(false);
             }
          }}
          className="cursor-pointer flex px-[10px] py-[8px] gap-2 items-center rounded-md hover:bg-[#493961] w-"
@@ -148,6 +157,7 @@ function Songs({ songs }: { songs: Song[] }) {
             width="w-12"
             height="h-12"
             disabled
+            nowrap={true}
          />
       </div>
    ));
@@ -155,9 +165,11 @@ function Songs({ songs }: { songs: Song[] }) {
 const Result = ({
    songs,
    showSearch,
+   setShowSearch,
 }: {
    songs: Song[] | undefined;
    showSearch: boolean;
+   setShowSearch: (value: boolean) => void;
 }) => {
    return (
       <div
@@ -180,7 +192,10 @@ const Result = ({
                      Please try a different search keyword...
                   </h2>
                ) : songs ? (
-                  <Songs songs={songs} />
+                  <Songs
+                     songs={songs}
+                     setShowSearch={setShowSearch}
+                  />
                ) : (
                   <Suggestions />
                )}

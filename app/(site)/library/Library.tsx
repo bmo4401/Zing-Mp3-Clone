@@ -14,7 +14,7 @@ const Library = () => {
             className={clsx(
                'pt-8  lg:flex gap-10  px-12 overflow-hidden overflow-y-auto',
                showPlayer ? 'h-[calc(100vh-70px)]' : 'h-screen',
-               showPlayer ? 'pb-24' : 'pb-10',
+               showPlayer ? 'pb-24' : 'pb-20',
             )}
          >
             <LibraryCard />

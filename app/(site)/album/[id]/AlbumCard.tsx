@@ -44,7 +44,7 @@ const AlbumCard: React.FC<AlbumCardProps> = ({ thumbnails, active }) => {
                      </>
                   ))}
                </div>
-               <span className="text-xs text-contentDesc hover:underline  ">
+               <span className="hidden sm:block text-xs text-contentDesc hover:underline  ">
                   {thumbnails?.favorites
                      ? thumbnails?.favorites + ' người yêu thích'
                      : '(Empty) follows'}

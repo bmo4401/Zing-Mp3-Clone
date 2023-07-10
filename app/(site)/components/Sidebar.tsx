@@ -49,6 +49,20 @@ const Sidebar: React.FC<SidebarProps> = ({ currentUser, children }) => {
       <section className={clsx(' flex overflow-hidden', 'h-screen')}>
          <>
             <div
+               onClick={() => router.push('/', { shallow: true })}
+               className="fixed z-10 top-0 translate-x-1/4 translate-y-1/4  sm:hidden  bg-sidebarActive rounded-full  cursor-pointer opacity-100 hover:opacity-70  flex items-center justify-center"
+            >
+               <Image
+                  alt="Logo"
+                  src={condition(Logo, MobileLogo) || ''}
+                  className={clsx(
+                     condition('', 'aspect-square'),
+                     condition('w-28', 'w-10'),
+                     condition('h-11', 'h-10'),
+                  )}
+               />
+            </div>
+            <div
                className={clsx(
                   ' sm:block overflow-hidden lg:w-54',
                   show || showSidebar ? 'w-54' : 'w-sidebarHeight ',
@@ -70,9 +84,12 @@ const Sidebar: React.FC<SidebarProps> = ({ currentUser, children }) => {
                   )}
                >
                   <div
-                     onClick={() =>
-                        setNavigation(() => router.push('/', { shallow: true }))
-                     }
+                     onClick={() => (
+                        setNavigation(() =>
+                           router.push('/', { shallow: true }),
+                        ),
+                        show && setShow(false)
+                     )}
                      className={clsx(
                         ' hover:opacity-90  h-sidebarHeight cursor-pointer',
                         condition('pl-[25px] pr-[25px]', ''),
@@ -105,7 +122,10 @@ const Sidebar: React.FC<SidebarProps> = ({ currentUser, children }) => {
                      <div className="absolute w-full h-[10px] top-[14px] shadow-lg shadow-slate-900" />
                   </div>
 
-                  <div className="relative pt-[14px] overflow-hidden hover:overflow-y-auto">
+                  <div
+                     onClick={() => show && setShow(false)}
+                     className="relative pt-[14px] overflow-hidden hover:overflow-y-auto"
+                  >
                      <Box
                         data={dataRankings}
                         item={item}
@@ -144,7 +164,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentUser, children }) => {
             ></div>
             <div
                onClick={() => setShow(true)}
-               className="fixed z-10 bottom-0 -translate-y-18 sm:hidden w-9 h-9 bg-sidebarActive rounded-full  cursor-pointer opacity-70 hover:opacity-100 font-semibold flex items-center justify-center"
+               className="fixed z-10 bottom-0 -translate-y-20 sm:hidden w-9 h-9 bg-sidebarActive rounded-full  cursor-pointer opacity-70 hover:opacity-100 font-semibold flex items-center justify-center"
             >
                <BsChevronLeft size={20} />
             </div>

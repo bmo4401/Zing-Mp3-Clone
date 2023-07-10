@@ -16,6 +16,7 @@ interface CardContentProps {
    disabled?: boolean;
    pass?: boolean;
    isStop?: boolean;
+   nowrap?: boolean;
 }
 const CardContent: React.FC<CardContentProps> = ({
    data,
@@ -27,6 +28,7 @@ const CardContent: React.FC<CardContentProps> = ({
    isStop,
    disabled,
    pass,
+   nowrap,
 }) => {
    const {
       showPlayer,
@@ -66,6 +68,7 @@ const CardContent: React.FC<CardContentProps> = ({
                   ' text-xds font-bold w-fit ',
                   !pass ? 'text-white' : 'text-white/50',
                   classNameTitle,
+                  nowrap ? 'whitespace-nowrap' : 'sm:whitespace-normal',
                )}
             >
                {data?.songName}

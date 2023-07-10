@@ -35,8 +35,8 @@ const Avatar: React.FC<AvatarProps> = ({ currentUser }) => {
                   leaveFrom="opacity-100 translate-y-0"
                   leaveTo="opacity-0 translate-y-1"
                >
-                  <Popover.Panel className="absolute  left-10 z-10 mt-3 w-[350px]   -translate-x-full transform ">
-                     <div className="overflow-hidden  rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
+                  <Popover.Panel className="absolute left-10 z-10 mt-3 w-64 sm:w-[350px]   -translate-x-full transform ">
+                     <div className="  overflow-hidden  rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
                         <div className="relative  bg-searchFocus p-[6px] ">
                            {currentUser ? (
                               <ActiveAvatar currentUser={currentUser} />

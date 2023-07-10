@@ -59,7 +59,7 @@ const RankingCard: React.FC<RankingCardProps> = ({
                 w-14 h-14"
             />
             <div className="flex flex-col gap-1">
-               <h2 className="text-xds text-clip text-white font-bold">
+               <h2 className="text-xds whitespace-nowrap sm:whitespace-normal text-clip text-white font-bold">
                   {data?.songName}
                </h2>
                <span className="text-xx text-contentDesc flex flex-wrap gap-[1px] ">

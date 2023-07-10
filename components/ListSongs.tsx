@@ -80,16 +80,17 @@ const ListSongs: React.FC<ListSongsProps> = ({
                         onMouseLeave={() => setIsOpen(-1)}
                         key={song.songName}
                         className={clsx(
-                           'grid grid-cols-4 md:grid-cols-3 border-t rounded-md border-contentDesc/10  px-2 py-2 group hover:bg-sidebarActive cursor-pointer',
+                           'grid grid-cols-4 md:grid-cols-3 border-t rounded-md border-contentDesc/10  px-2 py-2 group hover:bg-sidebarActive cursor-pointer ',
                            song.src === currentSong?.src && 'bg-sidebarActive',
                         )}
                      >
-                        <div className="col-span-3 md:col-span-2">
+                        <div className="col-span-3 md:col-span-2 overflow-hidden sm:overflow-visible">
                            <CardContent
                               play
                               data={song}
                               width="w-9"
                               height="h-9"
+                              nowrap={true}
                            />
                         </div>
                         <div

@@ -208,7 +208,7 @@ const LoginModal = () => {
                         <Dialog.Panel className="w-3/4 xl:w-1/2 py-5 md:py-0 gap-2 flex flex-col md:flex-row  transform overflow-hidden rounded-2xl bg-white  text-left align-middle shadow-xl transition-all">
                            {/* // Heading */}
                            <div className="relative block md:hidden w-full">
-                              <h1 className="text-2xl text-center text-slate-950 tracking-wider font-bold">
+                              <h1 className="text-xl sm:text-2xl text-center text-slate-950 tracking-wider font-bold">
                                  {step === 'LOGIN'
                                     ? 'Welcome to login!'
                                     : 'Welcome to website!'}
@@ -217,7 +217,7 @@ const LoginModal = () => {
                                  onClick={() => (
                                     reset(), setShowLoginModal(false)
                                  )}
-                                 className="absolute top-0 right-0  -translate-x-1/3 -translate-y-1/2  w-10 h-10 rounded-full hover:opacity-80 hover:bg-fuchsia-400 flex items-center justify-center cursor-pointer "
+                                 className="absolute top-0 right-0  -translate-x-1/4 -translate-y-1/2  w-10 h-10 rounded-full hover:opacity-80 hover:bg-fuchsia-400 flex items-center justify-center cursor-pointer "
                               >
                                  <TfiClose
                                     className="text-slate-950 hover:text-white"
@@ -225,7 +225,7 @@ const LoginModal = () => {
                                  />
                               </div>
                            </div>
-                           <div className="w-full md:w-1/2  p-4 md:p-6 flex flex-col gap-6">
+                           <div className="w-full md:w-1/2  px-4 md:p-6 flex flex-col gap-6">
                               {/*// Title */}
                               <div className="flex justify-between items-center">
                                  <Dialog.Title
@@ -377,7 +377,7 @@ const LoginModal = () => {
                               </div>
                            </div>
                            {/* //Below */}
-                           <div className=" w-full flex md:hidden flex-col h-full items-center justify-center gap-5 text-slate-950">
+                           <div className=" w-full flex md:hidden flex-col h-full items-center justify-center gap-2 sm:gap-5 text-slate-950">
                               <span className="tracking-wider text-base">
                                  Have an account?
                               </span>

@@ -43,7 +43,7 @@ const Uploaded: React.FC<UploadedProps> = ({ currentUser }) => {
                className={clsx(
                   ' overflow-hidden overflow-y-auto pt-8  px-12',
                   showPlayer ? 'h-[calc(100vh-70px)]' : 'h-[calc(100vh)]',
-                  showPlayer ? 'pb-24' : 'pb-10',
+                  showPlayer ? 'pb-24' : 'pb-20',
                )}
             >
                <div className="flex flex-col gap-5">

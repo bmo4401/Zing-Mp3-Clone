@@ -12,9 +12,10 @@ const PlayerCard = () => {
          <CardContent
             height="h-14"
             data={currentSong}
-            className="justify-center   overflow-hidden w-28 hidden md:flex"
-            classNameTitle=" animate-run whitespace-nowrap "
+            className="justify-center overflow-hidden w-28  hidden md:flex"
+            classNameTitle="animate-run whitespace-nowrap "
             play
+            disabled={true}
          />
          <div className="hidden lg:flex gap-2 items-center ">
             <OptionContent

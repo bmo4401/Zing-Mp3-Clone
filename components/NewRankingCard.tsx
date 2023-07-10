@@ -64,7 +64,6 @@ const NewRankingCard: React.FC<NewRankingCardProps> = ({ rank, song }) => {
                   <span className="text-xx text-contentDesc">
                      {song?.singers.map((singer, idx) => (
                         <Artist
-                           disabled={true}
                            key={singer}
                            singer={
                               idx === song?.singers.length - 1

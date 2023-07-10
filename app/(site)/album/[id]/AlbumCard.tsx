@@ -30,7 +30,7 @@ const AlbumCard: React.FC<AlbumCardProps> = ({ thumbnails, active }) => {
                <h2 className="text-lg text-center font-bold w-fit text-white">
                   {thumbnails?.title || 'Title'}
                </h2>
-               <div className="w-full flex  truncate md:flex-wrap gap-[1px] lg:justify-center ">
+               <div className="w-full flex  md:flex-wrap gap-[1px] lg:justify-center ">
                   {thumbnails?.singers?.map((singer, idx) => (
                      <>
                         <Artist

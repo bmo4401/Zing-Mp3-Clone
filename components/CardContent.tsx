@@ -63,17 +63,16 @@ const CardContent: React.FC<CardContentProps> = ({
          <div className={clsx('flex flex-col h-full', className)}>
             <span
                className={clsx(
-                  ' text-xds font-bold w-fit whitespace-nowrap text-clip ',
+                  ' text-xds font-bold w-fit ',
                   !pass ? 'text-white' : 'text-white/50',
                   classNameTitle,
                )}
             >
                {data?.songName}
             </span>
-            <div className="flex truncate overflow-hidden md:flex-wrap gap-[1px]  ">
+            <div className="flex  overflow-hidden md:overflow-visible md:flex-wrap gap-[1px]  ">
                {data?.singers.map((singer, idx) => (
                   <Artist
-                     disabled={disabled}
                      key={singer}
                      singer={
                         idx === data?.singers.length - 1 ? singer : singer + ','

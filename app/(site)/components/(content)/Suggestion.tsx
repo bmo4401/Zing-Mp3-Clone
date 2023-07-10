@@ -87,7 +87,6 @@ function Content({ className, thumbnails }: ContentProps) {
                   }}
                   like
                   btnPlay={{ circle: true, show: true }}
-                  options
                   image={thumbnail.image}
                   title={thumbnail.title}
                   className="  

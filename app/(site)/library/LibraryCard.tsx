@@ -27,7 +27,7 @@ const LibraryCard: React.FC<LibraryCardProps> = () => {
                <h2 className="text-lg text-center font-bold w-fit text-white">
                   {currentSong?.songName || 'Title'}
                </h2>
-               <div className="w-full flex  truncate md:flex-wrap gap-[1px] lg:justify-center ">
+               <div className="w-full flex   md:flex-wrap gap-[1px] lg:justify-center ">
                   {currentSong?.singers?.map((singer, idx) => (
                      <>
                         <Artist

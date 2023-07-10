@@ -87,7 +87,7 @@ function ArtistModal({ children, singer }: ArtistPopupProps) {
                            onMouseLeave={() => {
                               onClose(open, close);
                            }}
-                           className="  relative h-full bg-searchFocus rounded-md p-4 flex flex-col gap-4 overflow-hidden  "
+                           className="relative h-full bg-searchFocus rounded-md p-4 flex flex-col gap-4 overflow-hidden  "
                         >
                            {/* Heading */}
                            <div className="h-full flex justify-between">

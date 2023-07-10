@@ -6,6 +6,7 @@ import useSearch from '@/hooks/(header)/useSearch';
 import useUploadModal from '@/hooks/(header)/useUploadModal';
 import usePlayer from '@/hooks/(player)/usePlayer';
 import LoadingModal from '@/models/(content)/LoadingModal';
+import { Song } from '@/types';
 import { Tab } from '@headlessui/react';
 import { User } from '@prisma/client';
 import { useQuery } from '@tanstack/react-query';
@@ -38,7 +39,7 @@ const Uploaded: React.FC<UploadedProps> = ({ currentUser }) => {
       <>
          <LoadingModal show={isLoading} />
          <section className="h-screen bg-content mt-sidebarHeight overflow-hidden ">
-            {!data?.data && <EmptyState />}
+            {!(data?.data?.length === 0) && <EmptyState />}
             <div
                className={clsx(
                   ' overflow-hidden overflow-y-auto pt-8  px-12',

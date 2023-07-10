@@ -30,4 +30,4 @@
 
 ### Fontend: Nextjs 13, TypeScript, Tailwind, React-Query, Zustand, Cloudinary, Next-Auth
 
-### Backend:Prisma, MongoDB
+### Backend: Prisma, MongoDB Atlas

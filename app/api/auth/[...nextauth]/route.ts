@@ -11,12 +11,20 @@ export const authOptions: AuthOptions = {
       GithubProvider({
          clientId: process.env.GITHUB_ID as string,
          clientSecret: process.env.GITHUB_SECRET as string,
+         async profile(profile) {
+            const data = {
+               id: profile?.node_id,
+               email: profile?.email,
+               image: profile?.avatar_url,
+               username: profile?.login,
+            };
+            return data;
+         },
       }),
       GoogleProvider({
          clientId: process.env.GOOGLE_CLIENT_ID as string,
          clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
          async profile(profile) {
-            console.log('🚀 ~ profile:', profile);
             const data = {
                id: profile?.sub,
                email: profile?.email,

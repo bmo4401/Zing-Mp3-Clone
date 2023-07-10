@@ -12,6 +12,7 @@ export const authOptions: AuthOptions = {
          clientId: process.env.GITHUB_ID as string,
          clientSecret: process.env.GITHUB_SECRET as string,
          async profile(profile) {
+            console.log('🚀 ~ profile:', profile);
             const data = {
                id: profile?.node_id,
                email: profile?.email,
@@ -30,6 +31,7 @@ export const authOptions: AuthOptions = {
                email: profile?.email,
                image: profile?.picture,
                username: profile?.email + '1',
+               emailVerified: profile?.email_verified,
             };
             return data;
          },

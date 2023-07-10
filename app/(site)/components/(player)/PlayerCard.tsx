@@ -8,7 +8,7 @@ import usePlayer from '@/hooks/(player)/usePlayer';
 const PlayerCard = () => {
    const { currentSong } = usePlayer();
    return (
-      <div className="h-20 flex gap-5 items-center justify-between pr-10  ">
+      <div className="col-span-1 h-20 flex gap-5 items-center justify-between pr-10  ">
          <CardContent
             height="h-14"
             data={currentSong}

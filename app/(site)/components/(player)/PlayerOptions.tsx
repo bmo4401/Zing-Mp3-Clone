@@ -21,7 +21,7 @@ const PlayerOptions = () => {
    const { currentSong, setContinue, setClear } = usePlayer();
    const { volume, mute, setMute } = useVolume();
    return (
-      <div className="flex items-center gap-2 justify-end text-white">
+      <div className="col-span-1  flex items-center gap-2 justify-end text-white">
          {/* Frame */}
          <div>
             <div

@@ -20,7 +20,7 @@ const Player = () => {
             )}
          >
             {/* Player */}
-            <div className=" h-full grid grid-cols-3">
+            <div className=" h-full grid grid-cols-5 sm:grid-cols-3 ">
                <PlayerCard />
                <PlayerAction />
                <PlayerOptions />

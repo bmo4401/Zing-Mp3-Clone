@@ -84,7 +84,7 @@ const PlayerAction = () => {
       onRandom,
    });
    return (
-      <div className="h-20 flex flex-col justify-center py-3">
+      <div className="col-span-3 sm:col-span-1 h-20 flex flex-col justify-center py-3">
          {/* Options */}
          <div className="text-white h-full w-full flex gap-4 items-center justify-center">
             {actions.map((action) =>

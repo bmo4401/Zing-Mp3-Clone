@@ -16,8 +16,7 @@ const Player = () => {
       <>
          <div
             className={clsx(
-               'transition-all ease-linear  delay-150 h-20 w-full fixed bottom-0 bg-playerBackground px-4',
-               showPlaylist ? 'z-10' : '',
+               'transition-all ease-linear  delay-150 h-20 w-full fixed bottom-0 bg-playerBackground px-4 z-10',
             )}
          >
             {/* Player */}

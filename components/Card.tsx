@@ -53,7 +53,7 @@ const Card: React.FC<CardProps> = ({
             onMouseEnter={() => setIsOpenModal(true)}
             onMouseLeave={() => setIsOpenModal(false)}
             className={clsx(
-               'relative overflow-hidden aspect-square',
+               ' relative overflow-hidden aspect-square',
                className && className,
                circle ? 'rounded-full' : 'rounded-md ',
             )}

@@ -29,7 +29,7 @@ const PlayerOptions = () => {
                   setFrame(true), setContinue(false);
                }}
                className={clsx(
-                  'w-8 h-8 hover:bg-playerFocus  rounded-full  flex items-center justify-center cursor-pointer',
+                  'hidden md:flex w-8 h-8 hover:bg-playerFocus  rounded-full   items-center justify-center cursor-pointer',
                )}
             >
                {' '}

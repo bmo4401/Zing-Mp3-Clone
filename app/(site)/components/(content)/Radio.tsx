@@ -48,13 +48,13 @@ const Radio = () => {
                   <div
                      key={index}
                      className="
-                  w-1/2 
+                  px-8 sm:px-3 
+                     w-full
                   sm:w-1/3 
                   md:w-1/4 
                   lg:w-1/5 
                   xl:w-1/6 
                   2xl:w-1/7 
-                   px-3
                   "
                   >
                      {' '}
@@ -67,7 +67,7 @@ const Radio = () => {
    );
 };
 
-const breakpoints = getBreakpoint([2, 3, 4, 5, 6, 7]);
+const breakpoints = getBreakpoint([1, 3, 4, 5, 6, 7]);
 const settings = {
    speed: 500,
    infinite: false,
@@ -89,8 +89,8 @@ const settings = {
       {
          breakpoint: 550,
          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2,
+            slidesToShow: 1,
+            slidesToScroll: 1,
          },
       },
       {

@@ -27,7 +27,7 @@ interface ContentProps {
 
 const title = 'Có thể bạn muốn nghe';
 const Suggestion = () => {
-   const breakpoints = getBreakpoint([2, 3, 4, 4, 5, 5]);
+   const breakpoints = getBreakpoint([1, 2, 3, 4, 5, 5]);
    const className = getClassName(breakpoints);
    const item = useBreakpoint(breakpoints);
    const [thumbnails, setThumbnails] = useState<Thumbnail[]>();

@@ -50,7 +50,7 @@ const NewRankingCard: React.FC<NewRankingCardProps> = ({ rank, song }) => {
             {/* Info */}
             <div className="flex flex-col w-[calc(100%-126px)] justify-between items-start">
                {/* Artist info */}
-               <div className="flex flex-col gap-1 text-white overflow-hidden">
+               <div className=" hidden sm:flex  flex-col gap-1 text-white overflow-hidden">
                   <h2
                      className={clsx(
                         'text-xds font-semibold text-clip  ',

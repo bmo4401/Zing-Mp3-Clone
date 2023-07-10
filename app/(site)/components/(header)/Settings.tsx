@@ -24,7 +24,7 @@ const Settings = () => {
    const settingsInfo = settings.slice(2, 3);
    const settingsContact = settings.slice(3, 7);
    return (
-      <Popover className="relative z-10">
+      <Popover className="hidden sm:relative z-10">
          {({ open, close }) => (
             <>
                <Popover.Button className="relative z-10 w-9 h-9 flex items-center justify-center  rounded-full bg-search focus:outline-none hover:opacity-90">

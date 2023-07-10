@@ -135,9 +135,8 @@ const Box: React.FC<BoxProps> = ({ data, item: display }) => {
                {item.right && item.left && (
                   <>
                      <div
-                        onClick={() => item.disabled && toast.warning(text)}
                         className={clsx(
-                           ' flex items-center text-xds font-medium  ',
+                           'hidden sm:flex items-center text-xds font-medium  ',
                            item.disabled
                               ? 'cursor-not-allowed'
                               : 'cursor-pointer',
@@ -163,7 +162,9 @@ const Box: React.FC<BoxProps> = ({ data, item: display }) => {
                                  title={item.label}
                               />,
                               <div
-                                 onClick={() => setShowSidebar(true)}
+                                 onClick={(e) => (
+                                    e.stopPropagation(), setShowSidebar(true)
+                                 )}
                                  className="w-9 h-9 bg-sidebarActive rounded-full flex justify-center items-center cursor-pointer hover:opacity-80 font-semibold"
                               >
                                  <item.right size={14} />
@@ -171,6 +172,9 @@ const Box: React.FC<BoxProps> = ({ data, item: display }) => {
                            )}
 
                            <span
+                              onClick={() =>
+                                 item.disabled && toast.warning(text)
+                              }
                               className={clsx(
                                  condition('inline-block', 'hidden'),
                               )}
@@ -181,8 +185,10 @@ const Box: React.FC<BoxProps> = ({ data, item: display }) => {
                      </div>
                      {conditionButton(
                         <div
-                           onClick={() => setShowSidebar(false)}
-                           className="w-9 h-9 bg-sidebarActive rounded-full flex justify-center items-center cursor-pointer hover:opacity-80 font-semibold"
+                           onClick={(e) => (
+                              e.stopPropagation(), setShowSidebar(false)
+                           )}
+                           className="hidden w-9 h-9 bg-sidebarActive rounded-full sm:flex justify-center items-center cursor-pointer hover:opacity-80 font-semibold"
                         >
                            <item.left size={14} />
                         </div>,

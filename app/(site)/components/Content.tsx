@@ -38,7 +38,7 @@ const Content: React.FC<ContentProps> = ({ currentUser }) => {
             className={clsx(
                ' pt-8 flex flex-col gap-12 px-12 overflow-x-hidden overflow-y-auto',
                showPlayer ? 'h-[calc(100vh-70px)]' : 'h-screen',
-               showPlayer ? 'pb-24' : 'pb-10',
+               showPlayer ? 'pb-24' : 'pb-20',
             )}
          >
             <Gallery />

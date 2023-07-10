@@ -29,7 +29,7 @@ const Search: React.FC<SearchProps> = () => {
    return (
       <div
          className={clsx(
-            'relative w-60 md:w-80 lg:w-90 xl:w-100    rounded-full  bg-search h-9  ',
+            'relative w-40 sm:w-60 md:w-80 lg:w-90 xl:w-100    rounded-full  bg-search h-9  ',
          )}
       >
          <div

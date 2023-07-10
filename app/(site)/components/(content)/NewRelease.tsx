@@ -67,14 +67,14 @@ function RankingTabs() {
             <Tab.Group>
                <Tab.List className="w-full flex space-x-2  bg-transparent  text-white">
                   <div className="w-full flex justify-between">
-                     <div className="flex gap-4">
+                     <div className="flex gap-2 sm:gap-4">
                         {categories.map((category) => {
                            return (
                               <Tab
                                  key={category}
                                  className={({ selected }) =>
                                     clsx(
-                                       `w-20 h-6 flex items-center justify-center border border-slate-100/10 rounded-full font-medium`,
+                                       `w-18 text-xxx sm:text-xs sm:w-20 h-6 flex items-center justify-center border border-slate-100/10 rounded-full font-medium`,
                                        selected && active,
                                     )
                                  }
@@ -86,7 +86,7 @@ function RankingTabs() {
                            );
                         })}
                      </div>
-                     <span
+                     <div
                         onClick={() =>
                            setNavigation(() =>
                               router.push('/ranking', { shallow: true }),
@@ -94,9 +94,9 @@ function RankingTabs() {
                         }
                         className="flex gap-2 items-center text-xx uppercase text-contentDesc hover:text-textPrimary  font-semibold cursor-pointer leading-3"
                      >
-                        Tất cả
-                        <BsChevronRight />
-                     </span>
+                        <span className="hidden sm:block">Tất cả</span>
+                        <BsChevronRight className="text-base sm:text-inherit translate-x-full sm:translate-x-0" />
+                     </div>
                   </div>
                </Tab.List>
                <Tab.Panels>

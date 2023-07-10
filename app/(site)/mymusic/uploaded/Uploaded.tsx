@@ -38,7 +38,7 @@ const Uploaded: React.FC<UploadedProps> = ({ currentUser }) => {
       <>
          <LoadingModal show={isLoading} />
          <section className="h-screen bg-content mt-sidebarHeight overflow-hidden ">
-            {!data && <EmptyState />}
+            {!data?.data && <EmptyState />}
             <div
                className={clsx(
                   ' overflow-hidden overflow-y-auto pt-8  px-12',

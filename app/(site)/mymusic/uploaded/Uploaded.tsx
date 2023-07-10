@@ -25,6 +25,7 @@ const Uploaded: React.FC<UploadedProps> = ({ currentUser }) => {
       enabled: !!isUploading || !!currentUser?.liked,
       refetchOnMount: true,
    });
+   console.log('🚀 ~ data:', data);
    const result = useQuery({
       queryKey: ['user', 'liked'],
       queryFn: async () => await axios.get(`/api/song/liked`),
@@ -39,7 +40,7 @@ const Uploaded: React.FC<UploadedProps> = ({ currentUser }) => {
       <>
          <LoadingModal show={isLoading} />
          <section className="h-screen bg-content mt-sidebarHeight overflow-hidden ">
-            {!(data?.data?.length === 0) && <EmptyState />}
+            {!isLoading && data?.data?.length === 0 && <EmptyState />}
             <div
                className={clsx(
                   ' overflow-hidden overflow-y-auto pt-8  px-12',

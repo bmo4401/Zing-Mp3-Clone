@@ -18,17 +18,20 @@ const Library = () => {
                showPlayer ? 'pb-24' : 'pb-20',
             )}
          >
-            {!currentSong && list.length === 0 && (
+            {!currentSong && list.length === 0 ? (
                <EmptyState
                   text={'Hiện tại bạn chưa nghe bài hát nào cả.'}
                   home={true}
                />
+            ) : (
+               <>
+                  <LibraryCard />
+                  <ListSongs
+                     data={list}
+                     className="w-full h-fit"
+                  />
+               </>
             )}
-            <LibraryCard />
-            <ListSongs
-               data={list}
-               className="w-full h-fit"
-            />
          </div>
       </section>
    );

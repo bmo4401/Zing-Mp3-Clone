@@ -30,6 +30,7 @@ interface CardProps {
    onClick?: (e: React.SyntheticEvent) => void;
    data?: Song;
    notFit?: boolean;
+   rotate?: boolean;
 }
 const Card: React.FC<CardProps> = ({
    image,
@@ -43,6 +44,7 @@ const Card: React.FC<CardProps> = ({
    onClick,
    data,
    notFit,
+   rotate,
 }) => {
    const { isPlaying, currentSong } = usePlayer();
    const [isOpenModal, setIsOpenModal] = useState(false);
@@ -56,6 +58,7 @@ const Card: React.FC<CardProps> = ({
                ' relative overflow-hidden aspect-square',
                className && className,
                circle ? 'rounded-full' : 'rounded-md ',
+               rotate && isPlaying ? 'animate-spin-slow ' : '',
             )}
          >
             <Image
@@ -66,7 +69,7 @@ const Card: React.FC<CardProps> = ({
                sizes="100vw"
                style={{ width: '100%', height: 'auto' }}
                className={clsx(
-                  ` aspect-square object-cover  transition-all duration-700 h`,
+                  ` aspect-square object-cover  transition-all duration-700 `,
                   (isOpenModal || btnPlay?.isPlay || btnPlay?.active) &&
                      btnPlay?.show &&
                      'outline-none',
@@ -81,7 +84,12 @@ const Card: React.FC<CardProps> = ({
             />
             {(isOpenModal || btnPlay?.isPlay || btnPlay?.active) &&
                btnPlay?.show && (
-                  <div className="absolute inset-0 flex justify-center items-center gap-2 opacity-100 text-white">
+                  <div
+                     className={clsx(
+                        'absolute inset-0 flex justify-center items-center gap-2 opacity-100 text-white',
+                        rotate ? 'animate-none' : '',
+                     )}
+                  >
                      <Play btnPlay={btnPlay} />
                      {options && <Options />}
                   </div>

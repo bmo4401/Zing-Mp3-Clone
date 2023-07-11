@@ -17,7 +17,7 @@ interface UploadedProps {
 }
 const Uploaded: React.FC<UploadedProps> = ({ currentUser }) => {
    const active = 'bg-login focus:outline-none';
-   const { isUploading } = useUploadModal();
+   const { isUploading, isLike } = useUploadModal();
 
    const { isLoading, data } = useQuery({
       queryKey: ['user', isUploading],
@@ -26,13 +26,12 @@ const Uploaded: React.FC<UploadedProps> = ({ currentUser }) => {
       refetchOnMount: true,
    });
    const result = useQuery({
-      queryKey: ['user', 'liked'],
+      queryKey: ['user', isLike],
       queryFn: async () => await axios.get(`/api/song/liked`),
-      enabled: false,
+      enabled: false || !!isLike,
       refetchOnMount: true,
    });
    /* // Handle search */
-   const { setShowSearch } = useSearch();
    const { showPlayer } = usePlayer();
 
    return (

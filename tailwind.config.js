@@ -77,11 +77,20 @@ module.exports = {
          },
          animation: {
             run: 'run 12s linear infinite',
+            'spin-slow': 'spin-slow 4s linear infinite',
          },
          keyframes: {
             run: {
                '0%': { transform: 'translateX(100%)' },
                '100%': { transform: 'translateX(-100%)' },
+            },
+            'spin-slow': {
+               '0%': {
+                  transform: 'rotate(0deg)',
+               },
+               '100%': {
+                  transform: 'rotate(360deg)',
+               },
             },
          },
       },

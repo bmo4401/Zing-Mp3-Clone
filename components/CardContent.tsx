@@ -17,6 +17,8 @@ interface CardContentProps {
    pass?: boolean;
    isStop?: boolean;
    nowrap?: boolean;
+   circle?: boolean;
+   rotate?: boolean;
 }
 const CardContent: React.FC<CardContentProps> = ({
    data,
@@ -29,6 +31,8 @@ const CardContent: React.FC<CardContentProps> = ({
    disabled,
    pass,
    nowrap,
+   circle,
+   rotate,
 }) => {
    const {
       showPlayer,
@@ -54,13 +58,15 @@ const CardContent: React.FC<CardContentProps> = ({
             }}
             btnPlay={{
                isPlay: data?.src === currentSong?.src && isPlaying,
-               active: data?.src === currentSong?.src,
+               active: data?.src === currentSong?.src && isPlaying,
                size: 20,
                show: play,
             }}
             data={data}
             image={data?.image}
             className={clsx(height, width)}
+            circle={circle}
+            rotate={rotate}
          />
          <div className={clsx('flex flex-col h-full', className)}>
             <span

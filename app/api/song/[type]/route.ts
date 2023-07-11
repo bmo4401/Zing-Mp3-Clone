@@ -4,12 +4,14 @@ import getArrSinger from '@/helpers/getArrSinger';
 import prisma from '@/libs/prismadb';
 import { NextResponse } from 'next/server';
 
-export async function GET(request: Request) {
+export async function GET(request: Request, response: Response) {
    try {
-      const type = request?.params?.type;
+      const type = response?.params?.type;
       const currentUser = await getCurrentUser();
       const array = currentUser[type];
+      console.log('🚀 ~ array:', array);
       let typeQuery = type === 'liked' ? 'src' : 'id';
+      console.log('🚀 ~ typeQuery:', typeQuery);
       const songs = await prisma.song.findMany({
          where: {
             userId: currentUser?.id,

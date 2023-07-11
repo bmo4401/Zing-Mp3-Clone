@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import CardContent from './CardContent';
 import Like from './Like';
 import OptionContent from './OptionContent';
+import useUploadModal from '@/hooks/(header)/useUploadModal';
 
 interface ListSongsProps {
    data: Song[] | undefined;
@@ -26,6 +27,7 @@ const ListSongs: React.FC<ListSongsProps> = ({
    const router = useRouter();
    const [isLoading, setIsLoading] = useState<boolean>(false);
    const [isOpen, setIsOpen] = useState(-1);
+   const { setLike } = useUploadModal();
    const {
       showPlayer,
       setShowPlayer,
@@ -36,6 +38,7 @@ const ListSongs: React.FC<ListSongsProps> = ({
    } = usePlayer();
    const handleLike = (src: string) => {
       setIsLoading(true);
+      setLike('');
       axios
          .post('/api/user', {
             userId: currentUser?.id,
@@ -49,7 +52,10 @@ const ListSongs: React.FC<ListSongsProps> = ({
             console.log(err);
             toast.error('Something went wrong');
          })
-         .finally(() => setIsLoading(false));
+         .finally(() => {
+            setIsLoading(false);
+            setLike('liked');
+         });
    };
 
    return (

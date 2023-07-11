@@ -17,6 +17,8 @@ const PlayerCard = () => {
             play
             disabled={true}
             nowrap={true}
+            circle={true}
+            rotate={true}
          />
          <div className="hidden lg:flex gap-2 items-center ">
             <OptionContent

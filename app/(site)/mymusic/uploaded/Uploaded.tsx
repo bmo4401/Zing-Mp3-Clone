@@ -94,6 +94,7 @@ const Uploaded: React.FC<UploadedProps> = ({ currentUser }) => {
                                  currentUser={currentUser}
                                  data={data?.data}
                                  className="w-full"
+                                 like={true}
                               />
                            </Tab.Panel>
                            <Tab.Panel className={clsx('py-4 ')}>
@@ -101,6 +102,7 @@ const Uploaded: React.FC<UploadedProps> = ({ currentUser }) => {
                                  currentUser={currentUser}
                                  data={result?.data?.data}
                                  className="w-full"
+                                 like={true}
                               />
                            </Tab.Panel>
                         </Tab.Panels>

@@ -32,7 +32,7 @@ const template = (OTP: number) => {
                   <Heading className="text-gray-800 text-2xl font-medium text-center mb-4">
                      Enter the following code to verify your identity.
                   </Heading>
-                  <Text className="bg-gray-100 rounded-md  py-6 w-full  mb-6 text-4xl font-bold text-gray-800 tracking-wide  ">
+                  <Text className="bg-gray-100 rounded-md  py-6 w-full  mb-6 text-4xl font-bold text-gray-800 tracking-wide  text-center ">
                      {OTP}
                   </Text>
                   <Text className="text-gray-600 text-base font-normal leading-6 text-center">

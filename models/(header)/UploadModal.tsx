@@ -154,7 +154,7 @@ const UploadModal = () => {
                                  />
                               </div>
                            </div>
-                           <div className="w-full flex flex-col gap-8 p-4 ">
+                           <div className=" w-full flex flex-col gap-4 sm:gap-8 p-4 ">
                               {/*// Title */}
                               <div className="w-full flex justify-center items-center">
                                  <Dialog.Title
@@ -167,7 +167,7 @@ const UploadModal = () => {
                               {/* //Content */}
                               <div className="flex flex-col items-center md:flex-row gap-4 md:gap-2 md:items-start">
                                  {/* // Image */}
-                                 <div className="self-start w-1/4 pt-2">
+                                 <div className="self-center sm:self-start w-1/2 sm:w-1/4 pt-2">
                                     <Upload>
                                        <ImageUpload
                                           type={image}
@@ -175,10 +175,10 @@ const UploadModal = () => {
                                        />
                                     </Upload>
                                  </div>
-                                 <div className="flex flex-col gap-2 justify-start w-full md:w-3/4">
-                                    <div className="flex gap-2">
+                                 <div className="text-xds sm:text-sm flex flex-col gap-2 justify-start w-full md:w-3/4">
+                                    <div className="flex flex-col sm:flex-row gap-6 sm:gap-2">
                                        {' '}
-                                       <div className="w-1/2">
+                                       <div className="w-full sm:w-1/2 ">
                                           <Input
                                              id="title"
                                              label="Tên bài hát"
@@ -187,7 +187,7 @@ const UploadModal = () => {
                                              errors={errors}
                                           />
                                        </div>
-                                       <div className="w-1/2 ">
+                                       <div className="w-full sm:w-1/2 ">
                                           <Input
                                              id="link"
                                              label="Link MV"
@@ -198,9 +198,9 @@ const UploadModal = () => {
                                        </div>
                                     </div>
 
-                                    <div className="flex gap-2">
+                                    <div className="flex flex-col sm:flex-row gap-2">
                                        {' '}
-                                       <div className="w-1/2">
+                                       <div className="w-full sm:w-1/2">
                                           <Input
                                              id="singer"
                                              label="Tên nghệ sĩ thể hiện"
@@ -209,15 +209,15 @@ const UploadModal = () => {
                                              errors={errors}
                                           />
                                        </div>
-                                       <div className="w-1/2 rounded-md outline-none  hover:opacity-90">
+                                       <div className="w-full sm:w-1/2 rounded-md outline-none  hover:opacity-90">
                                           <SelectInput
                                              selected={selected}
                                              setSelected={setSelected}
                                           />
                                        </div>
                                     </div>
-                                    <div className="flex gap-2">
-                                       <div className="hover:bg-settingsFocus w-1/2 cursor-pointer hover:opacity-80 rounded-md ">
+                                    <div className="flex flex-col sm:flex-row gap-2">
+                                       <div className="hover:bg-settingsFocus  w-full sm:w-1/2 cursor-pointer hover:opacity-80 rounded-md ">
                                           <Upload>
                                              <AudioUpload
                                                 type={audio}
@@ -227,7 +227,7 @@ const UploadModal = () => {
                                              />
                                           </Upload>
                                        </div>
-                                       <div className="w-1/2 flex justify-center gap-3">
+                                       <div className="w-full sm:w-1/2 flex justify-center gap-3">
                                           <div className="w-1/2">
                                              <Click
                                                 type=""

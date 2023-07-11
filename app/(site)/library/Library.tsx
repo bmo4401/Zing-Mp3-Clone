@@ -4,8 +4,9 @@ import ListSongs from '@/components/ListSongs';
 import usePlayer from '@/hooks/(player)/usePlayer';
 import LibraryCard from './LibraryCard';
 import clsx from 'clsx';
+import EmptyState from '@/components/EmptyState';
 const Library = () => {
-   const { list, showPlayer } = usePlayer();
+   const { list, showPlayer, currentSong } = usePlayer();
    if (!list) <h2>Loading</h2>;
 
    return (
@@ -17,6 +18,12 @@ const Library = () => {
                showPlayer ? 'pb-24' : 'pb-20',
             )}
          >
+            {!currentSong && list.length === 0 && (
+               <EmptyState
+                  text={'Hiện tại bạn chưa nghe bài hát nào cả.'}
+                  home={true}
+               />
+            )}
             <LibraryCard />
             <ListSongs
                data={list}

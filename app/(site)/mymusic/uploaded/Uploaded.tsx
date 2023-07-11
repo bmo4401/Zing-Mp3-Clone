@@ -40,7 +40,12 @@ const Uploaded: React.FC<UploadedProps> = ({ currentUser }) => {
       <>
          <LoadingModal show={isLoading} />
          <section className="h-screen bg-content mt-sidebarHeight overflow-hidden ">
-            {!isLoading && data?.data?.length === 0 && <EmptyState />}
+            {!isLoading && (!data?.data || data?.data?.length === 0) && (
+               <EmptyState
+                  text={'Không có bài hát.'}
+                  upload={true}
+               />
+            )}
             <div
                className={clsx(
                   ' overflow-hidden overflow-y-auto pt-8  px-12',

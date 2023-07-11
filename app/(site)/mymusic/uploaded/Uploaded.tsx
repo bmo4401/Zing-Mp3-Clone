@@ -25,7 +25,6 @@ const Uploaded: React.FC<UploadedProps> = ({ currentUser }) => {
       enabled: !!isUploading || !!currentUser?.liked,
       refetchOnMount: true,
    });
-   console.log('🚀 ~ data:', data);
    const result = useQuery({
       queryKey: ['user', 'liked'],
       queryFn: async () => await axios.get(`/api/song/liked`),

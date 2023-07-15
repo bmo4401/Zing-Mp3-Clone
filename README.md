@@ -4,7 +4,7 @@
 
 ##### Base on: https://zingmp3.vn
 
-##### Website: https://zing-mp3-clone-iota.vercel.app
+##### Website: https://zing-mp3-clone-eta.vercel.app
 
 ##### Github: https://github.com/bmo4401/Zing-Mp3-Clone
 

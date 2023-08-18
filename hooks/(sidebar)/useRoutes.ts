@@ -38,7 +38,6 @@ const useRoutes = () => {
             href: '#radio',
             secondary: Live,
             play: MdPlayCircleOutline,
-            disabled: true,
          },
          {
             icon: Library,

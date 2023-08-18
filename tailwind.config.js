@@ -77,7 +77,7 @@ module.exports = {
          },
          animation: {
             run: 'run 12s linear infinite',
-            'spin-slow': 'spin-slow 4s linear infinite',
+            'spin-slow': 'spin-slow 8s linear infinite',
          },
          keyframes: {
             run: {

@@ -9,9 +9,7 @@ export async function GET(request: Request, response: Response) {
       const type = response?.params?.type;
       const currentUser = await getCurrentUser();
       const array = currentUser[type];
-      console.log('🚀 ~ array:', array);
       let typeQuery = type === 'liked' ? 'src' : 'id';
-      console.log('🚀 ~ typeQuery:', typeQuery);
       const songs = await prisma.song.findMany({
          where: {
             userId: currentUser?.id,

@@ -61,7 +61,11 @@ const Box: React.FC<BoxProps> = ({ data, item: display }) => {
                   item.disabled
                      ? toast.warning(text)
                      : setNavigation(() =>
-                          router.push(item.href, { shallow: true }),
+                          item.label !== 'Radio'
+                             ? router.push(item.href, { shallow: true })
+                             : document
+                                  .getElementById('radio')
+                                  ?.scrollIntoView({ behavior: 'smooth' }),
                        );
                }}
                key={item.label}

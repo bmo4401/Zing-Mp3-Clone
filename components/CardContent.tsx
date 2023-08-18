@@ -86,6 +86,7 @@ const CardContent: React.FC<CardContentProps> = ({
                      singer={
                         idx === data?.singers.length - 1 ? singer : singer + ','
                      }
+                     disabled={true}
                   />
                ))}
             </div>

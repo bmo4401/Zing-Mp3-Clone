@@ -77,7 +77,6 @@ const action = (set: setProps, get: getProps) => ({
          list: playNext(state.list, state.currentSong, song),
       }));
       if (get().isPlaying === false) {
-         console.log('next');
          get().setPlaying(song, true);
       }
    },

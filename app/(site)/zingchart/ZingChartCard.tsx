@@ -5,11 +5,14 @@ import Play from '@/components/Play';
 import usePlayer from '@/hooks/(player)/usePlayer';
 import { Thumbnail } from '@/types';
 
-interface AlbumCardProps {
+interface ZingChartCardProps {
   thumbnails: Thumbnail | undefined;
   active?: boolean;
 }
-const AlbumCard: React.FC<AlbumCardProps> = ({ thumbnails, active }) => {
+const ZingChartCard: React.FC<ZingChartCardProps> = ({
+  thumbnails,
+  active,
+}) => {
   const { isPlaying, setContinue } = usePlayer();
   return (
     /* Card */
@@ -82,4 +85,4 @@ const AlbumCard: React.FC<AlbumCardProps> = ({ thumbnails, active }) => {
     /* List */
   );
 };
-export default AlbumCard;
+export default ZingChartCard;

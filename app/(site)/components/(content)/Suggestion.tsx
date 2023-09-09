@@ -19,106 +19,106 @@ import Loading from '@/components/Loading';
 import useNavigation from '@/hooks/(utils)/useNavigation';
 
 interface ContentProps {
-   isLoading: boolean;
-   item: number;
-   className: string;
-   thumbnails: Thumbnail[] | undefined;
+  isLoading: boolean;
+  item: number;
+  className: string;
+  thumbnails: Thumbnail[] | undefined;
 }
 
 const title = 'Có thể bạn muốn nghe';
 const Suggestion = () => {
-   const breakpoints = getBreakpoint([1, 2, 3, 4, 5, 5]);
-   const className = getClassName(breakpoints);
-   const item = useBreakpoint(breakpoints);
-   const [thumbnails, setThumbnails] = useState<Thumbnail[]>();
-   /* React query */
-   const { isLoading, data } = useSong(
-      favorite.favorites,
-      typeMusic[Math.round(Math.random() * 3)],
-   );
-   const { getFavoriteList } = useList();
-   useEffect(() => {
-      if (data) {
-         const list = getFavoriteList(favorite.favorites, data as Song[], item);
-         if (list) setThumbnails(list as Thumbnail[]);
-      }
-   }, [item, isLoading, data]);
-   return (
-      <div className="flex flex-col gap-y-5 ">
-         <div className="flex justify-between">
-            {' '}
-            <h2 className="text-lg font-bold text-white">{title}</h2>
-         </div>
-         {isLoading ? (
-            <Loading />
-         ) : (
-            <Content
-               isLoading={isLoading}
-               item={item}
-               className={className}
-               thumbnails={thumbnails}
-            />
-         )}
+  const breakpoints = getBreakpoint([1, 2, 3, 4, 5, 5]);
+  const className = getClassName(breakpoints);
+  const item = useBreakpoint(breakpoints);
+  const [thumbnails, setThumbnails] = useState<Thumbnail[]>();
+  /* React query */
+  const { isLoading, data } = useSong(
+    favorite.favorites,
+    typeMusic[Math.round(Math.random() * 3)],
+  );
+  const { getFavoriteList } = useList();
+  useEffect(() => {
+    if (data) {
+      const list = getFavoriteList(favorite.favorites, data as Song[], item);
+      if (list) setThumbnails(list as Thumbnail[]);
+    }
+  }, [item, isLoading, data]);
+  return (
+    <div className="flex flex-col gap-y-5 ">
+      <div className="flex justify-between">
+        {' '}
+        <h2 className="text-lg font-bold text-white">{title}</h2>
       </div>
-   );
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <Content
+          isLoading={isLoading}
+          item={item}
+          className={className}
+          thumbnails={thumbnails}
+        />
+      )}
+    </div>
+  );
 };
 export default Suggestion;
 
 function Content({ className, thumbnails }: ContentProps) {
-   const { showPlayer, setShowPlayer, setPlaying, setPlaylist } = usePlayer();
-   const router = useRouter();
-   const { setNavigation } = useNavigation();
+  const { showPlayer, setShowPlayer, setPlaying, setPlaylist } = usePlayer();
+  const router = useRouter();
+  const { setNavigation } = useNavigation();
 
-   return (
-      <div className={clsx(className)}>
-         {thumbnails?.map((thumbnail, index) => (
-            <div
-               className=""
-               key={thumbnail.favorites}
-            >
-               <Card
-                  onClick={() => {
-                     setNavigation(() =>
-                        router.push(`album/${index + 1}`, { shallow: true }),
-                     );
-                     setPlaying(thumbnail.song);
-                     setPlaylist(thumbnail.song);
-                     !showPlayer && setShowPlayer(true);
-                  }}
-                  like
-                  btnPlay={{ circle: true, show: true }}
-                  image={thumbnail.image}
-                  title={thumbnail.title}
-                  className="  
+  return (
+    <div className={clsx(className)}>
+      {thumbnails?.map((thumbnail, index) => (
+        <div
+          className=""
+          key={thumbnail.favorites}
+        >
+          <Card
+            onClick={() => {
+              setNavigation(() =>
+                router.push(`album/${index + 1}`, { shallow: true }),
+              );
+              setPlaying(thumbnail.song);
+              setPlaylist(thumbnail.song);
+              !showPlayer && setShowPlayer(true);
+            }}
+            like
+            btnPlay={{ circle: true, show: true }}
+            image={thumbnail.image}
+            title={thumbnail.title}
+            className="  
                            
                w-36 h-36
                md:w-40 md:h-40
                lg:w-44 lg:h-44
                xl:w-46 xl:h-46
                2xl:w-46 2xl:h-46"
-               />
-               <div
-                  className="flex flex-wrap gap-[1px]    w-36 
+          />
+          <div
+            className="flex flex-wrap gap-[1px]    w-36 
                md:w-40 
                lg:w-44 
                xl:w-46 
              2xl:w-46 "
-               >
-                  {thumbnail.singers?.map((singer, idx) => (
-                     <>
-                        <Artist
-                           key={singer}
-                           singer={
-                              idx === thumbnail.singers.length - 1
-                                 ? singer + '...'
-                                 : singer + ','
-                           }
-                        />
-                     </>
-                  ))}
-               </div>
-            </div>
-         ))}
-      </div>
-   );
+          >
+            {thumbnail.singers?.map((singer, idx) => (
+              <>
+                <Artist
+                  key={singer}
+                  singer={
+                    idx === thumbnail.singers.length - 1
+                      ? singer + '...'
+                      : singer + ','
+                  }
+                />
+              </>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }

@@ -92,7 +92,6 @@ const LoginModal = () => {
       if (step === 'LOGIN') {
          signIn('credentials', { ...data, redirect: false }).then(
             (callback) => {
-               console.log('🚀 ~ callback:', callback);
                setLoading(false);
                if (callback?.ok && !callback?.error) {
                   toast.success('Logged in');

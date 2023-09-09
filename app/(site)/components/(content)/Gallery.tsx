@@ -14,7 +14,6 @@ const Gallery = () => {
   const breakpoints = getBreakpoint([1, 2, 2, 3, 3, 3]);
   const className = getClassName(breakpoints);
   const item = useBreakpoint(breakpoints);
-  console.log('❄️ ~ file: Gallery.tsx:17 ~ item:', item);
   const images = [one, two, three];
   const router = useRouter();
   const { setNavigation } = useNavigation();

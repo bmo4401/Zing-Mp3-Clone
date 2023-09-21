@@ -15,6 +15,7 @@ import { BsChevronLeft } from 'react-icons/bs';
 import { useState } from 'react';
 import axios from 'axios';
 import { cn } from '@/libs/utils';
+import useLoginModal from '@/hooks/(header)/useLoginModal';
 interface SidebarProps {
   children: React.ReactNode;
   currentUser: User | undefined;
@@ -46,6 +47,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentUser, children }) => {
   const [show, setShow] = useState<boolean>(false);
   const { setNavigation } = useNavigation();
   const { showPlayer } = usePlayer();
+  const { setShowLoginModal } = useLoginModal();
   return (
     <section className={cn(' flex overflow-hidden', 'h-screen')}>
       <>
@@ -143,12 +145,14 @@ const Sidebar: React.FC<SidebarProps> = ({ currentUser, children }) => {
                   </h2>
                   <div
                     onClick={() => {
-                      (async () => {
-                        const res = await axios.post('/api/checkout', {
-                          data: '',
-                        });
-                        window.location = res.data.url;
-                      })();
+                      currentUser
+                        ? (async () => {
+                            const res = await axios.post('/api/checkout', {
+                              data: '',
+                            });
+                            window.location = res.data.url;
+                          })()
+                        : setShowLoginModal(true);
                     }}
                     className="w-full h-7 rounded-full bg-yellow-400 flex items-center justify-center text-xx font-bold text-black cursor-pointer hover:opacity-90"
                   >

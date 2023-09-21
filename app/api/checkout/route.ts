@@ -1,12 +1,13 @@
-import { NextResponse } from 'next/server';
-import Stripe from 'stripe';
-import { headers } from 'next/headers';
 import stripe from '@/libs/stripe';
+import { NextResponse } from 'next/server';
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type, Authorization',
 };
+export async function OPTIONS(req: Request, res: Response) {
+  return NextResponse.json({}, { headers: corsHeaders });
+}
 export async function POST(req: Request, res: Response) {
   if (req.method === 'POST') {
     try {

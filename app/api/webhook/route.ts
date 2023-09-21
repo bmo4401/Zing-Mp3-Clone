@@ -6,7 +6,7 @@ import Stripe from 'stripe';
 
 export async function POST(req: Request) {
   const body = await req.text();
-  const signature = headers().get('Stripe-Signature') as string;
+  const signature = req.headers.get('stripe-signature') as string;
 
   let event: Stripe.Event;
 
@@ -17,17 +17,16 @@ export async function POST(req: Request) {
       process.env.STRIPE_WEBHOOK_SECRET,
     );
   } catch (error: any) {
+    console.log('❄️ ~ file: route.ts:20 ~ error:', error);
     return new NextResponse(`Webhook Error: ${error.message}`, {
       status: 400,
     });
   }
-  console.log('❄️ ~ file: route.ts:12 ~ event:', event);
-
-  const session = event.data.object as Stripe.Checkout.Session;
-  //@ts-ignore
-  const email = session.billing_details?.email;
 
   if (event.type === 'checkout.session.completed') {
+    const session = event.data.object as Stripe.Checkout.Session;
+    //@ts-ignore
+    const email = session.billing_details?.email;
     await prisma.user.update({
       where: {
         email,

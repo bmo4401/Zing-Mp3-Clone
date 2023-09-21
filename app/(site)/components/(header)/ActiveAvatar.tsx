@@ -145,7 +145,7 @@ const ActiveAvatar: React.FC<ActiveAvatarProps> = ({ currentUser }) => {
         {/* // Part 3 */}
         <div
           onClick={() =>
-            signOut({ redirect: false, callbackUrl: process.env.NEXTAUTH_URL })
+            signOut({ redirect: true, callbackUrl: process.env.NEXTAUTH_URL })
           }
           className="rounded-full p-2 cursor-pointer hover:bg-settingsFocus w-full flex gap-2 items-center"
         >

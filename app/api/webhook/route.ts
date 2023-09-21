@@ -1,9 +1,8 @@
-import getCurrentUser from '@/actions/getCurrentUser';
+import prisma from '@/libs/prismadb';
 import stripe from '@/libs/stripe';
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import prisma from '@/libs/prismadb';
 
 export async function POST(req: Request) {
   const body = await req.text();
@@ -15,7 +14,7 @@ export async function POST(req: Request) {
     event = stripe.webhooks.constructEvent(
       body,
       signature,
-      process.env.STRIPE_WEBHOOK_SECRET!,
+      process.env.STRIPE_WEBHOOK_SECRET,
     );
   } catch (error: any) {
     return new NextResponse(`Webhook Error: ${error.message}`, {
@@ -37,5 +36,5 @@ export async function POST(req: Request) {
       },
     });
   }
-  return NextResponse.json(null, { status: 200 });
+  return new NextResponse(null, { status: 200 });
 }

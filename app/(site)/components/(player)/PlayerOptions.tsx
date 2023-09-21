@@ -4,7 +4,6 @@ import useFrame from '@/hooks/(player)/useFrame';
 import usePlayer from '@/hooks/(player)/usePlayer';
 import usePlaylist from '@/hooks/(player)/usePlaylist';
 import useVolume from '@/hooks/(player)/useVolume';
-import clsx from 'clsx';
 import Link from 'next/link';
 import { useState } from 'react';
 import { AiOutlineDownload } from 'react-icons/ai';
@@ -14,6 +13,7 @@ import { LuVolume2, LuVolumeX } from 'react-icons/lu';
 import { RiPlayListFill } from 'react-icons/ri';
 import Input from './Input';
 import Playlist from './Playlist';
+import { cn } from '@/libs/utils';
 const PlayerOptions = () => {
   const [show, setShow] = useState<boolean>(false);
   const { setFrame } = useFrame();
@@ -28,7 +28,7 @@ const PlayerOptions = () => {
           onClick={() => {
             setFrame(true), setContinue(false);
           }}
-          className={clsx(
+          className={cn(
             'hidden md:flex w-8 h-8 hover:bg-playerFocus  rounded-full   items-center justify-center cursor-pointer',
           )}
         >
@@ -45,7 +45,7 @@ const PlayerOptions = () => {
         <div className="group relative hidden md:flex items-center gap-1">
           <div
             onClick={setMute}
-            className={clsx(
+            className={cn(
               'w-8 h-8 hover:bg-playerFocus  rounded-full  flex items-center justify-center cursor-pointer',
             )}
           >
@@ -62,7 +62,7 @@ const PlayerOptions = () => {
             )}
           </div>
           <div
-            className={clsx(
+            className={cn(
               'w-18 h-3 hidden lg:flex   p-2 rounded-sm  items-center justify-center absolute lg:static -left-3/4 -translate-y-full lg:translate-y-0 lg:group-hover:bg-transparent',
               'group-hover:bg-playerFocus group-hover:flex',
             )}
@@ -78,7 +78,7 @@ const PlayerOptions = () => {
       <div className="text-white">
         <div
           onClick={setShowPlaylist}
-          className={clsx(
+          className={cn(
             'w-8 h-8 hover:bg-playerFocus  rounded-full  flex items-center justify-center cursor-pointer',
           )}
         >
@@ -90,7 +90,7 @@ const PlayerOptions = () => {
         </div>
         {/* Playlist */}
         <section
-          className={clsx(
+          className={cn(
             'fixed z-10  top-0 right-0  h-[calc(100vh-90px)]   bg-playlistBackground overflow-hidden transition-all ease-linear  delay-150',
             showPlaylist ? 'w-72 px-3' : 'w-0',
           )}
@@ -103,7 +103,7 @@ const PlayerOptions = () => {
               </h2>
               <div
                 onClick={() => setShow(!show)}
-                className={clsx(
+                className={cn(
                   '  items-center justify-center font-medium cursor-pointer w-9 h-9 rounded-full h  flex',
                 )}
               >

@@ -5,7 +5,7 @@ import getDuration from '@/helpers/getDuration';
 import useFrame from '@/hooks/(player)/useFrame';
 import usePlayer from '@/hooks/(player)/usePlayer';
 import useVolume from '@/hooks/(player)/useVolume';
-import clsx from 'clsx';
+import { cn } from '@/libs/utils';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import {
   BsFillSkipEndFill,
@@ -106,7 +106,7 @@ const PlayerAction = () => {
           ) : (
             <div
               key={action.label}
-              className={clsx(
+              className={cn(
                 action.label === 'repeat' &&
                   typeRepeat != 0 &&
                   'text-textPrimary',
@@ -170,7 +170,7 @@ const PlayerAction = () => {
             className="w-full h-[3px] transition bg-contentDesc cursor-pointer "
             style={getBackgroundSize()}
           />
-          <span className={clsx(currentSong && 'text-white')}>
+          <span className={cn(currentSong && 'text-white')}>
             {currentSong ? currentSong.duration : 'NaN:NaN'}
           </span>
         </div>

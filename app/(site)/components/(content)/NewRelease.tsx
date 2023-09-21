@@ -8,10 +8,10 @@ import useSong from '@/hooks/(data)/useSong';
 import usePlayer from '@/hooks/(player)/usePlayer';
 import useBreakpoint from '@/hooks/(utils)/useBreakpoint';
 import useNavigation from '@/hooks/(utils)/useNavigation';
+import { cn } from '@/libs/utils';
 import { ranking } from '@/store/queryKeys';
 import { Song } from '@/types';
 import { Tab } from '@headlessui/react';
-import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { BsChevronRight, BsThreeDots } from 'react-icons/bs';
@@ -73,7 +73,7 @@ function RankingTabs() {
                     <Tab
                       key={category}
                       className={({ selected }) =>
-                        clsx(
+                        cn(
                           `w-18 text-xxx sm:text-xs sm:w-20 h-6 flex items-center justify-center border border-slate-100/10 rounded-full font-medium`,
                           selected && active,
                         )
@@ -104,7 +104,7 @@ function RankingTabs() {
               return (
                 <Tab.Panel
                   key={index}
-                  className={clsx('py-4 ', className)}
+                  className={cn('py-4 ', className)}
                 >
                   {list?.map((song, index) => (
                     <div key={song.src}>

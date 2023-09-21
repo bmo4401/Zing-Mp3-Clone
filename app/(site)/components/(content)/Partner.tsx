@@ -1,7 +1,6 @@
 'use client';
 import Image, { StaticImageData } from 'next/image';
 import getClassName from '@/helpers/getClassName';
-import clsx from 'clsx';
 import bmw from '@/public/bmw.jpg';
 import {
   Partner1,
@@ -22,6 +21,7 @@ import {
   Partner16,
 } from '@/public/index';
 import getBreakpoint from '@/helpers/getBreakpoint';
+import { cn } from '@/libs/utils';
 const Partner = () => {
   const className = getClassName(breakpoints);
   return (
@@ -30,7 +30,7 @@ const Partner = () => {
         đối tác âm nhạc
       </div>
       <div className="w-full">
-        <div className={clsx(' sm:h-1/7  lg:h-1/14  gap-3', className)}>
+        <div className={cn(' sm:h-1/7  lg:h-1/14  gap-3', className)}>
           {partners.map((partner, index) => (
             <div
               key={index + Math.random() * 10}

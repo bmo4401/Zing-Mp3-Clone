@@ -3,10 +3,10 @@ import usePlayer from '@/hooks/(player)/usePlayer';
 import { useInView } from '@/hooks/(utils)/useInView';
 import { Song } from '@/types';
 import { User } from '@prisma/client';
-import clsx from 'clsx';
 import { ElementRef, useEffect, useRef, useState } from 'react';
 import CardContent from './CardContent';
 import OptionContent from './OptionContent';
+import { cn } from '@/libs/utils';
 
 interface InfinitePageProps {
   data: Song[][];
@@ -44,7 +44,7 @@ const InfinitePage: React.FC<InfinitePageProps> = ({
   } = usePlayer();
 
   return (
-    <div className={clsx('w-full')}>
+    <div className={cn('w-full')}>
       <div className="flex flex-col ">
         <div className="text-xx text-contentDesc uppercase font-semibold text-left flex justify-between  lg:px-2 pb-2">
           <span>Bài hát</span>
@@ -66,7 +66,7 @@ const InfinitePage: React.FC<InfinitePageProps> = ({
                   onMouseEnter={() => setIsOpen(idx)}
                   onMouseLeave={() => setIsOpen(-1)}
                   key={song.songName}
-                  className={clsx(
+                  className={cn(
                     'grid grid-cols-4 md:grid-cols-3 border-t rounded-md border-contentDesc/10  px-2 py-2 group hover:bg-sidebarActive cursor-pointer ',
                     song.src === currentSong?.src && 'bg-sidebarActive',
                   )}
@@ -82,7 +82,7 @@ const InfinitePage: React.FC<InfinitePageProps> = ({
                     />
                   </div>
                   <div
-                    className={clsx(
+                    className={cn(
                       'flex items-center',
                       like ? ' justify-between' : 'justify-end',
                     )}

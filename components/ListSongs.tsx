@@ -3,7 +3,6 @@ import usePlayer from '@/hooks/(player)/usePlayer';
 import { Song } from '@/types';
 import { User } from '@prisma/client';
 import axios from 'axios';
-import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
@@ -11,6 +10,7 @@ import CardContent from './CardContent';
 import Like from './Like';
 import OptionContent from './OptionContent';
 import useUploadModal from '@/hooks/(header)/useUploadModal';
+import { cn } from '@/libs/utils';
 
 interface ListSongsProps {
   data: Song[] | undefined;
@@ -62,7 +62,7 @@ const ListSongs: React.FC<ListSongsProps> = ({
 
   return (
     <div
-      className={clsx(
+      className={cn(
         className
           ? className
           : 'w-full lg:w-[calc(100%-256px)] h-screen overflow-hidden overflow-y-auto',
@@ -88,7 +88,7 @@ const ListSongs: React.FC<ListSongsProps> = ({
                 onMouseEnter={() => setIsOpen(idx)}
                 onMouseLeave={() => setIsOpen(-1)}
                 key={song.songName}
-                className={clsx(
+                className={cn(
                   'grid grid-cols-4 md:grid-cols-3 border-t rounded-md border-contentDesc/10  px-2 py-2 group hover:bg-sidebarActive cursor-pointer ',
                   song.src === currentSong?.src && 'bg-sidebarActive',
                 )}
@@ -103,7 +103,7 @@ const ListSongs: React.FC<ListSongsProps> = ({
                   />
                 </div>
                 <div
-                  className={clsx(
+                  className={cn(
                     'flex items-center',
                     like ? ' justify-between' : 'justify-end',
                   )}

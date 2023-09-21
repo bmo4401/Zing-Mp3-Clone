@@ -1,5 +1,5 @@
 import useVolume from '@/hooks/(player)/useVolume';
-import clsx from 'clsx';
+import { cn } from '@/libs/utils';
 const Input = () => {
   const { mute, volume, setVolume, setMute, setChange } = useVolume();
   const MAX = 1;
@@ -17,7 +17,7 @@ const Input = () => {
       onMouseDown={() => setChange(true)}
       onChange={(e) => setVolume(+e.target.value)}
       onMouseUp={() => setChange(false)}
-      className={clsx(
+      className={cn(
         'w-full h-[3px] bg-contentDesc ',
         mute ? 'cursor-not-allowed' : 'cursor-pointer',
       )}

@@ -1,7 +1,6 @@
 'use client';
 
-import clsx from 'clsx';
-import { AiOutlineHeart } from 'react-icons/ai';
+import { cn } from '@/libs/utils';
 import { BsThreeDots } from 'react-icons/bs';
 interface OptionsProps {
   size?: number;
@@ -10,7 +9,7 @@ interface OptionsProps {
 const Options: React.FC<OptionsProps> = ({ size, className }) => {
   return (
     <div
-      className={clsx(
+      className={cn(
         'w-6 h-6 hover:bg-slate-100/40  rounded-full  flex items-center justify-center cursor-pointer',
         className,
       )}

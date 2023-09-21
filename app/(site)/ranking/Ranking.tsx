@@ -8,15 +8,12 @@ import { ranking } from '@/store/queryKeys';
 import { Song } from '@/types';
 import { Tab } from '@headlessui/react';
 import { useQueryClient } from '@tanstack/react-query';
-import clsx from 'clsx';
 import { categories } from '../components/(content)/NewRelease';
-import LoadingModal from '@/models/(content)/LoadingModal';
+import { cn } from '@/libs/utils';
 
 const Ranking = () => {
   const active = 'bg-login focus:outline-none';
   const breakpoints = getBreakpoint([1, 1, 2, 2, 3, 3]);
-  const className = getClassName(breakpoints);
-  const item = useBreakpoint(breakpoints);
 
   const queryClient = useQueryClient();
   const data = queryClient.getQueryData<Song[]>(ranking.rankings());
@@ -40,7 +37,7 @@ const Ranking = () => {
                       <Tab
                         key={category}
                         className={({ selected }) =>
-                          clsx(
+                          cn(
                             `w-20 h-6 flex items-center justify-center border border-slate-100/10 rounded-full font-medium`,
                             selected && active,
                           )
@@ -60,7 +57,7 @@ const Ranking = () => {
                 return (
                   <Tab.Panel
                     key={index}
-                    className={clsx('py-4 ')}
+                    className={cn('py-4 ')}
                   >
                     <ListSongs
                       data={list}

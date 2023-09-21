@@ -4,8 +4,8 @@ import { Slug } from '@/actions/getSongs';
 import InfinitePage from '@/components/InfinitePage';
 import UseQueryScroll from '@/hooks/(data)/useQueryScroll';
 import usePlayer from '@/hooks/(player)/usePlayer';
+import { cn } from '@/libs/utils';
 import { Song } from '@/types';
-import clsx from 'clsx';
 import { ElementRef, useEffect, useRef, useState } from 'react';
 const slugs: Slug[] = ['/trending', '/favorite', '/new-music', '/top-views'];
 const ZingChart = () => {
@@ -33,7 +33,7 @@ const ZingChart = () => {
       <section className="relative h-screen bg-content mt-sidebarHeight overflow-hidden ">
         <div
           ref={root}
-          className={clsx(
+          className={cn(
             ' pt-8  lg:flex gap-10  px-12 overflow-hidden overflow-y-auto',
             showPlayer ? 'h-[calc(100vh-70px)]' : 'h-screen',
             showPlayer ? 'pb-24' : 'pb-20',

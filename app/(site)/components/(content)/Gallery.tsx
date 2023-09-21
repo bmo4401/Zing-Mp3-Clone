@@ -4,10 +4,10 @@ import getBreakpoint from '@/helpers/getBreakpoint';
 import getClassName from '@/helpers/getClassName';
 import useBreakpoint from '@/hooks/(utils)/useBreakpoint';
 import useNavigation from '@/hooks/(utils)/useNavigation';
+import { cn } from '@/libs/utils';
 import one from '@/public/images/gallery/1.jpg';
 import two from '@/public/images/gallery/2.jpg';
 import three from '@/public/images/gallery/3.jpg';
-import clsx from 'clsx';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 const Gallery = () => {
@@ -19,7 +19,7 @@ const Gallery = () => {
   const { setNavigation } = useNavigation();
   if (!item) return <Loading />;
   return (
-    <div className={clsx(' gap-10', className)}>
+    <div className={cn(' gap-10', className)}>
       {images.slice(0, item).map((image, idx) => (
         <div
           key={idx + Math.random() * 10}

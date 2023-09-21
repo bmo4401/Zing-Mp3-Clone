@@ -10,7 +10,7 @@ import live from '@/public/images/sidebar/live.svg';
 import bmw from '@/public/bmw.jpg';
 import { Song } from '@/types';
 import usePlayer from '@/hooks/(player)/usePlayer';
-import clsx from 'clsx';
+import { cn } from '@/libs/utils';
 interface RadioCardProps {
   song: Song;
 }
@@ -45,7 +45,7 @@ const RadioCard: React.FC<RadioCardProps> = ({ song }) => {
           <Card
             image={song?.image}
             btnPlay={{}}
-            className={clsx(
+            className={cn(
               'w-full',
               song.src === currentSong?.src
                 ? 'shadow-2xl shadow-[#ff4b4a] opacity-90'
@@ -86,7 +86,7 @@ const RadioCard: React.FC<RadioCardProps> = ({ song }) => {
                 active: song.src === currentSong?.src,
                 isPlay: isPlaying && song.src === currentSong?.src,
               }}
-              className={clsx(
+              className={cn(
                 'border-2 border-fuchsia-600 transition-all duration-500 sha',
                 song.src === currentSong?.src ? 'w-14' : 'w-11',
               )}

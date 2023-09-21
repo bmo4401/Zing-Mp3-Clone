@@ -3,7 +3,6 @@
 import Artist from '@/components/Artist';
 import getClassName from '@/helpers/getClassName';
 import useBreakpoint from '@/hooks/(utils)/useBreakpoint';
-import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Card from '../../../../components/Card';
@@ -17,6 +16,7 @@ import { Song, Thumbnail } from '@/types';
 import useList from '@/hooks/(data)/useList';
 import Loading from '@/components/Loading';
 import useNavigation from '@/hooks/(utils)/useNavigation';
+import { cn } from '@/libs/utils';
 
 interface ContentProps {
   isLoading: boolean;
@@ -70,7 +70,7 @@ function Content({ className, thumbnails }: ContentProps) {
   const { setNavigation } = useNavigation();
 
   return (
-    <div className={clsx(className)}>
+    <div className={cn(className)}>
       {thumbnails?.map((thumbnail, index) => (
         <div
           className=""

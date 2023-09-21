@@ -1,8 +1,8 @@
-import clsx from 'clsx';
+import { cn } from '@/libs/utils';
 import Content from '../(site)/components/Content';
 export default function Home() {
   return (
-    <main className={clsx('flex-1  flex-col overflow-hidden')}>
+    <main className={cn('flex-1  flex-col overflow-hidden')}>
       <Content />
     </main>
   );

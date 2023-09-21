@@ -13,7 +13,7 @@ import { CldUploadWidget } from 'next-cloudinary';
 import { useCallback, useState } from 'react';
 import LoadingModal from '@/models/(content)/LoadingModal';
 import { useRouter } from 'next/navigation';
-import clsx from 'clsx';
+import { cn } from '@/libs/utils';
 export const text = 'This feature is currently not available...';
 interface ActiveAvatarProps {
   currentUser: User | undefined;
@@ -23,18 +23,7 @@ const ActiveAvatar: React.FC<ActiveAvatarProps> = ({ currentUser }) => {
   const router = useRouter();
   const [isLoading, setLoading] = useState<boolean>(false);
   const { setShowUploadModal } = useUploadModal();
-  /*    const deleteMany = () => {
-      axios
-         .delete('/api/song')
-         .then(() => toast.success('Deleted All Song'))
-         .catch((err) => console.log(err));
-   };
-   const deleteLiked = () => {
-      axios
-         .delete('/api/user')
-         .then(() => toast.success('Deleted Liked Song'))
-         .catch((err) => console.log(err));
-   }; */
+
   const handleUpload = useCallback(
     (result: any) => {
       const image = result.info.secure_url;
@@ -71,7 +60,7 @@ const ActiveAvatar: React.FC<ActiveAvatarProps> = ({ currentUser }) => {
                 return (
                   <div
                     onClick={() => currentUser?.username && open()}
-                    className={clsx(
+                    className={cn(
                       'w-14 h-w-14   rounded-full  overflow-hidden flex aspect-square justify-center items-center',
                       currentUser?.username
                         ? 'hover:scale-105 hover:opacity-80 cursor-pointer hover:border-dashed hover:border-2'
@@ -95,17 +84,29 @@ const ActiveAvatar: React.FC<ActiveAvatarProps> = ({ currentUser }) => {
               <h2 className="text-sm font-bold text-clip">
                 {currentUser?.username || currentUser?.email || 'Hải'}
               </h2>
-              <span className="w-fit py-0.5 px-1 rounded-md bg-slate-300/50 uppercase font-bold text-xxx tracking-widest">
-                basic
+              <span
+                className={cn(
+                  'w-fit py-0.5 px-1 rounded-md  uppercase font-bold text-xxx tracking-widest',
+                  currentUser?.isSubscribed
+                    ? 'bg-yellow-400 text-black'
+                    : 'bg-slate-300/50 text-white',
+                )}
+              >
+                {currentUser?.isSubscribed ? 'vip' : 'basic'}
               </span>
             </div>
           </div>
           {/* // Upgrade */}
           <div
             onClick={() => {
-              toast.warning(text);
+              (async () => {
+                const res = await axios.post('/api/checkout', {
+                  data: '',
+                });
+                window.location = res.data.url;
+              })();
             }}
-            className="w-full rounded-full bg-settingsFocus flex items-center justify-center py-2 hover:opacity-90 cursor-not-allowed "
+            className="w-full rounded-full bg-settingsFocus flex items-center justify-center py-2 hover:opacity-90 cursor-pointer "
           >
             <p className="text-xds font-semibold text-white">
               Nâng cấp tài khoản

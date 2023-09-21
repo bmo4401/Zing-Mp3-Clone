@@ -2,9 +2,9 @@
 
 import usePlayer from '@/hooks/(player)/usePlayer';
 import { Song } from '@/types';
-import clsx from 'clsx';
 import Artist from './Artist';
 import Card from './Card';
+import { cn } from '@/libs/utils';
 interface CardContentProps {
   data: Song | undefined;
   height: string;
@@ -43,7 +43,7 @@ const CardContent: React.FC<CardContentProps> = ({
     setContinue,
   } = usePlayer();
   return (
-    <div className={clsx('flex gap-2 ', height)}>
+    <div className={cn('flex gap-2 ', height)}>
       <Card
         onClick={(e) => {
           {
@@ -63,13 +63,13 @@ const CardContent: React.FC<CardContentProps> = ({
         }}
         data={data}
         image={data?.image}
-        className={clsx(height, width)}
+        className={cn(height, width)}
         circle={circle}
         rotate={rotate}
       />
-      <div className={clsx('flex flex-col h-full', className)}>
+      <div className={cn('flex flex-col h-full', className)}>
         <span
-          className={clsx(
+          className={cn(
             ' text-xds font-bold w-fit ',
             !pass ? 'text-white' : 'text-white/50',
             classNameTitle,

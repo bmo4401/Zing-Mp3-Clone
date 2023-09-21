@@ -3,11 +3,9 @@ import Download from '@/app/(site)/components/(header)/Download';
 import Search from '@/app/(site)/components/(header)/Search';
 import Settings from '@/app/(site)/components/(header)/Settings';
 import Avatar from '@/components/Avatar';
-import useSearch from '@/hooks/(header)/useSearch';
-import usePlaylist from '@/hooks/(player)/usePlaylist';
 import useNavigation from '@/hooks/(utils)/useNavigation';
+import { cn } from '@/libs/utils';
 import { User } from '@prisma/client';
-import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 interface HeaderProps {
@@ -19,7 +17,7 @@ const Header: React.FC<HeaderProps> = ({ currentUser }) => {
 
   return (
     <section
-      className={clsx(
+      className={cn(
         'z-10 right-0 left-11 sm:left-sidebarHeight px-8 sm:px-12  lg:left-sidebarWidth  bg-content h-sidebarHeight fixed top-0 ',
       )}
     >
@@ -33,7 +31,7 @@ const Header: React.FC<HeaderProps> = ({ currentUser }) => {
             <button
               disabled={index === 0}
               onClick={() => setNavigation(() => router.back(), -1)}
-              className={clsx(index !== 0 ? 'text-white' : 'opacity-80')}
+              className={cn(index !== 0 ? 'text-white' : 'opacity-80')}
             >
               <BsArrowLeft
                 size={22}
@@ -43,7 +41,7 @@ const Header: React.FC<HeaderProps> = ({ currentUser }) => {
             <button
               disabled={max === index || max === -1}
               onClick={() => setNavigation(() => router.forward())}
-              className={clsx(max > index ? 'text-white' : 'opacity-80')}
+              className={cn(max > index ? 'text-white' : 'opacity-80')}
             >
               <BsArrowRight
                 size={22}

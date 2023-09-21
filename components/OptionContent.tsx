@@ -2,7 +2,7 @@
 
 import RankingModal from '@/models/(content)/RankingModal';
 import { Song } from '@/types';
-import clsx from 'clsx';
+import { cn } from '@/libs/utils';
 import { StaticImageData } from 'next/image';
 import Options from './Options';
 interface OptionContentProps {
@@ -27,7 +27,7 @@ const OptionContent: React.FC<OptionContentProps> = ({
         song={song}
       >
         <div
-          className={clsx(
+          className={cn(
             'items-center justify-center font-medium cursor-pointer w-9 h-9 rounded-full h  flex',
           )}
         >

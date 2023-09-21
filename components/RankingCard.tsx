@@ -3,10 +3,10 @@
 import usePlayer from '@/hooks/(player)/usePlayer';
 import RankingModal from '@/models/(content)/RankingModal';
 import { Song } from '@/types';
-import clsx from 'clsx';
 import { IconType } from 'react-icons';
 import Artist from './Artist';
 import Card from './Card';
+import { cn } from '@/libs/utils';
 interface RankingCardProps {
   options: IconType;
   className: string;
@@ -30,7 +30,7 @@ const RankingCard: React.FC<RankingCardProps> = ({
   } = usePlayer();
   return (
     <div
-      className={clsx(
+      className={cn(
         'flex justify-between p-2 rounded-md group ',
         className,
         active ? 'bg-sidebarActive' : 'hover:bg-sidebarActive ',

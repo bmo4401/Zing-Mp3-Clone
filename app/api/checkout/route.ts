@@ -5,6 +5,11 @@ const corsHeaders = {
   'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type, Authorization',
 };
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 export async function OPTIONS(req: Request, res: Response) {
   return NextResponse.json({}, { headers: corsHeaders });
 }

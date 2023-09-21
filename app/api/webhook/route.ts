@@ -7,6 +7,7 @@ import Stripe from 'stripe';
 
 export async function POST(req: Request) {
   const body = await buffer(req.body as any);
+  console.log('❄️ ~ file: route.ts:10 ~ body:', body);
   const signature = req.headers.get('stripe-signature') as string;
   console.log('❄️ ~ file: route.ts:10 ~ headers:', headers);
   if (!signature) {
@@ -31,10 +32,23 @@ export async function POST(req: Request) {
   const session = event.data.object as Stripe.Checkout.Session;
   if (event.type === 'checkout.session.completed') {
     //@ts-ignore
-    const email = session.billing_details?.email;
-    await prisma.user.update({
+    const email = session.customer_details?.email as string;
+    const user = await prisma.user.findUnique({
       where: {
         email,
+      },
+    });
+    if (!user) {
+      return new NextResponse(
+        'User not found, maybe you entered wrong email!',
+        {
+          status: 401,
+        },
+      );
+    }
+    await prisma.user.update({
+      where: {
+        id: user?.id,
       },
       data: {
         isSubscribed: true,

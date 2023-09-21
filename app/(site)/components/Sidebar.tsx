@@ -144,9 +144,10 @@ const Sidebar: React.FC<SidebarProps> = ({ currentUser, children }) => {
                   <div
                     onClick={() => {
                       (async () => {
-                        await axios.post('/api/checkout', {
+                        const res = await axios.post('/api/checkout', {
                           data: '',
                         });
+                        window.location = res.data.url;
                       })();
                     }}
                     className="w-full h-7 rounded-full bg-yellow-400 flex items-center justify-center text-xx font-bold text-black cursor-pointer hover:opacity-90"

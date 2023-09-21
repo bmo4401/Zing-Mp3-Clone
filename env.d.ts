@@ -16,5 +16,8 @@ namespace NodeJS {
 
     EMAIL_ADDRESS: string;
     EMAIL_PASSWORD: string;
+
+    STRIPE_API_KEY: string;
+    STRIPE_WEBHOOK_SECRET: string;
   }
 }

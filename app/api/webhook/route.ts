@@ -2,11 +2,12 @@ import prisma from '@/libs/prismadb';
 import stripe from '@/libs/stripe';
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
+import { buffer } from 'node:stream/consumers';
 import Stripe from 'stripe';
 
 export async function POST(req: Request) {
-  const body = await req.text();
-  const signature = req.headers.get('stripe-signature');
+  const body = await buffer(req.body as any);
+  const signature = req.headers.get('stripe-signature') as string;
   console.log('❄️ ~ file: route.ts:10 ~ headers:', headers);
   if (!signature) {
     return new NextResponse(`No Stripe Signature found`, {

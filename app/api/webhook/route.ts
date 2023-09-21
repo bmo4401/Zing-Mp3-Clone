@@ -21,6 +21,7 @@ export async function POST(req: Request) {
       status: 400,
     });
   }
+  console.log('❄️ ~ file: route.ts:12 ~ event:', event);
 
   const session = event.data.object as Stripe.Checkout.Session;
   //@ts-ignore

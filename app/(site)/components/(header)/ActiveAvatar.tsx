@@ -86,7 +86,7 @@ const ActiveAvatar: React.FC<ActiveAvatarProps> = ({ currentUser }) => {
               </h2>
               <span
                 className={cn(
-                  'w-fit py-0.5 px-1 rounded-md  uppercase font-bold text-xxx tracking-widest',
+                  'text-[11px]  w-fit py-0.5 px-1 rounded-md  uppercase font-bold tracking-widest',
                   currentUser?.isSubscribed
                     ? 'bg-yellow-400 text-black'
                     : 'bg-slate-300/50 text-white',
@@ -145,7 +145,7 @@ const ActiveAvatar: React.FC<ActiveAvatarProps> = ({ currentUser }) => {
         {/* // Part 3 */}
         <div
           onClick={() =>
-            signOut({ redirect: true, callbackUrl: process.env.NEXTAUTH_URL })
+            signOut({ redirect: false, callbackUrl: process.env.NEXTAUTH_URL })
           }
           className="rounded-full p-2 cursor-pointer hover:bg-settingsFocus w-full flex gap-2 items-center"
         >

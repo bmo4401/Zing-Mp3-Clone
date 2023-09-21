@@ -27,7 +27,7 @@ export async function POST(req: Request) {
   //@ts-ignore
   const email = session.billing_details?.email;
 
-  if (session.status === 'complete' || email) {
+  if (event.type === 'checkout.session.completed') {
     await prisma.user.update({
       where: {
         email,
@@ -36,6 +36,6 @@ export async function POST(req: Request) {
         isSubscribed: true,
       },
     });
-    return NextResponse.json('Successfully', { status: 200 });
   }
+  return NextResponse.json(null, { status: 200 });
 }

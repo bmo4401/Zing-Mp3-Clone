@@ -134,7 +134,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentUser, children }) => {
               <div
                 className={cn(
                   'hidden px-[21px] my-5 w-full h-30  items-center justify-center',
-                  currentUser?.isSubscribed ? 'hidden' : 'md:flex',
+                  currentUser?.isSubscribed ? 'hidden' : 'xl:flex',
                 )}
               >
                 <div className=" w-full h-full rounded-md  bg-vip flex flex-col items-center justify-center text-white gap-3 px-3">

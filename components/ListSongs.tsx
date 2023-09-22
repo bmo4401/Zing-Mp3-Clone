@@ -48,8 +48,7 @@ const ListSongs: React.FC<ListSongsProps> = ({
         liked: currentUser?.liked,
       })
       .then((res) => {
-        /* router.refresh(), */
-        toast.success('Successfully!');
+        toast.success('Successfully!'), router.refresh();
       })
       .catch((err) => {
         console.log(err);

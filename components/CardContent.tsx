@@ -70,7 +70,7 @@ const CardContent: React.FC<CardContentProps> = ({
       <div className={cn('flex flex-col h-full', className)}>
         <span
           className={cn(
-            'font-bold w-fit text-xds ',
+            'font-bold w-fit text-[0.78rem] ',
             !pass ? 'text-white' : 'text-white/50',
             classNameTitle,
             nowrap ? 'whitespace-nowrap' : 'sm:whitespace-normal',

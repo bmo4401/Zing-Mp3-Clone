@@ -87,11 +87,7 @@ function RankingTabs() {
                 })}
               </div>
               <div
-                onClick={() =>
-                  setNavigation(() =>
-                    router.push('/ranking', { shallow: true }),
-                  )
-                }
+                onClick={() => setNavigation(() => router.push('/ranking'))}
                 className="flex gap-2 items-center text-xx uppercase text-contentDesc hover:text-textPrimary  font-semibold cursor-pointer leading-3"
               >
                 <span className="hidden sm:block">Tất cả</span>

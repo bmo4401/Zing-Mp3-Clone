@@ -78,9 +78,7 @@ function Content({ className, thumbnails }: ContentProps) {
         >
           <Card
             onClick={() => {
-              setNavigation(() =>
-                router.push(`album/${index + 1}`, { shallow: true }),
-              );
+              setNavigation(() => router.push(`album/${index + 1}`));
               setPlaying(thumbnail.song);
               setPlaylist(thumbnail.song);
               !showPlayer && setShowPlayer(true);

@@ -52,7 +52,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentUser, children }) => {
     <section className={cn(' flex overflow-hidden', 'h-screen')}>
       <>
         <div
-          onClick={() => router.push('/', { shallow: true })}
+          onClick={() => router.push('/')}
           className="fixed z-10 top-0 translate-x-1/4 translate-y-1/4  sm:hidden  bg-sidebarActive rounded-full  cursor-pointer opacity-100 hover:opacity-70  flex items-center justify-center"
         >
           <Image
@@ -84,8 +84,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentUser, children }) => {
           >
             <div
               onClick={() => (
-                setNavigation(() => router.push('/', { shallow: true })),
-                show && setShow(false)
+                setNavigation(() => router.push('/')), show && setShow(false)
               )}
               className={cn(
                 ' hover:opacity-90  h-sidebarHeight cursor-pointer',

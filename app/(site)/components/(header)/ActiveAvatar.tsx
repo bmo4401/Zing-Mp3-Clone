@@ -99,12 +99,14 @@ const ActiveAvatar: React.FC<ActiveAvatarProps> = ({ currentUser }) => {
           {/* // Upgrade */}
           <div
             onClick={() => {
-              (async () => {
-                const res = await axios.post('/api/checkout', {
-                  data: '',
-                });
-                window.location = res.data.url;
-              })();
+              !currentUser?.isSubscribed
+                ? (async () => {
+                    const res = await axios.post('/api/checkout', {
+                      data: '',
+                    });
+                    window.location = res.data.url;
+                  })()
+                : toast.warn('You had a subscription');
             }}
             className="w-full rounded-full bg-settingsFocus flex items-center justify-center py-2 hover:opacity-90 cursor-pointer "
           >

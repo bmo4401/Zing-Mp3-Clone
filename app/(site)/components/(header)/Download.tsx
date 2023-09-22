@@ -1,7 +1,4 @@
 'use client';
-import { RedirectType } from 'next/dist/client/components/redirect';
-import Link from 'next/link';
-import { redirect } from 'next/navigation';
 import { VscDesktopDownload } from 'react-icons/vsc';
 const Download = () => {
   return (

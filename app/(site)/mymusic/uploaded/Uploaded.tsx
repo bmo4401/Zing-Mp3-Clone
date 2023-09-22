@@ -2,12 +2,10 @@
 
 import EmptyState from '@/components/EmptyState';
 import ListSongs from '@/components/ListSongs';
-import useSearch from '@/hooks/(header)/useSearch';
 import useUploadModal from '@/hooks/(header)/useUploadModal';
 import usePlayer from '@/hooks/(player)/usePlayer';
 import { cn } from '@/libs/utils';
 import LoadingModal from '@/models/(content)/LoadingModal';
-import { Song } from '@/types';
 import { Tab } from '@headlessui/react';
 import { User } from '@prisma/client';
 import { useQuery } from '@tanstack/react-query';

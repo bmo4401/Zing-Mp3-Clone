@@ -26,7 +26,6 @@ interface BoxProps {
 const Box: React.FC<BoxProps> = ({ data, item: display }) => {
   const { setNavigation } = useNavigation();
   const pathname = usePathname();
-  console.log('❄️ ~ file: Box.tsx:29 ~ params:', pathname);
   const router = useRouter();
   const { showSidebar, setShowSidebar } = useSidebar();
   const [show, setShow] = useState<number>(-1);

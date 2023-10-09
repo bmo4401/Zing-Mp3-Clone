@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Image, { StaticImageData } from 'next/image';
 import { IconType } from 'react-icons/lib';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import useSidebar from '@/hooks/(sidebar)/useSidebar';
 import useNavigation from '@/hooks/(utils)/useNavigation';
 import { toast } from 'react-toastify';
@@ -25,7 +25,8 @@ interface BoxProps {
 }
 const Box: React.FC<BoxProps> = ({ data, item: display }) => {
   const { setNavigation } = useNavigation();
-
+  const pathname = usePathname();
+  console.log('❄️ ~ file: Box.tsx:29 ~ params:', pathname);
   const router = useRouter();
   const { showSidebar, setShowSidebar } = useSidebar();
   const [show, setShow] = useState<number>(-1);
@@ -63,6 +64,13 @@ const Box: React.FC<BoxProps> = ({ data, item: display }) => {
               : setNavigation(() =>
                   item.label !== 'Radio'
                     ? router.push(item.href)
+                    : pathname !== '/'
+                    ? (router.push('/'),
+                      setTimeout(() => {
+                        document
+                          .getElementById('radio')
+                          ?.scrollIntoView({ behavior: 'smooth' });
+                      }, 500))
                     : document
                         .getElementById('radio')
                         ?.scrollIntoView({ behavior: 'smooth' }),

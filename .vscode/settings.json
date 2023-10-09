@@ -20,5 +20,6 @@
       "Zalo",
       "zingchart",
       "zustand"
-   ]
+   ],
+   "nuxt.isNuxtApp": false
 }

@@ -30,7 +30,7 @@ const Search: React.FC<SearchProps> = () => {
     <div
       className={cn(
         'relative  sm:w-60 md:w-80 lg:w-90 xl:w-100    rounded-full  bg-search h-9',
-        showSearch ? 'fixed top-0 w-72' : 'w-40',
+        showSearch ? 'fixed top-[15px] w-72' : 'w-40',
       )}
     >
       <div
@@ -54,7 +54,7 @@ const Search: React.FC<SearchProps> = () => {
           <div>
             <div
               className={cn(
-                'absolute left-2 top-[15px]   w-9 h-9 text  flex items-center justify-center',
+                'absolute left-2 top-0   w-9 h-9 text  flex items-center justify-center',
                 isLoading && showSearch && 'animate-spin duration-150',
               )}
             >

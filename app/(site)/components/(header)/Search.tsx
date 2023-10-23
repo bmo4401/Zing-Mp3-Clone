@@ -54,7 +54,7 @@ const Search: React.FC<SearchProps> = () => {
           <div>
             <div
               className={cn(
-                'absolute left-2 top-0   w-9 h-9 text  flex items-center justify-center',
+                'absolute left-2 top-[15px]   w-9 h-9 text  flex items-center justify-center',
                 isLoading && showSearch && 'animate-spin duration-150',
               )}
             >
@@ -67,6 +67,7 @@ const Search: React.FC<SearchProps> = () => {
             <div className=" h-9 w-full  pl-10 pr-8 ">
               <form className="h-9' w-full flex items-center pl-2">
                 <input
+                  autoComplete="off"
                   id="search"
                   onFocus={(e) => {
                     e.stopPropagation();

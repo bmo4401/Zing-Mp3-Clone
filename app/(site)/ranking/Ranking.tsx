@@ -60,6 +60,7 @@ const Ranking = () => {
                     className={cn('py-4 ')}
                   >
                     <ListSongs
+                    
                       data={list}
                       className="w-full"
                     />

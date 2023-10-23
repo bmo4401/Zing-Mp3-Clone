@@ -95,6 +95,7 @@ const ListSongs: React.FC<ListSongsProps> = ({
               >
                 <div className="col-span-3 md:col-span-2 overflow-hidden sm:overflow-visible">
                   <CardContent
+                    disabled={false}
                     play
                     data={song}
                     width="w-9"

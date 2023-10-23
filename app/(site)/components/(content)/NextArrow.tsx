@@ -18,6 +18,7 @@ const NextArrow: React.FC<NextArrowProps> = (props) => {
     breakpoints,
     customClassName,
   } = props;
+
   const item = useBreakpoint(breakpoints);
   const disabled =
     currentSlide && (slideCount as number) - item === currentSlide;

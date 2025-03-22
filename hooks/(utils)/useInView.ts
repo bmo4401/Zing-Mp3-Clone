@@ -33,6 +33,7 @@ export const useInView = (target: Target, options: Options) => {
     return () => {
       observer?.disconnect();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [target.current, options.root, options.rootMargin, options.threshold]);
   return { isIntersecting };
 };

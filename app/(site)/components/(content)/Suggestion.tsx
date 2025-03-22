@@ -87,8 +87,7 @@ function Content({ className, thumbnails }: ContentProps) {
             btnPlay={{ circle: true, show: true }}
             image={thumbnail.image}
             title={thumbnail.title}
-            className="  
-                           
+            className="           
                w-36 h-36
                md:w-40 md:h-40
                lg:w-44 lg:h-44
@@ -96,11 +95,12 @@ function Content({ className, thumbnails }: ContentProps) {
                2xl:w-46 2xl:h-46"
           />
           <div
-            className="flex flex-wrap gap-[1px]    w-36 
+            className="flex flex-wrap gap-[1px]  
+              w-36 
                md:w-40 
                lg:w-44 
                xl:w-46 
-             2xl:w-46 "
+               2xl:w-46 "
           >
             {thumbnail.singers?.map((singer, idx) => (
               <>

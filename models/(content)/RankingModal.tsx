@@ -1,16 +1,7 @@
-//@ts-nocheck
 'use client';
-import { text } from '@/app/(site)/components/(header)/ActiveAvatar';
-import getPosition from '@/helpers/getPosition';
-import usePlayer from '@/hooks/(player)/usePlayer';
-import useWindowSize from '@/hooks/(utils)/useWindowSize';
-import bmw from '/public/bmw.jpg';
-import { Song } from '@/types';
-import { Popover, Transition } from '@headlessui/react';
-import { cn } from '@/libs/utils';
-import Image, { StaticImageData } from 'next/image';
-import Link from 'next/link';
+
 import { Fragment, useRef, useState } from 'react';
+import CopyToClipboard from 'react-copy-to-clipboard';
 import { IconType } from 'react-icons';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { BiBlock } from 'react-icons/bi';
@@ -18,8 +9,19 @@ import { BsDownload, BsMic } from 'react-icons/bs';
 import { RiLinksLine, RiPlayListAddLine, RiPlayListFill } from 'react-icons/ri';
 import { SlEarphones } from 'react-icons/sl';
 import { toast } from 'react-toastify';
+import { Popover, Transition } from '@headlessui/react';
+import Image, { StaticImageData } from 'next/image';
+import Link from 'next/link';
+
+import { text } from '@/app/(site)/components/(header)/ActiveAvatar';
+import getPosition from '@/helpers/getPosition';
+import usePlayer from '@/hooks/(player)/usePlayer';
+import useWindowSize from '@/hooks/(utils)/useWindowSize';
+import { cn } from '@/libs/utils';
+import { Song } from '@/types';
+
 import SongDetailModal from './SongDetailModal';
-import CopyToClipboard from 'react-copy-to-clipboard';
+
 interface PositionProps {
   height: number;
   width: number;
@@ -31,6 +33,13 @@ interface RankingModalProps {
   song?: Song;
 }
 
+interface getOptionsProps {
+  setPlayNext?: (song: Song) => void;
+  setPlaylist: (song: Song) => void;
+  setPlaying: (song: Song) => void;
+  setContinue: () => void;
+}
+
 interface OptionsProps {
   icon: IconType;
   label: string;
@@ -38,7 +47,40 @@ interface OptionsProps {
   copy?: boolean;
 }
 
-function RankingModal({ children, image, like, song }: RankingModalProps) {
+const getOptions = ({ setPlaylist, setPlayNext, setPlaying, setContinue }: getOptionsProps) => [
+  {
+    icon: AiOutlineHeart,
+    label: 'Trình phát nhạc',
+    action: (song?: Song, currentSong?: Song) => {
+      if (song?.src === currentSong?.src) {
+        setContinue();
+      } else {
+        setPlaying(song as Song);
+        if (song) {
+          setPlaylist(song);
+        }
+      }
+    }
+  },
+  {
+    icon: RiPlayListAddLine,
+    label: 'Thêm vào danh sách phát',
+    action: setPlaylist
+  },
+  {
+    icon: RiPlayListFill,
+    label: 'Phát tiếp theo',
+    action: setPlayNext
+  },
+
+  {
+    icon: RiLinksLine,
+    label: 'Sao chép link',
+    copy: true
+  }
+];
+
+const RankingModal = ({ children, image, like, song }: RankingModalProps) => {
   const size = useWindowSize();
   const [position, setPosition] = useState<PositionProps>({
     height: 0,
@@ -60,8 +102,8 @@ function RankingModal({ children, image, like, song }: RankingModalProps) {
         <div className="relative z-20 w-fit">
           <Popover.Button
             onMouseEnter={(e) => {
-              const width = (e.clientX * 100) / size.width;
-              const height = (e.clientY * 100) / size.height;
+              const width = (e.clientX * 100) / (size.width || 1);
+              const height = (e.clientY * 100) / (size.height || 1);
               setPosition({ width, height });
             }}
             className="relative w-fit hover:underline hover:opacity-80 focus:outline-none"
@@ -94,7 +136,7 @@ function RankingModal({ children, image, like, song }: RankingModalProps) {
                           width={0}
                           height={0}
                           sizes="100vw"
-                          src={image || bmw}
+                          src={image || 'bmw.jpg'}
                           className="h-9 w-9 rounded-lg object-contain"
                         />
                       </div>
@@ -158,8 +200,8 @@ function RankingModal({ children, image, like, song }: RankingModalProps) {
                   </div>
                   {/* Options */}
                   <div className="flex flex-col items-start text-searchText">
-                    {options.map((option) =>
-                      option.copy ? (
+                    {options.map((option) => {
+                      return option.copy ? (
                         <CopyToClipboard
                           key={option.label}
                           text={currentSong?.src || "This song doesn't existing"}
@@ -168,7 +210,10 @@ function RankingModal({ children, image, like, song }: RankingModalProps) {
                             close();
                           }}
                         >
-                          <button className='className="flex " w-full items-center justify-between px-3 py-2 hover:bg-contentFocus'>
+                          <button
+                            type="button"
+                            className='className="flex " w-full items-center justify-between px-3 py-2 hover:bg-contentFocus'
+                          >
                             <div className="flex items-center gap-2">
                               <div>
                                 <option.icon size={16} />
@@ -182,7 +227,9 @@ function RankingModal({ children, image, like, song }: RankingModalProps) {
                           key={option.label}
                           onClick={(e) => {
                             e.stopPropagation();
-                            option?.action && option?.action(song as Song, currentSong as Song);
+                            if (option?.action) {
+                              option.action(song as Song, currentSong as Song);
+                            }
                             close();
                           }}
                           className="flex w-full cursor-pointer items-center justify-between px-3 py-2 hover:bg-contentFocus"
@@ -194,8 +241,8 @@ function RankingModal({ children, image, like, song }: RankingModalProps) {
                             <span className="text-xds">{option.label}</span>
                           </div>
                         </div>
-                      )
-                    )}
+                      );
+                    })}
                   </div>
                 </div>
                 <div className="flex justify-center pb-2 pt-1 text-xds font-medium text-contentDesc">
@@ -208,38 +255,6 @@ function RankingModal({ children, image, like, song }: RankingModalProps) {
       )}
     </Popover>
   );
-}
-interface getOptionsProps {
-  setPlayNext?: (song: Song) => void;
-  setPlaylist: (song: Song) => void;
-  setPlaying: (song: Song) => void;
-  setContinue: () => void;
-}
-const getOptions = ({ setPlaylist, setPlayNext, setPlaying, setContinue }: getOptionsProps) => [
-  {
-    icon: AiOutlineHeart,
-    label: 'Trình phát nhạc',
-    action: (song?: Song, currentSong?: Song) =>
-      song?.src === currentSong?.src
-        ? setContinue()
-        : (setPlaying(song as Song), song && setPlaylist(song))
-  },
-  {
-    icon: RiPlayListAddLine,
-    label: 'Thêm vào danh sách phát',
-    action: setPlaylist
-  },
-  {
-    icon: RiPlayListFill,
-    label: 'Phát tiếp theo',
-    action: setPlayNext
-  },
-
-  {
-    icon: RiLinksLine,
-    label: 'Sao chép link',
-    copy: true
-  }
-];
+};
 
 export default RankingModal;

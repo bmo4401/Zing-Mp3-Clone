@@ -21,11 +21,7 @@ const Gallery = () => {
   const breakpoints = getBreakpoint([1, 2, 2, 3, 3, 3]);
   const className = getClassName(breakpoints);
   const item = useBreakpoint(breakpoints);
-  const images = [
-    '/public/images/gallery/1.jpg',
-    '/public/images/gallery/2.jpg',
-    '/public/images/gallery/3.jpg'
-  ];
+  const images = ['images/gallery/1.jpg', 'images/gallery/2.jpg', 'images/gallery/3.jpg'];
   const router = useRouter();
   const { setNavigation } = useNavigation();
   if (!item) return <Loading />;

@@ -1,23 +1,36 @@
-//@ts-nocheck
+// @ts-nocheck
+
 'use client';
-import Image from 'next/image';
+
+import { Fragment, useState } from 'react';
+import { Popover, Transition } from '@headlessui/react';
+import Image, { StaticImageData } from 'next/image';
+
 import getPosition from '@/helpers/getPosition';
 import usePopup from '@/hooks/(utils)/usePopup';
 import useWindowSize from '@/hooks/(utils)/useWindowSize';
-import { Popover, Transition } from '@headlessui/react';
 import { cn } from '@/libs/utils';
-import { Fragment, useState } from 'react';
 
-import { StaticImageData } from 'next/image';
-
-import bmw from '/public/bmw.jpg';
-import zalo from '/public/zalo.svg';
-import facebook from '/public/facebook.svg';
-import div from '/public/div.svg';
 interface PositionProps {
   height: number;
   width: number;
 }
+
+const getOptions = () => [
+  {
+    icon: 'facebook.svg',
+    label: 'Facebook'
+  },
+  {
+    icon: 'zalo.svg',
+    label: 'Zalo'
+  },
+  {
+    icon: 'div.svg',
+    label: 'Mã nhúng'
+  }
+];
+
 export interface ShareModalProps {
   children: React.ReactNode;
 }
@@ -27,7 +40,7 @@ interface OptionsProps {
   label: string;
 }
 
-function ShareModal({ children }: ShareModalProps) {
+const ShareModal = ({ children }: ShareModalProps) => {
   const { buttonRef, onClose, onOpen } = usePopup();
 
   const options: OptionsProps[] = getOptions();
@@ -92,7 +105,7 @@ function ShareModal({ children }: ShareModalProps) {
                       <div className="h-4 w-4 rounded-full">
                         <Image
                           alt="Social Icon"
-                          src={option.icon || bmw}
+                          src={option.icon || 'bmw.jpg'}
                           className="h-4 w-4 rounded-full bg-white"
                         />
                       </div>
@@ -107,21 +120,6 @@ function ShareModal({ children }: ShareModalProps) {
       )}
     </Popover>
   );
-}
-
-const getOptions = () => [
-  {
-    icon: facebook,
-    label: 'Facebook'
-  },
-  {
-    icon: zalo,
-    label: 'Zalo'
-  },
-  {
-    icon: div,
-    label: 'Mã nhúng'
-  }
-];
+};
 
 export default ShareModal;

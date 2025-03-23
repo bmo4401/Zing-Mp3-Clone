@@ -68,7 +68,7 @@ const ActiveAvatar: React.FC<ActiveAvatarProps> = ({ currentUser }) => {
                     )}
                   >
                     <Image
-                      src={currentUser?.image || '/public/images/placeholder.png'}
+                      src={currentUser?.image || 'images/placeholder.png'}
                       width={0}
                       height={0}
                       sizes="100vw"

@@ -11,7 +11,7 @@ import Options from './Options';
 import Play from './Play';
 
 interface CardProps {
-  image?: StaticImageData;
+  image?: StaticImageData | string;
   like?: boolean;
   btnPlay: BtnPlay;
   options?: boolean;
@@ -53,7 +53,7 @@ const Card: React.FC<CardProps> = ({
       >
         <Image
           alt="Image"
-          src={image || '/public/images/uploadSong.webp'}
+          src={image || 'images/uploadSong.webp'}
           width={0}
           height={0}
           sizes="100vw"

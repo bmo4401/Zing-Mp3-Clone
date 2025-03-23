@@ -232,7 +232,7 @@ const UploadModal = () => {
   const { setUploading, showUploadModal, setShowUploadModal } = useUploadModal();
   const [selected, setSelected] = useState<string>('Khác');
   const [isLoading, setLoading] = useState<boolean>(false);
-  const [image, setImage] = useState<StaticImageData | string>('/public/images/uploadSong.webp');
+  const [image, setImage] = useState<StaticImageData | string>('images/uploadSong.webp');
   const [audio, setAudio] = useState<string>('');
   const [duration, setDuration] = useState<number>(0);
   const {

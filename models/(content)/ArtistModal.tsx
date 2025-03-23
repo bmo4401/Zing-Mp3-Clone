@@ -1,18 +1,19 @@
-//@ts-nocheck
 'use client';
+
+import { Fragment, useCallback, useState } from 'react';
+import { AiOutlineUserAdd } from 'react-icons/ai';
+import { Popover, Transition } from '@headlessui/react';
+import truncate from 'lodash.truncate';
+
 import Card from '@/components/Card';
 import getPosition from '@/helpers/getPosition';
 import useSinger from '@/hooks/(data)/useSinger';
 import usePlayer from '@/hooks/(player)/usePlayer';
 import usePopup from '@/hooks/(utils)/usePopup';
 import useWindowSize from '@/hooks/(utils)/useWindowSize';
-import placeholder from '/public/images/placeholder.png';
-import { Song } from '@/types';
-import { Popover, Transition } from '@headlessui/react';
 import { cn } from '@/libs/utils';
-import truncate from 'lodash.truncate';
-import { Fragment, useCallback, useState } from 'react';
-import { AiOutlineUserAdd } from 'react-icons/ai';
+import { Song } from '@/types';
+
 interface PositionProps {
   height: number;
   width: number;
@@ -25,8 +26,8 @@ const description = () => {
   return 'Description: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text ever since the 1500s';
 };
 
-function ArtistModal({ children, singer }: ArtistPopupProps) {
-  let timer: NodeJS.Timeout;
+const ArtistModal = ({ children, singer }: ArtistPopupProps) => {
+  let timer: ReturnType<typeof setTimeout>;
   const { showPlayer, setShowPlayer, setPlaying, setPlaylist } = usePlayer();
   const { buttonRef, onClose, onOpen } = usePopup();
   const size = useWindowSize();
@@ -48,8 +49,8 @@ function ArtistModal({ children, singer }: ArtistPopupProps) {
           <Popover.Button
             onMouseEnter={(e) => {
               timer = setTimeout(() => {
-                const width = (e.clientX * 100) / size?.width;
-                const height = (e.clientY * 100) / size?.height;
+                const width = (e.clientX * 100) / (size?.width || 1);
+                const height = (e.clientY * 100) / (size?.height || 1);
                 setPosition({ width, height });
                 getArtistData();
                 onOpen(open);
@@ -95,8 +96,7 @@ function ArtistModal({ children, singer }: ArtistPopupProps) {
                       <div className="h-11 w-11">
                         <Card
                           btnPlay={{ show: true, size: 25 }}
-                          circle
-                          image={artist?.[0]?.image || placeholder}
+                          image={artist?.[0]?.image || 'images/placeholder.png'}
                           className="h-11 w-11"
                         />
                       </div>
@@ -137,11 +137,12 @@ function ArtistModal({ children, singer }: ArtistPopupProps) {
                           <div className="w-16" key={song.link}>
                             <Card
                               onClick={(e) => {
-                                {
-                                  e.stopPropagation();
-                                  !showPlayer && setShowPlayer(true);
-                                  setPlaying(song, true), setPlaylist(song);
+                                e.stopPropagation();
+                                if (!showPlayer) {
+                                  setShowPlayer(true);
                                 }
+                                setPlaying(song, true);
+                                setPlaylist(song);
                               }}
                               data={song}
                               btnPlay={{ show: true }}
@@ -166,6 +167,6 @@ function ArtistModal({ children, singer }: ArtistPopupProps) {
       )}
     </Popover>
   );
-}
+};
 
 export default ArtistModal;

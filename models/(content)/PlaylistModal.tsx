@@ -1,21 +1,9 @@
-//@ts-nocheck
 'use client';
-import Image from 'next/image';
-import getPosition from '@/helpers/getPosition';
-import Card from '@/components/Card';
-import usePopup from '@/hooks/(utils)/usePopup';
-import useWindowSize from '@/hooks/(utils)/useWindowSize';
-import { Popover, Transition } from '@headlessui/react';
-import { cn } from '@/libs/utils';
+
 import { Fragment, useState } from 'react';
-import { TfiHeart } from 'react-icons/tfi';
-import { SlEarphones } from 'react-icons/sl';
-import { BsChevronRight, BsDownload, BsMic, BsPlayCircle } from 'react-icons/bs';
-import { BiBlock } from 'react-icons/bi';
-import { AiOutlineHeart, AiOutlineUserAdd } from 'react-icons/ai';
-import truncate from 'lodash.truncate';
-import bmw from '/public/bmw.jpg';
-import { StaticImageData } from 'next/image';
+import { IconType } from 'react-icons';
+import { AiOutlineHeart } from 'react-icons/ai';
+import { IoAdd } from 'react-icons/io5';
 import {
   RiAddCircleLine,
   RiLinksLine,
@@ -23,12 +11,44 @@ import {
   RiPlayListFill,
   RiShareForwardLine
 } from 'react-icons/ri';
-import { IconType } from 'react-icons';
-import { IoAdd } from 'react-icons/io5';
+import { Popover, Transition } from '@headlessui/react';
+
+import getPosition from '@/helpers/getPosition';
+import useWindowSize from '@/hooks/(utils)/useWindowSize';
+import { cn } from '@/libs/utils';
+
 interface PositionProps {
   height: number;
   width: number;
 }
+
+const getOptions = () => [
+  {
+    icon: AiOutlineHeart,
+    label: 'Playlist'
+  },
+  {
+    icon: RiPlayListAddLine,
+    label: 'Playlist'
+  },
+  {
+    icon: RiPlayListFill,
+    label: 'Playlist'
+  },
+  {
+    icon: RiAddCircleLine,
+    label: 'Playlist'
+  },
+  {
+    icon: RiLinksLine,
+    label: 'Playlist'
+  },
+  {
+    icon: RiShareForwardLine,
+    label: 'Playlist'
+  }
+];
+
 export interface PlaylistModalProps {
   children: React.ReactNode;
 }
@@ -40,7 +60,7 @@ interface OptionsProps {
   modal?: string;
 }
 
-function PlaylistModal({ children }: PlaylistModalProps) {
+const PlaylistModal = ({ children }: PlaylistModalProps) => {
   const options: OptionsProps[] = getOptions();
   const size = useWindowSize();
   const [position, setPosition] = useState<PositionProps>({
@@ -55,8 +75,8 @@ function PlaylistModal({ children }: PlaylistModalProps) {
         <div className="relative w-full">
           <Popover.Button
             onClick={(e) => {
-              const width = (e.clientX * 100) / size.width;
-              const height = (e.clientY * 100) / size.height;
+              const width = (e.clientX * 100) / (size.width || 1);
+              const height = (e.clientY * 100) / (size.height || 1);
               setPosition({ width, height });
             }}
             className="relative w-full cursor-pointer hover:bg-contentFocus focus:outline-none"
@@ -128,33 +148,6 @@ function PlaylistModal({ children }: PlaylistModalProps) {
       )}
     </Popover>
   );
-}
-
-const getOptions = () => [
-  {
-    icon: AiOutlineHeart,
-    label: 'Playlist'
-  },
-  {
-    icon: RiPlayListAddLine,
-    label: 'Playlist'
-  },
-  {
-    icon: RiPlayListFill,
-    label: 'Playlist'
-  },
-  {
-    icon: RiAddCircleLine,
-    label: 'Playlist'
-  },
-  {
-    icon: RiLinksLine,
-    label: 'Playlist'
-  },
-  {
-    icon: RiShareForwardLine,
-    label: 'Playlist'
-  }
-];
+};
 
 export default PlaylistModal;

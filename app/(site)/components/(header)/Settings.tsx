@@ -32,7 +32,7 @@ const getSettings = () => [
   {
     icon: AiOutlineInfoCircle,
     label: 'Giới thiệu',
-    secondary: '/public/images/sidebar/logo.svg',
+    secondary: 'images/sidebar/logo.svg',
     data: [
       'Giấy phép mạng xã hội: 157/GP-BTTTT do Bộ Thông tin và Truyền thông cấp ngày 24/4/2019',
       'Chủ quản: Công Ty Cổ Phần VNG Z06 Đường số 13, phường Tân Thuận Đông, quận 7, thành phố Hồ Chí Minh, Việt Nam'

@@ -22,7 +22,7 @@ const Avatar: React.FC<AvatarProps> = ({ currentUser }) => {
             <Image
               className=""
               alt="Avatar"
-              src={currentUser?.image || 'images/placeholder.png'}
+              src={currentUser?.image || '/images/placeholder.png'}
               width={41}
               height={41}
               title="Người dùng"

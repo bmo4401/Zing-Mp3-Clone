@@ -21,7 +21,7 @@ const Gallery = () => {
   const breakpoints = getBreakpoint([1, 2, 2, 3, 3, 3]);
   const className = getClassName(breakpoints);
   const item = useBreakpoint(breakpoints);
-  const images = ['images/gallery/1.jpg', 'images/gallery/2.jpg', 'images/gallery/3.jpg'];
+  const images = ['/images/gallery/1.jpg', '/images/gallery/2.jpg', '/images/gallery/3.jpg'];
   const router = useRouter();
   const { setNavigation } = useNavigation();
   if (!item) return <Loading />;
@@ -30,7 +30,7 @@ const Gallery = () => {
       {images.slice(0, item).map((image, idx) => (
         <div
           key={idx + Math.random() * 10}
-          className="duration-350 cursor-pointer rounded-lg transition-all hover:scale-105 hover:opacity-80"
+          className="duration-350 relative aspect-video h-40 cursor-pointer rounded-lg transition-all hover:scale-105 hover:opacity-80"
         >
           <Image
             onClick={() => {
@@ -40,7 +40,9 @@ const Gallery = () => {
             alt="image"
             width={0}
             height={0}
-            className="rounded-lg object-contain"
+            fill
+            sizes="100vw"
+            className="rounded-lg object-fill"
           />
         </div>
       ))}

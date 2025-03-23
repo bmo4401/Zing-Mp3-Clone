@@ -72,7 +72,7 @@ const Settings = () => {
   const settingsContact = settings.slice(3, 7);
   return (
     <Popover className="relative z-10">
-      {({ open, close }) => (
+      {() => (
         <>
           <Popover.Button className="relative z-10 hidden h-9 w-9 items-center justify-center rounded-full bg-search hover:opacity-90 focus:outline-none sm:flex">
             <FiSettings size={20} title="Cài đặt" />
@@ -132,7 +132,7 @@ const Settings = () => {
                       />
                       <div
                         className="flex h-11 cursor-pointer items-center justify-between gap-2 rounded-md px-[10px] py-2.5 text-xds text-searchText opacity-50 hover:bg-settingsFocus hover:opacity-100"
-                        onClick={(e) => {
+                        onClick={() => {
                           setIsOpenModal(true);
                         }}
                       >
@@ -154,7 +154,7 @@ const Settings = () => {
                     <Link
                       href={setting.href as string}
                       target="blank"
-                      key={setting.label + Math.random() * 10}
+                      key={setting.label + setting.id}
                       className="flex h-11 cursor-pointer items-center justify-between gap-2 rounded-md px-[10px] py-2.5 text-xds text-searchText opacity-50 hover:bg-settingsFocus hover:opacity-100"
                     >
                       <div className="flex gap-2">

@@ -96,7 +96,7 @@ const ArtistModal = ({ children, singer }: ArtistPopupProps) => {
                       <div className="h-11 w-11">
                         <Card
                           btnPlay={{ show: true, size: 25 }}
-                          image={artist?.[0]?.image || 'images/placeholder.png'}
+                          image={artist?.[0]?.image || '/images/placeholder.png'}
                           className="h-11 w-11"
                         />
                       </div>

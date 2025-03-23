@@ -42,6 +42,8 @@ const Partner = () => {
               className="flex h-full w-full items-center justify-center rounded-md bg-white p-2"
             >
               <Image
+                width={0}
+                height={0}
                 alt="Partner"
                 src={partnerImage || 'bmw.jpg'}
                 sizes="100vw"

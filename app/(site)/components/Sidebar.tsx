@@ -56,6 +56,8 @@ const Sidebar: React.FC<SidebarProps> = ({ currentUser, children }) => {
         className="fixed top-0 z-10 flex translate-x-1/4 translate-y-1/4 cursor-pointer items-center justify-center rounded-full bg-sidebarActive opacity-100 hover:opacity-70 sm:hidden"
       >
         <Image
+          height={0}
+          width={0}
           alt="Logo"
           src={condition('images/sidebar/logo.svg', 'images/sidebar/logo_mobile.svg') || ''}
           className={cn(
@@ -99,6 +101,8 @@ const Sidebar: React.FC<SidebarProps> = ({ currentUser, children }) => {
               )}
             >
               <Image
+                height={0}
+                width={0}
                 alt="Logo"
                 src={condition('images/sidebar/logo.svg', 'images/sidebar/logo_mobile.svg') || ''}
                 className={cn(

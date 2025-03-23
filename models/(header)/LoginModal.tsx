@@ -234,7 +234,7 @@ const LoginModal = () => {
   const [otp, setOTP] = useState<number | null>(null);
   const [hidden, setHidden] = useState<boolean>(true);
   const [isLoading, setLoading] = useState<boolean>(false);
-  const [image, setImage] = useState<StaticImageData | string>('@/public/images/placeholder.png');
+  const [image, setImage] = useState<StaticImageData | string>('/public/images/placeholder.png');
   const {
     register,
     handleSubmit,

@@ -4,7 +4,7 @@ import { text } from '@/app/(site)/components/(header)/ActiveAvatar';
 import getPosition from '@/helpers/getPosition';
 import usePlayer from '@/hooks/(player)/usePlayer';
 import useWindowSize from '@/hooks/(utils)/useWindowSize';
-import bmw from '@/public/bmw.jpg';
+import bmw from '/public/bmw.jpg';
 import { Song } from '@/types';
 import { Popover, Transition } from '@headlessui/react';
 import { cn } from '@/libs/utils';

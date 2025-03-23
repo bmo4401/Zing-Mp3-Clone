@@ -22,9 +22,9 @@ const Gallery = () => {
   const className = getClassName(breakpoints);
   const item = useBreakpoint(breakpoints);
   const images = [
-    '@/public/images/gallery/1.jpg',
-    '@/public/images/gallery/2.jpg',
-    '@/public/images/gallery/3.jpg'
+    '/public/images/gallery/1.jpg',
+    '/public/images/gallery/2.jpg',
+    '/public/images/gallery/3.jpg'
   ];
   const router = useRouter();
   const { setNavigation } = useNavigation();

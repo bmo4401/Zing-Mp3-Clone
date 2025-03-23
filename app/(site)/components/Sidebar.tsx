@@ -59,8 +59,8 @@ const Sidebar: React.FC<SidebarProps> = ({ currentUser, children }) => {
           alt="Logo"
           src={
             condition(
-              '@/public/images/sidebar/logo.svg',
-              '@/public/images/sidebar/logo_mobile.svg'
+              '/public/images/sidebar/logo.svg',
+              '/public/images/sidebar/logo_mobile.svg'
             ) || ''
           }
           className={cn(
@@ -107,8 +107,8 @@ const Sidebar: React.FC<SidebarProps> = ({ currentUser, children }) => {
                 alt="Logo"
                 src={
                   condition(
-                    '@/public/images/sidebar/logo.svg',
-                    '@/public/images/sidebar/logo_mobile.svg'
+                    '/public/images/sidebar/logo.svg',
+                    '/public/images/sidebar/logo_mobile.svg'
                   ) || ''
                 }
                 className={cn(

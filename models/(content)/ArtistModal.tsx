@@ -6,7 +6,7 @@ import useSinger from '@/hooks/(data)/useSinger';
 import usePlayer from '@/hooks/(player)/usePlayer';
 import usePopup from '@/hooks/(utils)/usePopup';
 import useWindowSize from '@/hooks/(utils)/useWindowSize';
-import placeholder from '@/public/images/placeholder.png';
+import placeholder from '/public/images/placeholder.png';
 import { Song } from '@/types';
 import { Popover, Transition } from '@headlessui/react';
 import { cn } from '@/libs/utils';

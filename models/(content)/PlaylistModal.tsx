@@ -14,7 +14,7 @@ import { BsChevronRight, BsDownload, BsMic, BsPlayCircle } from 'react-icons/bs'
 import { BiBlock } from 'react-icons/bi';
 import { AiOutlineHeart, AiOutlineUserAdd } from 'react-icons/ai';
 import truncate from 'lodash.truncate';
-import bmw from '@/public/bmw.jpg';
+import bmw from '/public/bmw.jpg';
 import { StaticImageData } from 'next/image';
 import {
   RiAddCircleLine,

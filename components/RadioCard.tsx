@@ -74,7 +74,7 @@ const RadioCard: React.FC<RadioCardProps> = ({ song }) => {
           <div className="flex h-full w-full items-end justify-center">
             <Image
               alt="Live"
-              src="@/public/images/sidebar/live.svg"
+              src="/public/images/sidebar/live.svg"
               width={38}
               height={17}
               className="absolute bottom-0 left-1/3 z-10 ml-2 hidden opacity-100 lg:inline-flex"
@@ -82,7 +82,7 @@ const RadioCard: React.FC<RadioCardProps> = ({ song }) => {
           </div>
           <div className="-translate-y-1/translate-x-1/4 absolute bottom-0 right-0 z-10 shadow-lg">
             <Card
-              image={song.image || '@/public/bmw.jpg'}
+              image={song.image || '/public/bmw.jpg'}
               onClick={(e) => {
                 e.stopPropagation();
                 if (song?.src === currentSong?.src) {

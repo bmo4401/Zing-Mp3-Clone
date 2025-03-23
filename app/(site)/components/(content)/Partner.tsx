@@ -43,7 +43,7 @@ const Partner = () => {
             >
               <Image
                 alt="Partner"
-                src={partnerImage || '@/public/bmw.jpg'}
+                src={partnerImage || '/public/bmw.jpg'}
                 sizes="100vw"
                 style={{ width: '100%', height: 'auto' }}
                 className="aspect-video object-contain"

@@ -10,10 +10,10 @@ import { Fragment, useState } from 'react';
 
 import { StaticImageData } from 'next/image';
 
-import bmw from '@/public/bmw.jpg';
-import zalo from '@/public/zalo.svg';
-import facebook from '@/public/facebook.svg';
-import div from '@/public/div.svg';
+import bmw from '/public/bmw.jpg';
+import zalo from '/public/zalo.svg';
+import facebook from '/public/facebook.svg';
+import div from '/public/div.svg';
 interface PositionProps {
   height: number;
   width: number;

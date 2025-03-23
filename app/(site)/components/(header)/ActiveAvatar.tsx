@@ -1,18 +1,20 @@
 'use client';
-import useUploadModal from '@/hooks/(header)/useUploadModal';
-import { cn } from '@/libs/utils';
-import LoadingModal from '@/models/(content)/LoadingModal';
-import Placeholder from '@/public/images/placeholder.png';
-import { User } from '@prisma/client';
-import axios from 'axios';
-import { signOut } from 'next-auth/react';
-import { CldUploadWidget } from 'next-cloudinary';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+
 import { useCallback, useState } from 'react';
 import { GoDownload, GoSignOut } from 'react-icons/go';
 import { IoBanOutline } from 'react-icons/io5';
 import { toast } from 'react-toastify';
+import { User } from '@prisma/client';
+import axios from 'axios';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { signOut } from 'next-auth/react';
+import { CldUploadWidget } from 'next-cloudinary';
+
+import useUploadModal from '@/hooks/(header)/useUploadModal';
+import { cn } from '@/libs/utils';
+import LoadingModal from '@/models/(content)/LoadingModal';
+
 export const text = 'This feature is currently not available...';
 interface ActiveAvatarProps {
   currentUser: User | undefined;
@@ -31,25 +33,24 @@ const ActiveAvatar: React.FC<ActiveAvatarProps> = ({ currentUser }) => {
       axios
         .post('/api/user/avatar', {
           userId: currentUser?.id,
-          image,
+          image
         })
-        .then(
-          () => (
-            router.refresh(), toast.success('Changed Avatar Successfully!')
-          ),
-        )
+        .then(() => {
+          router.refresh();
+          toast.success('Changed Avatar Successfully!');
+        })
         .finally(() => setLoading(false));
     },
-    [currentUser, router],
+    [currentUser, router]
   );
   return (
     <>
       <LoadingModal show={isLoading} />
-      <div className="w-full py-2 px-2 flex flex-col justify-start gap-2">
+      <div className="flex w-full flex-col justify-start gap-2 px-2 py-2">
         {/* // Part 1 */}
         <div className="flex flex-col gap-2 py-2">
           {/* // Image */}
-          <div className="flex gap-3 items-center">
+          <div className="flex items-center gap-3">
             <CldUploadWidget
               onUpload={handleUpload}
               uploadPreset={uploadPreset}
@@ -60,35 +61,35 @@ const ActiveAvatar: React.FC<ActiveAvatarProps> = ({ currentUser }) => {
                   <div
                     onClick={() => currentUser?.username && open()}
                     className={cn(
-                      'w-14 h-w-14   rounded-full  overflow-hidden flex aspect-square justify-center items-center',
+                      'h-w-14 flex aspect-square w-14 items-center justify-center overflow-hidden rounded-full',
                       currentUser?.username
-                        ? 'hover:scale-105 hover:opacity-80 cursor-pointer hover:border-dashed hover:border-2'
-                        : 'cursor-not-allowed',
+                        ? 'cursor-pointer hover:scale-105 hover:border-2 hover:border-dashed hover:opacity-80'
+                        : 'cursor-not-allowed'
                     )}
                   >
                     <Image
-                      src={currentUser?.image || Placeholder}
+                      src={currentUser?.image || '@/public/images/placeholder.png'}
                       width={0}
                       height={0}
                       sizes="100vw"
                       alt="Avatar"
                       style={{ width: '100%', height: 'auto' }}
-                      className="aspect-square object-cover rounded-full"
+                      className="aspect-square rounded-full object-cover"
                     />
                   </div>
                 );
               }}
             </CldUploadWidget>
             <div className="flex flex-col justify-center gap-1 text-white">
-              <h2 className="text-sm font-bold text-clip">
+              <h2 className="text-clip text-sm font-bold">
                 {currentUser?.username || currentUser?.email || 'Hải'}
               </h2>
               <span
                 className={cn(
-                  'text-[11px]  w-fit py-0.5 px-1 rounded-md  uppercase font-bold tracking-widest',
+                  'w-fit rounded-md px-1 py-0.5 text-[11px] font-bold uppercase tracking-widest',
                   currentUser?.isSubscribed
                     ? 'bg-yellow-400 text-black'
-                    : 'bg-slate-300/50 text-white',
+                    : 'bg-slate-300/50 text-white'
                 )}
               >
                 {currentUser?.isSubscribed ? 'vip' : 'basic'}
@@ -98,24 +99,24 @@ const ActiveAvatar: React.FC<ActiveAvatarProps> = ({ currentUser }) => {
           {/* // Upgrade */}
           <div
             onClick={() => {
-              !currentUser?.isSubscribed
-                ? (async () => {
-                    const res = await axios.post('/api/checkout', {
-                      data: '',
-                    });
-                    window.location = res.data.url;
-                  })()
-                : toast.warn('You had a subscription');
+              if (!currentUser?.isSubscribed) {
+                (async () => {
+                  const res = await axios.post('/api/checkout', {
+                    data: ''
+                  });
+                  window.location.href = res.data.url;
+                })();
+              } else {
+                toast.warn('You had a subscription');
+              }
             }}
-            className="w-full rounded-full bg-settingsFocus flex items-center justify-center py-2 hover:opacity-90 cursor-pointer "
+            className="flex w-full cursor-pointer items-center justify-center rounded-full bg-settingsFocus py-2 hover:opacity-90"
           >
-            <p className="text-xds font-semibold text-white">
-              Nâng cấp tài khoản
-            </p>
+            <p className="text-xds font-semibold text-white">Nâng cấp tài khoản</p>
           </div>
         </div>
         {/* // Barrier */}
-        <hr className=" border-settingsFocus px-1" />
+        <hr className="border-settingsFocus px-1" />
         {/* // Part 2 */}
         <div className="flex flex-col gap-2 pt-2">
           <h2 className="text-sm font-bold text-white">Cá nhân</h2>
@@ -123,39 +124,38 @@ const ActiveAvatar: React.FC<ActiveAvatarProps> = ({ currentUser }) => {
             onClick={() => {
               toast.warning(text);
             }}
-            className="rounded-full p-2 cursor-not-allowed hover:bg-settingsFocus w-full flex gap-2 items-center"
+            className="flex w-full cursor-not-allowed items-center gap-2 rounded-full p-2 hover:bg-settingsFocus"
           >
             {' '}
             <IoBanOutline size={20} />
-            <p className="text-xds ">Danh sách chặn</p>
+            <p className="text-xds">Danh sách chặn</p>
           </div>
           <div
             onClick={(e) => {
-              e.stopPropagation;
+              e.stopPropagation();
               setShowUploadModal(true);
             }}
-            className="rounded-full p-2 cursor-pointer hover:bg-settingsFocus w-full flex gap-2 items-center"
+            className="flex w-full cursor-pointer items-center gap-2 rounded-full p-2 hover:bg-settingsFocus"
           >
             {' '}
             <GoDownload size={20} />
-            <p className="text-xds ">Tải lên</p>
+            <p className="text-xds">Tải lên</p>
           </div>
         </div>
         {/* // Barrier */}
-        <hr className=" border-settingsFocus px-1" />
+        <hr className="border-settingsFocus px-1" />
         {/* // Part 3 */}
         <div
-          onClick={() =>
-            signOut({ redirect: true, callbackUrl: process.env.NEXTAUTH_URL })
-          }
-          className="rounded-full p-2 cursor-pointer hover:bg-settingsFocus w-full flex gap-2 items-center"
+          onClick={() => signOut({ redirect: true, callbackUrl: process.env.NEXTAUTH_URL })}
+          className="flex w-full cursor-pointer items-center gap-2 rounded-full p-2 hover:bg-settingsFocus"
         >
           {' '}
           <GoSignOut size={20} />
-          <p className="text-xds ">Đăng suất</p>
+          <p className="text-xds">Đăng suất</p>
         </div>
       </div>
     </>
   );
 };
+
 export default ActiveAvatar;

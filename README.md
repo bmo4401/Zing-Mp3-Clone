@@ -10,15 +10,15 @@
 
 ##### Tính năng
 
--  Song: phát nhạc theo các chế độ (Next, Prev, Random, Repeat Song, Repeat
-   Playlist), xem MV, điều chỉnh âm lượng, tải xuống bài phát, xóa Playlist, tìm
-   kiếm bài hát.
--  User: Login (Google, Github, Credentials), Register, Forget Password (OTP),
-   Upload, Like bài hát, chỉnh sửa Avatar.
--  Responsive: Mobile, Tablet, Laptop.
+- Song: phát nhạc theo các chế độ (Next, Prev, Random, Repeat Song, Repeat
+  Playlist), xem MV, điều chỉnh âm lượng, tải xuống bài phát, xóa Playlist, tìm
+  kiếm bài hát.
+- User: Login (Google, Github, Credentials), Register, Forget Password (OTP),
+  Upload, Like bài hát, chỉnh sửa Avatar.
+- Responsive: Mobile, Tablet, Laptop.
 
 ##### Công nghệ sử dụng:
 
--  Fontend: Nextjs 13, TypeScript, Tailwind, HeadlessUi, React-Query, Zustand,
-   Cloudinary, Next-Auth.
--  Backend: MongoDB, Prisma, Nodemailer.
+- Fontend: Nextjs 13, TypeScript, Tailwind, HeadlessUi, React-Query, Zustand,
+  Cloudinary, Next-Auth.
+- Backend: MongoDB, Prisma, Nodemailer.

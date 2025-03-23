@@ -1,80 +1,75 @@
+import { HiXMark } from 'react-icons/hi2';
+import ReactPlayer from 'react-player';
+
 import CardContent from '@/components/CardContent';
 import useFrame from '@/hooks/(player)/useFrame';
 import usePlayer from '@/hooks/(player)/usePlayer';
 import { cn } from '@/libs/utils';
-import { HiXMark } from 'react-icons/hi2';
-import ReactPlayer from 'react-player';
 
 const Frame = () => {
-  const { currentSong, list, setPlaying, setPlaylist, setContinue, setClear } =
-    usePlayer();
+  const { currentSong, list, setPlaying, setPlaylist } = usePlayer();
   const { showFrame, setFrame } = useFrame();
   return (
     <div
       className={cn(
-        ' bottom-0 bg-gradient-to-b from-gray-900 to-gray-600  rounded-md z-50 overflow-hidden transition-all  ease-linear delay-150',
+        'bottom-0 z-50 overflow-hidden rounded-md bg-gradient-to-b from-gray-900 to-gray-600 transition-all delay-150 ease-linear',
         showFrame ? 'fixed' : '',
-        showFrame ? ' w-full h-full p-5' : 'w-0 h-0',
+        showFrame ? 'h-full w-full p-5' : 'h-0 w-0'
       )}
     >
       {' '}
-      <div className="w-full flex justify-end">
+      <div className="flex w-full justify-end">
         <div
           onClick={() => {
             setFrame(false);
           }}
-          className="cursor-pointer h-10 w-10 bg-slate-600 hover:bg-slate-400 rounded-full flex items-center justify-center"
+          className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-slate-600 hover:bg-slate-400"
         >
           <HiXMark size={30} />
         </div>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 p-5 overflow-hidden  gap-2 rounded-md bg-slate-600">
-        <div className=" lg:col-span-2 aspect-video rounded-md">
+      <div className="grid grid-cols-1 gap-2 overflow-hidden rounded-md bg-slate-600 p-5 lg:grid-cols-3">
+        <div className="aspect-video rounded-md lg:col-span-2">
           {showFrame && (
             <ReactPlayer
               playing={showFrame}
-              height={'100%'}
-              width={'100%'}
+              height="100%"
+              width="100%"
               onError={(e) => console.log(e)}
               url={`https://www.youtube.com/embed/${currentSong?.link}`}
-              controls={true}
+              controls
               config={{
                 youtube: {
-                  playerVars: { info: 0 },
-                },
+                  playerVars: { info: 0 }
+                }
               }}
             />
           )}
         </div>
-        <div className="lg:col-span-1 h-52 px-20 py-5 lg:py-0 lg:px-0 lg:h-5/6 overflow-hidden overflow-y-auto bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 rounded-md">
+        <div className="h-52 overflow-hidden overflow-y-auto rounded-md bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 px-20 py-5 lg:col-span-1 lg:h-5/6 lg:px-0 lg:py-0">
           {list?.map((song) => (
             <div
               onClick={(e) => {
-                {
-                  e.stopPropagation();
-                  setPlaying(song, false), setPlaylist(song);
-                }
+                e.stopPropagation();
+                setPlaying(song, false);
+                setPlaylist(song);
               }}
               key={song.src}
               className={cn(
-                'px-2 py-2  rounded-md cursor-pointer ',
-                currentSong?.src === song.src
-                  ? 'bg-login'
-                  : 'hover:bg-login/40',
+                'cursor-pointer rounded-md px-2 py-2',
+                currentSong?.src === song.src ? 'bg-login' : 'hover:bg-login/40'
               )}
             >
               <CardContent
-                isStop={true}
+                isStop
                 play
                 disabled
                 data={song}
                 height="h-9"
-                className={cn(
-                  currentSong?.src === song.src && 'overflow-hidden',
-                )}
+                className={cn(currentSong?.src === song.src && 'overflow-hidden')}
                 classNameTitle={cn(
                   'whitespace-nowrap ',
-                  currentSong?.src === song.src && 'animate-run ',
+                  currentSong?.src === song.src && 'animate-run '
                 )}
               />
             </div>
@@ -84,4 +79,5 @@ const Frame = () => {
     </div>
   );
 };
+
 export default Frame;

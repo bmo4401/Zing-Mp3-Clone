@@ -9,73 +9,61 @@ interface ZingChartCardProps {
   thumbnails: Thumbnail | undefined;
   active?: boolean;
 }
-const ZingChartCard: React.FC<ZingChartCardProps> = ({
-  thumbnails,
-  active,
-}) => {
+const ZingChartCard: React.FC<ZingChartCardProps> = ({ thumbnails, active }) => {
   const { isPlaying, setContinue } = usePlayer();
   return (
     /* Card */
-    <div className="flex gap-4 lg:flex-col lg:w-64">
+    <div className="flex gap-4 lg:w-64 lg:flex-col">
       <Card
         btnPlay={{
           isPlay: isPlaying && active,
           circle: true,
-          show: true,
+          show: true
         }}
         onClick={() => setContinue()}
         data={thumbnails?.song}
         image={thumbnails?.image}
         className="w-46 lg:w-64"
       />
-      <div className="w-auto lg:w-64 h-46 lg:h-auto flex flex-col justify-between lg:items-center gap-3">
-        <div className="flex flex-col gap-1  w-full lg:items-center">
-          <h2 className="text-lg text-center font-bold w-fit text-white">
+      <div className="flex h-46 w-auto flex-col justify-between gap-3 lg:h-auto lg:w-64 lg:items-center">
+        <div className="flex w-full flex-col gap-1 lg:items-center">
+          <h2 className="w-fit text-center text-lg font-bold text-white">
             {thumbnails?.title || 'Title'}
           </h2>
-          <div className="w-full flex  md:flex-wrap gap-[1px] lg:justify-center ">
+          <div className="flex w-full gap-[1px] md:flex-wrap lg:justify-center">
             {thumbnails?.singers?.map((singer, idx) => (
-              <>
-                <Artist
-                  key={singer}
-                  singer={
-                    idx === thumbnails?.singers?.length - 1
-                      ? singer + '.'
-                      : singer + ','
-                  }
-                />
-              </>
+              <Artist
+                key={singer}
+                singer={
+                  idx === (thumbnails?.singers?.length ?? 0) - 1 ? `${singer}.` : `${singer},`
+                }
+              />
             ))}
           </div>
-          <span className="hidden sm:block text-xs text-contentDesc hover:underline  ">
-            {thumbnails?.favorites
-              ? thumbnails?.favorites + ' người yêu thích'
-              : '(Empty) follows'}
+          <span className="hidden text-xs text-contentDesc hover:underline sm:block">
+            {thumbnails?.favorites ? `${thumbnails?.favorites} người yêu thích` : '(Empty) follows'}
           </span>
         </div>
         <div className="flex gap-2 lg:flex-col lg:items-center">
           <div className="flex items-center">
-            <div className="h-8 text-white flex px-2 md:px-4 py-1.5 bg-login items-center justify-center rounded-full hover:opacity-80 cursor-pointer">
-              <div
-                onClick={() => setContinue()}
-                className="flex gap-1 items-center "
-              >
+            <div className="flex h-8 cursor-pointer items-center justify-center rounded-full bg-login px-2 py-1.5 text-white hover:opacity-80 md:px-4">
+              <div onClick={() => setContinue()} className="flex items-center gap-1">
                 <Play btnPlay={{ isPlay: isPlaying, size: 17, show: true }} />
-                <span className="hidden md:block text-xds leading-6 font-medium tracking-wider">
+                <span className="hidden text-xds font-medium leading-6 tracking-wider md:block">
                   TIẾP TỤC PHÁT
                 </span>
               </div>
             </div>
           </div>
 
-          <div className="flex gap-2 h-8">
-            <div className="w-8 flex rounded-full bg-search items-center justify-center">
+          <div className="flex h-8 gap-2">
+            <div className="flex w-8 items-center justify-center rounded-full bg-search">
               {' '}
               <OptionContent
                 image={thumbnails?.image}
                 song={thumbnails?.song}
                 size={16}
-                className="w-8 h-8"
+                className="h-8 w-8"
               />
             </div>
           </div>
@@ -85,4 +73,5 @@ const ZingChartCard: React.FC<ZingChartCardProps> = ({
     /* List */
   );
 };
+
 export default ZingChartCard;

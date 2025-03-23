@@ -1,10 +1,12 @@
 'use client';
 
 import usePlayer from '@/hooks/(player)/usePlayer';
+import { cn } from '@/libs/utils';
 import { Song } from '@/types';
+
 import Artist from './Artist';
 import Card from './Card';
-import { cn } from '@/libs/utils';
+
 interface CardContentProps {
   data: Song | undefined;
   height: string;
@@ -31,7 +33,7 @@ const CardContent: React.FC<CardContentProps> = ({
   pass,
   nowrap,
   circle,
-  rotate,
+  rotate
 }) => {
   const {
     showPlayer,
@@ -40,26 +42,31 @@ const CardContent: React.FC<CardContentProps> = ({
     setPlaylist,
     currentSong,
     isPlaying,
-    setContinue,
+    setContinue
   } = usePlayer();
   return (
-    <div className={cn('flex gap-2 ', height)}>
+    <div className={cn('flex gap-2', height)}>
       <Card
         onClick={(e) => {
-          {
-            e.stopPropagation();
+          e.stopPropagation();
 
-            !showPlayer && setShowPlayer(true);
-            data?.src === currentSong?.src
-              ? setContinue()
-              : (setPlaying(data, true), data && setPlaylist(data));
+          if (!showPlayer) {
+            setShowPlayer(true);
+          }
+          if (data?.src === currentSong?.src) {
+            setContinue();
+          } else {
+            setPlaying(data, true);
+            if (data) {
+              setPlaylist(data);
+            }
           }
         }}
         btnPlay={{
           isPlay: data?.src === currentSong?.src && isPlaying,
           active: data?.src === currentSong?.src && isPlaying,
           size: 20,
-          show: play,
+          show: play
         }}
         data={data}
         image={data?.image}
@@ -67,22 +74,22 @@ const CardContent: React.FC<CardContentProps> = ({
         circle={circle}
         rotate={rotate}
       />
-      <div className={cn('flex flex-col h-full', className)}>
+      <div className={cn('flex h-full flex-col', className)}>
         <span
           className={cn(
-            'font-bold w-fit text-[0.78rem] ',
+            'w-fit text-[0.78rem] font-bold',
             !pass ? 'text-white' : 'text-white/50',
             classNameTitle,
-            nowrap ? 'whitespace-nowrap' : 'sm:whitespace-normal',
+            nowrap ? 'whitespace-nowrap' : 'sm:whitespace-normal'
           )}
         >
           {data?.songName}
         </span>
-        <div className="flex  overflow-hidden md:overflow-visible md:flex-wrap gap-[1px]  ">
+        <div className="flex gap-[1px] overflow-hidden md:flex-wrap md:overflow-visible">
           {data?.singers.map((singer, idx) => (
             <Artist
               key={singer}
-              singer={idx === data?.singers.length - 1 ? singer : singer + ','}
+              singer={data?.singers && idx === data.singers.length - 1 ? singer : `${singer},`}
               disabled={disabled ?? true}
             />
           ))}
@@ -91,4 +98,5 @@ const CardContent: React.FC<CardContentProps> = ({
     </div>
   );
 };
+
 export default CardContent;

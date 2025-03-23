@@ -1,13 +1,12 @@
 import { create } from 'zustand';
 interface PlaylistProps {
-   showPlaylist: boolean;
+  showPlaylist: boolean;
 
-   setShowPlaylist: () => void;
+  setShowPlaylist: () => void;
 }
 const usePlaylist = create<PlaylistProps>((set) => ({
-   showPlaylist: false,
-   setShowPlaylist: () =>
-      set((state) => ({ showPlaylist: !state.showPlaylist })),
+  showPlaylist: false,
+  setShowPlaylist: () => set((state) => ({ showPlaylist: !state.showPlaylist }))
 }));
 
 export default usePlaylist;

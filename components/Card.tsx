@@ -1,21 +1,15 @@
 'use client';
 
-import usePlayer from '@/hooks/(player)/usePlayer';
-import songPlaceholder from '@/public/images/uploadSong.webp';
-import { BtnPlay, Song } from '@/types';
-import Image, { StaticImageData } from 'next/image';
 import { useState } from 'react';
+import Image, { StaticImageData } from 'next/image';
+
+import usePlayer from '@/hooks/(player)/usePlayer';
+import { cn } from '@/libs/utils';
+import { BtnPlay, Song } from '@/types';
+
 import Options from './Options';
 import Play from './Play';
-import { cn } from '@/libs/utils';
-interface ModalProps {
-  isOpenModal: boolean;
-  setIsOpenModal: (value: boolean) => void;
-  like?: boolean;
-  play: boolean;
-  option?: boolean;
-  children?: React.ReactNode;
-}
+
 interface CardProps {
   image?: StaticImageData;
   like?: boolean;
@@ -32,7 +26,6 @@ interface CardProps {
 }
 const Card: React.FC<CardProps> = ({
   image,
-  like,
   btnPlay,
   options,
   title,
@@ -40,11 +33,10 @@ const Card: React.FC<CardProps> = ({
   className,
   circle,
   onClick,
-  data,
   notFit,
-  rotate,
+  rotate
 }) => {
-  const { isPlaying, currentSong } = usePlayer();
+  const { isPlaying } = usePlayer();
   const [isOpenModal, setIsOpenModal] = useState(false);
   return (
     <div className={cn(notFit ? '' : 'w-fit')}>
@@ -53,50 +45,41 @@ const Card: React.FC<CardProps> = ({
         onMouseEnter={() => setIsOpenModal(true)}
         onMouseLeave={() => setIsOpenModal(false)}
         className={cn(
-          ' relative overflow-hidden aspect-square',
+          'relative aspect-square overflow-hidden',
           className && className,
-          circle ? 'rounded-full' : 'rounded-md ',
-          rotate && isPlaying ? 'animate-spin-slow ' : '',
+          circle ? 'rounded-full' : 'rounded-md',
+          rotate && isPlaying ? 'animate-spin-slow' : ''
         )}
       >
         <Image
           alt="Image"
-          src={image || songPlaceholder}
+          src={image || '@/public/images/uploadSong.webp'}
           width={0}
           height={0}
           sizes="100vw"
           style={{ width: '100%', height: 'auto' }}
           className={cn(
-            ` aspect-square object-cover  transition-all duration-700 `,
-            (isOpenModal || btnPlay?.isPlay || btnPlay?.active) &&
-              btnPlay?.show &&
-              'outline-none',
-            (isOpenModal || btnPlay?.isPlay || btnPlay?.active) &&
-              btnPlay?.show &&
-              'scale-110',
-            (isOpenModal || btnPlay?.isPlay || btnPlay?.active) &&
-              btnPlay?.show &&
-              'opacity-80',
-            circle ? 'rounded-full' : 'rounded-md ',
+            'aspect-square object-cover transition-all duration-700',
+            (isOpenModal || btnPlay?.isPlay || btnPlay?.active) && btnPlay?.show && 'outline-none',
+            (isOpenModal || btnPlay?.isPlay || btnPlay?.active) && btnPlay?.show && 'scale-110',
+            (isOpenModal || btnPlay?.isPlay || btnPlay?.active) && btnPlay?.show && 'opacity-80',
+            circle ? 'rounded-full' : 'rounded-md'
           )}
         />
-        {(isOpenModal || btnPlay?.isPlay || btnPlay?.active) &&
-          btnPlay?.show && (
-            <div
-              className={cn(
-                'absolute inset-0 flex justify-center items-center gap-2 opacity-100 text-white',
-                rotate ? 'animate-none' : '',
-              )}
-            >
-              <Play btnPlay={btnPlay} />
-              {options && <Options />}
-            </div>
-          )}
+        {(isOpenModal || btnPlay?.isPlay || btnPlay?.active) && btnPlay?.show && (
+          <div
+            className={cn(
+              'absolute inset-0 flex items-center justify-center gap-2 text-white opacity-100',
+              rotate ? 'animate-none' : ''
+            )}
+          >
+            <Play btnPlay={btnPlay} />
+            {options && <Options />}
+          </div>
+        )}
       </div>
       <div>
-        <h2 className={cn('text-sm font-bold w-fit text-white mt-2')}>
-          {title && title}
-        </h2>
+        <h2 className={cn('mt-2 w-fit text-sm font-bold text-white')}>{title && title}</h2>
         <span className={cn('text-xs text-contentDesc')}>{desc && desc}</span>
       </div>
     </div>

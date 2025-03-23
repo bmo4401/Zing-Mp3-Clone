@@ -1,12 +1,12 @@
 import { create } from 'zustand';
 interface FrameProps {
-   showFrame: boolean;
+  showFrame: boolean;
 
-   setFrame: (value: boolean) => void;
+  setFrame: (value: boolean) => void;
 }
 const useFrame = create<FrameProps>((set) => ({
-   showFrame: false,
-   setFrame: (value: boolean) => set({ showFrame: value }),
+  showFrame: false,
+  setFrame: (value: boolean) => set({ showFrame: value })
 }));
 
 export default useFrame;

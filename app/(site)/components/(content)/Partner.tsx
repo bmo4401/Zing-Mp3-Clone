@@ -1,44 +1,49 @@
 'use client';
-import Image, { StaticImageData } from 'next/image';
-import getClassName from '@/helpers/getClassName';
-import bmw from '@/public/bmw.jpg';
-import {
-  Partner1,
-  Partner2,
-  Partner3,
-  Partner4,
-  Partner5,
-  Partner6,
-  Partner7,
-  Partner8,
-  Partner9,
-  Partner10,
-  Partner11,
-  Partner12,
-  Partner13,
-  Partner14,
-  Partner15,
-  Partner16,
-} from '@/public/index';
+
+import Image from 'next/image';
+
 import getBreakpoint from '@/helpers/getBreakpoint';
+import getClassName from '@/helpers/getClassName';
 import { cn } from '@/libs/utils';
+
+const partners = [
+  '/partner/1.png',
+  '/partner/2.png',
+  '/partner/3.png',
+  '/partner/4.png',
+  '/partner/5.png',
+  '/partner/6.png',
+  '/partner/7.png',
+  '/partner/8.png',
+  '/partner/9.png',
+  '/partner/10.png',
+  '/partner/11.png',
+  '/partner/12.png',
+  '/partner/13.png',
+  '/partner/14.png',
+  '/partner/15.png',
+  '/partner/16.png'
+];
+
+const breakpoints = getBreakpoint([4, 4, 4, 8, 8, 8]);
+
 const Partner = () => {
   const className = getClassName(breakpoints);
   return (
-    <div className=" flex flex-col gap-y-5 ">
-      <div className="w-full flex justify-center text-xs font-semibold tracking-wider text-contentDesc uppercase">
+    <div className="flex flex-col gap-y-5">
+      <div className="flex w-full justify-center text-xs font-semibold uppercase tracking-wider text-contentDesc">
         đối tác âm nhạc
       </div>
       <div className="w-full">
-        <div className={cn(' sm:h-1/7  lg:h-1/14  gap-3', className)}>
-          {partners.map((partner, index) => (
+        <div className={cn('gap-3 sm:h-1/7 lg:h-1/14', className)}>
+          {partners.map((partnerImage, index) => (
             <div
               key={index + Math.random() * 10}
-              className=" w-full h-full flex items-center justify-center bg-white rounded-md p-2"
+              className="flex h-full w-full items-center justify-center rounded-md bg-white p-2"
             >
               <Image
-                alt={'Partner'}
-                src={partner.img || bmw}
+                alt="Partner"
+                src={partnerImage || '@/public/bmw.jpg'}
                 sizes="100vw"
                 style={{ width: '100%', height: 'auto' }}
                 className="aspect-video object-contain"
@@ -47,30 +52,11 @@ const Partner = () => {
           ))}
         </div>
       </div>
-      <div className="w-full flex justify-center text-xs font-semibold tracking-wider text-contentDesc/50 uppercase text-center">
+      <div className="flex w-full justify-center text-center text-xs font-semibold uppercase tracking-wider text-contentDesc/50">
         <h2>This clone is for educational purpose only.</h2>
       </div>
     </div>
   );
 };
 
-const breakpoints = getBreakpoint([4, 4, 4, 8, 8, 8]);
-const partners: Array<{ img: StaticImageData }> = [
-  { img: Partner1 },
-  { img: Partner2 },
-  { img: Partner3 },
-  { img: Partner4 },
-  { img: Partner5 },
-  { img: Partner6 },
-  { img: Partner7 },
-  { img: Partner8 },
-  { img: Partner9 },
-  { img: Partner10 },
-  { img: Partner11 },
-  { img: Partner12 },
-  { img: Partner13 },
-  { img: Partner14 },
-  { img: Partner15 },
-  { img: Partner16 },
-];
 export default Partner;

@@ -32,7 +32,7 @@ function ArtistModal({ children, singer }: ArtistPopupProps) {
   const size = useWindowSize();
   const [position, setPosition] = useState<PositionProps>({
     height: 0,
-    width: 0,
+    width: 0
   });
   const [artist, setArtist] = useState<Song[]>();
   const { isLoading, data } = useSinger(singer);
@@ -42,7 +42,7 @@ function ArtistModal({ children, singer }: ArtistPopupProps) {
   }, [data, isLoading]);
   if (isLoading) return <h2>Loading...</h2>;
   return (
-    <Popover className="w-fit focus:outline-none   ">
+    <Popover className="w-fit focus:outline-none">
       {({ open, close }) => (
         <div className="relative w-fit">
           <Popover.Button
@@ -56,7 +56,7 @@ function ArtistModal({ children, singer }: ArtistPopupProps) {
               }, 400);
             }}
             ref={buttonRef}
-            className="w-fit relative  focus:outline-none hover:underline hover:text-textPrimary"
+            className="relative w-fit hover:text-textPrimary hover:underline focus:outline-none"
             onMouseLeave={() => {
               clearTimeout(timer);
               onClose(open, close);
@@ -77,9 +77,9 @@ function ArtistModal({ children, singer }: ArtistPopupProps) {
             <Popover.Panel
               static
               /* Z-index */
-              className={cn('absolute  z-40 w-80 ', className)}
+              className={cn('absolute z-40 w-80', className)}
             >
-              <div className="relative h-full  shadow-lg ring-1 ring-black ring-opacity-5">
+              <div className="relative h-full shadow-lg ring-1 ring-black ring-opacity-5">
                 <div
                   onMouseEnter={(e) => {
                     onOpen(open);
@@ -87,36 +87,31 @@ function ArtistModal({ children, singer }: ArtistPopupProps) {
                   onMouseLeave={() => {
                     onClose(open, close);
                   }}
-                  className="relative h-full bg-searchFocus rounded-md p-4 flex flex-col gap-4 overflow-hidden  "
+                  className="relative flex h-full flex-col gap-4 overflow-hidden rounded-md bg-searchFocus p-4"
                 >
                   {/* Heading */}
-                  <div className="h-full flex justify-between">
+                  <div className="flex h-full justify-between">
                     <div className="flex items-center gap-2">
-                      <div className="w-11 h-11">
+                      <div className="h-11 w-11">
                         <Card
                           btnPlay={{ show: true, size: 25 }}
                           circle
                           image={artist?.[0]?.image || placeholder}
-                          className="h-11 w-11 "
+                          className="h-11 w-11"
                         />
                       </div>
                       <div className="flex flex-col gap-1">
-                        <span className="text-xds text-white font-bold">
-                          {singer}
-                        </span>
+                        <span className="text-xds font-bold text-white">{singer}</span>
                         <span className="text-xx text-contentDesc">
                           {(artist && artist[0]?.favorites) || '(Empty)'}
                         </span>
                       </div>
                     </div>
                     <div className="flex items-center">
-                      <div className="w-28 h-6 text-white flex  px-2 py-1.5 bg-login items-center justify-center rounded-full hover:opacity-80 cursor-not-allowed">
-                        <div className="flex gap-1 items-center ">
-                          <AiOutlineUserAdd
-                            size={17}
-                            className="font-medium"
-                          />
-                          <span className="text-xx leading-6 font-normal tracking-wider">
+                      <div className="flex h-6 w-28 cursor-not-allowed items-center justify-center rounded-full bg-login px-2 py-1.5 text-white hover:opacity-80">
+                        <div className="flex items-center gap-1">
+                          <AiOutlineUserAdd size={17} className="font-medium" />
+                          <span className="text-xx font-normal leading-6 tracking-wider">
                             QUAN TÂM
                           </span>
                         </div>
@@ -124,25 +119,22 @@ function ArtistModal({ children, singer }: ArtistPopupProps) {
                     </div>
                   </div>
                   {/* Description */}
-                  <div className="w-full flex flex-col text-white ">
-                    <p className="hover:text-textPrimary cursor-pointer hover:underline">
+                  <div className="flex w-full flex-col text-white">
+                    <p className="cursor-pointer hover:text-textPrimary hover:underline">
                       {truncate(description(), {
                         length: 100,
                         separator: ' ',
-                        omission: '...Xem thêm',
+                        omission: '...Xem thêm'
                       })}
                     </p>
                   </div>
                   {/* Songs */}
                   <div className="flex flex-col gap-2">
-                    <h2 className="text-xds font-bold  text-white">Mới nhất</h2>
+                    <h2 className="text-xds font-bold text-white">Mới nhất</h2>
                     <div className="flex gap-3">
                       {artist ? (
                         artist?.slice(0, artist?.length).map((song, index) => (
-                          <div
-                            className="w-16"
-                            key={song.link}
-                          >
+                          <div className="w-16" key={song.link}>
                             <Card
                               onClick={(e) => {
                                 {
@@ -154,9 +146,9 @@ function ArtistModal({ children, singer }: ArtistPopupProps) {
                               data={song}
                               btnPlay={{ show: true }}
                               image={song.image}
-                              className="w-16 h-16"
+                              className="h-16 w-16"
                             />
-                            <h2 className="text-xx text-white line-clamp-2  leading-3">
+                            <h2 className="line-clamp-2 text-xx leading-3 text-white">
                               {song.songName}
                             </h2>
                           </div>

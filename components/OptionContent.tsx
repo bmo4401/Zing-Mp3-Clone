@@ -1,10 +1,13 @@
 'use client';
 
+import { StaticImageData } from 'next/image';
+
+import { cn } from '@/libs/utils';
 import RankingModal from '@/models/(content)/RankingModal';
 import { Song } from '@/types';
-import { cn } from '@/libs/utils';
-import { StaticImageData } from 'next/image';
+
 import Options from './Options';
+
 interface OptionContentProps {
   image?: StaticImageData;
   like?: string | number;
@@ -12,33 +15,21 @@ interface OptionContentProps {
   className?: string;
   song?: Song;
 }
-const OptionContent: React.FC<OptionContentProps> = ({
-  image,
-  like,
-  size,
-  className,
-  song,
-}) => {
+const OptionContent: React.FC<OptionContentProps> = ({ image, like, size, className, song }) => {
   return (
     <div>
-      <RankingModal
-        image={image}
-        like={like}
-        song={song}
-      >
+      <RankingModal image={image} like={like} song={song}>
         <div
           className={cn(
-            'items-center justify-center font-medium cursor-pointer w-9 h-9 rounded-full h  flex',
+            'h flex h-9 w-9 cursor-pointer items-center justify-center rounded-full font-medium'
           )}
         >
           {' '}
-          <Options
-            size={size ? size : 16}
-            className={className}
-          />{' '}
+          <Options size={size || 16} className={className} />{' '}
         </div>
       </RankingModal>
     </div>
   );
 };
+
 export default OptionContent;

@@ -1,21 +1,23 @@
 'use client';
-import { useRouter } from 'next/navigation';
+
+import { useState } from 'react';
+import { BsChevronLeft } from 'react-icons/bs';
+import { User } from '@prisma/client';
+import axios from 'axios';
 import Image, { StaticImageData } from 'next/image';
-import Box from './(sidebar)/Box';
-import useBreakpoint from '@/hooks/(utils)/useBreakpoint';
+import { useRouter } from 'next/navigation';
+
+import getBreakpoint from '@/helpers/getBreakpoint';
+import useLoginModal from '@/hooks/(header)/useLoginModal';
+import usePlayer from '@/hooks/(player)/usePlayer';
 import useRoutes from '@/hooks/(sidebar)/useRoutes';
 import useSidebar from '@/hooks/(sidebar)/useSidebar';
-import usePlayer from '@/hooks/(player)/usePlayer';
-import getBreakpoint from '@/helpers/getBreakpoint';
-import MobileLogo from '@/public/images/sidebar/logo_mobile.svg';
-import Logo from '@/public/images/sidebar/logo.svg';
+import useBreakpoint from '@/hooks/(utils)/useBreakpoint';
 import useNavigation from '@/hooks/(utils)/useNavigation';
-import { User } from '@prisma/client';
-import { BsChevronLeft } from 'react-icons/bs';
-import { useState } from 'react';
-import axios from 'axios';
 import { cn } from '@/libs/utils';
-import useLoginModal from '@/hooks/(header)/useLoginModal';
+
+import Box from './(sidebar)/Box';
+
 interface SidebarProps {
   children: React.ReactNode;
   currentUser: User | undefined;
@@ -33,164 +35,156 @@ const Sidebar: React.FC<SidebarProps> = ({ currentUser, children }) => {
   const dataPlaylists = routes.slice(7, 8);
   const condition = (
     classNameTrue: string | StaticImageData,
-    classNameFalse: string | StaticImageData,
+    classNameFalse: string | StaticImageData
   ) => {
     if (item === 2) {
       return classNameTrue;
-    } else {
-      if (showSidebar) {
-        return classNameTrue;
-      }
-      return classNameFalse;
     }
+    if (showSidebar) {
+      return classNameTrue;
+    }
+    return classNameFalse;
   };
   const [show, setShow] = useState<boolean>(false);
   const { setNavigation } = useNavigation();
   const { showPlayer } = usePlayer();
   const { setShowLoginModal } = useLoginModal();
   return (
-    <section className={cn(' flex overflow-hidden', 'h-screen')}>
-      <>
-        <div
-          onClick={() => router.push('/')}
-          className="fixed z-10 top-0 translate-x-1/4 translate-y-1/4  sm:hidden  bg-sidebarActive rounded-full  cursor-pointer opacity-100 hover:opacity-70  flex items-center justify-center"
-        >
-          <Image
-            alt="Logo"
-            src={condition(Logo, MobileLogo) || ''}
-            className={cn(
-              condition('', 'aspect-square'),
-              condition('w-28', 'w-10'),
-              condition('h-11', 'h-10'),
-            )}
-          />
-        </div>
+    <section className={cn('flex overflow-hidden', 'h-screen')}>
+      <div
+        onClick={() => router.push('/')}
+        className="fixed top-0 z-10 flex translate-x-1/4 translate-y-1/4 cursor-pointer items-center justify-center rounded-full bg-sidebarActive opacity-100 hover:opacity-70 sm:hidden"
+      >
+        <Image
+          alt="Logo"
+          src={
+            condition(
+              '@/public/images/sidebar/logo.svg',
+              '@/public/images/sidebar/logo_mobile.svg'
+            ) || ''
+          }
+          className={cn(
+            condition('', 'aspect-square'),
+            condition('w-28', 'w-10'),
+            condition('h-11', 'h-10')
+          )}
+        />
+      </div>
+      <div
+        className={cn(
+          'overflow-hidden sm:block lg:w-54',
+          show || showSidebar ? 'w-54' : 'w-sidebarHeight',
+          show || showSidebar ? 'fixed left-0 z-40' : '',
+          show || showSidebar ? 'transition-all delay-150 ease-linear' : '',
+          showPlayer ? 'h-[calc(100vh-90px)]' : 'h-screen',
+          !show && 'hidden'
+        )}
+      >
         <div
           className={cn(
-            ' sm:block overflow-hidden lg:w-54',
-            show || showSidebar ? 'w-54' : 'w-sidebarHeight ',
-            show || showSidebar ? 'fixed left-0 z-40' : '',
-            show || showSidebar ? 'transition-all ease-linear  delay-150' : '',
-            showPlayer ? 'h-[calc(100vh-90px)]' : 'h-screen',
-            !show && 'hidden',
+            'flex flex-col bg-sidebarBackground lg:w-54',
+            showSidebar ? 'w-54' : 'w-sidebarHeight',
+            showPlayer ? 'h-[calc(100vh-144px)]' : 'h-[calc(100vh-54px)]'
           )}
         >
           <div
+            onClick={() => {
+              setNavigation(() => router.push('/'));
+              if (show) setShow(false);
+            }}
             className={cn(
-              ' lg:w-54 bg-sidebarBackground flex flex-col',
-              showSidebar ? 'w-54' : 'w-sidebarHeight ',
-              showPlayer ? 'h-[calc(100vh-144px)]' : 'h-[calc(100vh-54px)]',
+              'h-sidebarHeight cursor-pointer hover:opacity-90',
+              condition('pl-[25px] pr-[25px]', '')
             )}
           >
             <div
-              onClick={() => (
-                setNavigation(() => router.push('/')), show && setShow(false)
-              )}
               className={cn(
-                ' hover:opacity-90  h-sidebarHeight cursor-pointer',
-                condition('pl-[25px] pr-[25px]', ''),
+                'flex h-sidebarHeight w-full items-center',
+                condition('', 'justify-center')
               )}
             >
-              <div
+              <Image
+                alt="Logo"
+                src={
+                  condition(
+                    '@/public/images/sidebar/logo.svg',
+                    '@/public/images/sidebar/logo_mobile.svg'
+                  ) || ''
+                }
                 className={cn(
-                  'w-full h-sidebarHeight flex items-center ',
-                  condition('', 'justify-center'),
+                  condition('', 'aspect-square'),
+                  condition('w-28', 'w-10'),
+                  condition('h-11', 'h-10')
                 )}
-              >
-                <Image
-                  alt="Logo"
-                  src={condition(Logo, MobileLogo) || ''}
-                  className={cn(
-                    condition('', 'aspect-square'),
-                    condition('w-28', 'w-10'),
-                    condition('h-11', 'h-10'),
-                  )}
-                />
-              </div>
-            </div>
-            <Box
-              data={dataHome}
-              item={item}
-            />
-            <div className="relative mt-[14px] ml-[21px] mr-[25px] ">
-              <div className="absolute -top-px  h-px w-full bg-sidebarActive" />
-              <div className="absolute top-0 h-[14px] w-full z-10 bg-sidebarBackground" />
-              <div className="absolute w-full h-[10px] top-[14px] shadow-lg shadow-slate-900" />
-            </div>
-
-            <div
-              onClick={() => show && setShow(false)}
-              className="relative pt-[14px] overflow-hidden hover:overflow-y-auto"
-            >
-              <Box
-                data={dataRankings}
-                item={item}
               />
-              {currentUser && (
-                <Box
-                  data={dataPrivate}
-                  item={item}
-                />
+            </div>
+          </div>
+          <Box data={dataHome} item={item} />
+          <div className="relative ml-[21px] mr-[25px] mt-[14px]">
+            <div className="absolute -top-px h-px w-full bg-sidebarActive" />
+            <div className="absolute top-0 z-10 h-[14px] w-full bg-sidebarBackground" />
+            <div className="absolute top-[14px] h-[10px] w-full shadow-lg shadow-slate-900" />
+          </div>
+
+          <div
+            onClick={() => show && setShow(false)}
+            className="relative overflow-hidden pt-[14px] hover:overflow-y-auto"
+          >
+            <Box data={dataRankings} item={item} />
+            {currentUser && <Box data={dataPrivate} item={item} />}
+            <div
+              className={cn(
+                'my-5 hidden h-30 w-full items-center justify-center px-[21px]',
+                currentUser?.isSubscribed ? 'hidden' : 'xl:flex'
               )}
-              <div
-                className={cn(
-                  'hidden px-[21px] my-5 w-full h-30  items-center justify-center',
-                  currentUser?.isSubscribed ? 'hidden' : 'xl:flex',
-                )}
-              >
-                <div className=" w-full h-full rounded-md  bg-vip flex flex-col items-center justify-center text-white gap-3 px-3">
-                  <h2 className="font-bold text-xx text-center">
-                    Nghe nhạc không quảng cáo cùng kho nhạc PREMIUM
-                  </h2>
-                  <div
-                    onClick={() => {
-                      currentUser
-                        ? (async () => {
-                            const res = await axios.post('/api/checkout', {
-                              data: '',
-                            });
-                            window.location = res.data.url;
-                          })()
-                        : setShowLoginModal(true);
-                    }}
-                    className="w-full h-7 rounded-full bg-yellow-400 flex items-center justify-center text-xx font-bold text-black cursor-pointer hover:opacity-90"
-                  >
-                    NÂNG CẤP TÀI KHOẢN
-                  </div>
+            >
+              <div className="bg-vip flex h-full w-full flex-col items-center justify-center gap-3 rounded-md px-3 text-white">
+                <h2 className="text-center text-xx font-bold">
+                  Nghe nhạc không quảng cáo cùng kho nhạc PREMIUM
+                </h2>
+                <div
+                  onClick={async () => {
+                    if (currentUser) {
+                      const res = await axios.post('/api/checkout', {
+                        data: ''
+                      });
+                      window.location.href = res.data.url;
+                    } else {
+                      setShowLoginModal(true);
+                    }
+                  }}
+                  className="flex h-7 w-full cursor-pointer items-center justify-center rounded-full bg-yellow-400 text-xx font-bold text-black hover:opacity-90"
+                >
+                  NÂNG CẤP TÀI KHOẢN
                 </div>
               </div>
             </div>
           </div>
-          <div className={cn('hidden sm:block h-px bg-sidebarActive ')} />
-          <div
-            className={cn(
-              'h-[54px]   bg-sidebarBackground flex items-center justify-between',
-              show ? 'w-sidebarHeight' : 'w-sidebarWidth',
-            )}
-          >
-            <Box
-              data={dataPlaylists}
-              item={item}
-            />
-          </div>
         </div>
-        {/* /// Layout */}
+        <div className={cn('hidden h-px bg-sidebarActive sm:block')} />
         <div
-          onClick={() => setShow(false)}
           className={cn(
-            'inset-0 bg-black bg-opacity-25 z-30',
-            show ? 'fixed' : 'hidden',
+            'flex h-[54px] items-center justify-between bg-sidebarBackground',
+            show ? 'w-sidebarHeight' : 'w-sidebarWidth'
           )}
-        />
-        <div
-          onClick={() => setShow(true)}
-          className="fixed z-10 bottom-0 -translate-y-20 sm:hidden w-9 h-9 bg-sidebarActive rounded-full  cursor-pointer opacity-70 hover:opacity-100 font-semibold flex items-center justify-center"
         >
-          <BsChevronLeft size={20} />
+          <Box data={dataPlaylists} item={item} />
         </div>
-      </>
-      <main className="flex-1 bg-content overflow-hidden">{children}</main>
+      </div>
+      {/* /// Layout */}
+      <div
+        onClick={() => setShow(false)}
+        className={cn('inset-0 z-30 bg-black bg-opacity-25', show ? 'fixed' : 'hidden')}
+      />
+      <div
+        onClick={() => setShow(true)}
+        className="fixed bottom-0 z-10 flex h-9 w-9 -translate-y-20 cursor-pointer items-center justify-center rounded-full bg-sidebarActive font-semibold opacity-70 hover:opacity-100 sm:hidden"
+      >
+        <BsChevronLeft size={20} />
+      </div>
+      <main className="flex-1 overflow-hidden bg-content">{children}</main>
     </section>
   );
 };
+
 export default Sidebar;

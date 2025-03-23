@@ -1,10 +1,4 @@
-const siteMetadata = ({
-  title,
-  description,
-}: {
-  title: string;
-  description: string;
-}) => {
+const siteMetadata = ({ title, description }: { title: string; description: string }) => {
   return {
     title,
     author: 'BMO',
@@ -17,7 +11,7 @@ const siteMetadata = ({
     socialBanner: '/banner.png', // add social banner in the public folder
     email: 'haiminh612a@gmail.com',
     github: 'https://github.com/bmo4401',
-    locale: 'vi-ve',
+    locale: 'vi-ve'
   };
 };
 

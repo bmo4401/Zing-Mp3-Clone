@@ -2,10 +2,7 @@ import { getToken } from 'next-auth/jwt';
 import { withAuth } from 'next-auth/middleware';
 import { NextFetchEvent, NextRequest, NextResponse } from 'next/server';
 
-export default async function middleware(
-  req: NextRequest,
-  event: NextFetchEvent,
-) {
+export default async function middleware(req: NextRequest, event: NextFetchEvent) {
   const token = await getToken({ req });
   const isAuthenticated = !!token;
 
@@ -14,8 +11,8 @@ export default async function middleware(
   }
   const authMiddleware = await withAuth({
     pages: {
-      signIn: `/login`,
-    },
+      signIn: `/login`
+    }
   });
 
   // @ts-expect-error
@@ -23,5 +20,5 @@ export default async function middleware(
 }
 
 export const config = {
-  matcher: ['/mymusic/uploaded'],
+  matcher: ['/mymusic/uploaded']
 };

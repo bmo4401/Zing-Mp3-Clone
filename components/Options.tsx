@@ -1,7 +1,9 @@
 'use client';
 
-import { cn } from '@/libs/utils';
 import { BsThreeDots } from 'react-icons/bs';
+
+import { cn } from '@/libs/utils';
+
 interface OptionsProps {
   size?: number;
   className?: string;
@@ -10,17 +12,14 @@ const Options: React.FC<OptionsProps> = ({ size, className }) => {
   return (
     <div
       className={cn(
-        'w-6 h-6 hover:bg-slate-100/40  rounded-full  flex items-center justify-center cursor-pointer',
-        className,
+        'flex h-6 w-6 cursor-pointer items-center justify-center rounded-full hover:bg-slate-100/40',
+        className
       )}
     >
       {' '}
-      <BsThreeDots
-        size={size ? size : 20}
-        className="font-bold"
-        title="Options"
-      />
+      <BsThreeDots size={size || 20} className="font-bold" title="Options" />
     </div>
   );
 };
+
 export default Options;

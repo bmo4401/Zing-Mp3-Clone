@@ -1,20 +1,17 @@
 'use client';
 
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
+import { BsFillSkipEndFill, BsFillSkipStartFill, BsRepeat } from 'react-icons/bs';
+import { LiaRandomSolid } from 'react-icons/lia';
+import ReactPlayer from 'react-player';
+import { OnProgressProps } from 'react-player/base';
+
 import Play from '@/components/Play';
 import getDuration from '@/helpers/getDuration';
 import useFrame from '@/hooks/(player)/useFrame';
 import usePlayer from '@/hooks/(player)/usePlayer';
 import useVolume from '@/hooks/(player)/useVolume';
 import { cn } from '@/libs/utils';
-import { MutableRefObject, useEffect, useRef, useState } from 'react';
-import {
-  BsFillSkipEndFill,
-  BsFillSkipStartFill,
-  BsRepeat,
-} from 'react-icons/bs';
-import { LiaRandomSolid } from 'react-icons/lia';
-import ReactPlayer from 'react-player';
-import { OnProgressProps } from 'react-player/base';
 
 interface OptionsProps {
   onNext: () => void;
@@ -23,6 +20,41 @@ interface OptionsProps {
   onRandom: () => void;
   onRepeat: () => void;
 }
+
+const options = ({ onPrev, onNext, onPlay, onRepeat, onRandom }: OptionsProps) => [
+  {
+    icon: LiaRandomSolid,
+    label: 'random',
+    onClick: onRandom,
+    size: 22
+  },
+  {
+    icon: BsFillSkipStartFill,
+    label: 'prev',
+    onClick: onPrev,
+    size: 25
+  },
+  {
+    icon: LiaRandomSolid,
+    play: Play,
+    label: 'play',
+    onClick: onPlay,
+    size: 27
+  },
+  {
+    icon: BsFillSkipEndFill,
+    label: 'next',
+    onClick: onNext,
+    size: 25
+  },
+  {
+    icon: BsRepeat,
+    label: 'repeat',
+    onClick: onRepeat,
+    size: 22
+  }
+];
+
 const PlayerAction = () => {
   const {
     list,
@@ -38,7 +70,7 @@ const PlayerAction = () => {
     setPrev,
     setNext,
     setRepeat,
-    setRandom,
+    setRandom
   } = usePlayer();
   const { volume, mute, change } = useVolume();
   const { showFrame } = useFrame();
@@ -48,7 +80,7 @@ const PlayerAction = () => {
   const ref = useRef<ReactPlayer>() as MutableRefObject<ReactPlayer>;
   const getBackgroundSize = () => {
     return {
-      backgroundSize: `${ref?.current ? seconds * 100 : '0'}% 100%`,
+      backgroundSize: `${ref?.current ? seconds * 100 : '0'}% 100%`
     };
   };
   const disabled = typeRepeat === 0;
@@ -81,24 +113,27 @@ const PlayerAction = () => {
     onNext,
     onPlay,
     onRepeat,
-    onRandom,
+    onRandom
   });
   return (
-    <div className="col-span-3 sm:col-span-1 h-20 flex flex-col justify-center py-3">
+    <div className="col-span-3 flex h-20 flex-col justify-center py-3 sm:col-span-1">
       {/* Options */}
-      <div className="text-white h-full w-full flex gap-4 items-center justify-center">
-        {actions.map((action) =>
-          action.play ? (
+      <div className="flex h-full w-full items-center justify-center gap-4 text-white">
+        {actions.map((action) => {
+          return action.play ? (
             <div
-              onClick={(e) => (e.stopPropagation(), action.onClick())}
+              onClick={(e) => {
+                e.stopPropagation();
+                action.onClick();
+              }}
               key={action.label}
-              className="  hover:text-textPrimary"
+              className="hover:text-textPrimary"
             >
               <action.play
                 btnPlay={{
                   circle: true,
                   size: action.size,
-                  isPlay: isPlaying && !isLoad,
+                  isPlay: isPlaying && !isLoad
                 }}
                 className="hover:border-textPrimary hover:bg-transparent"
               />
@@ -107,28 +142,27 @@ const PlayerAction = () => {
             <div
               key={action.label}
               className={cn(
-                action.label === 'repeat' &&
-                  typeRepeat != 0 &&
-                  'text-textPrimary',
+                action.label === 'repeat' && typeRepeat !== 0 && 'text-textPrimary',
                 action.label === 'random' && isRandom && 'text-textPrimary',
-                'relative cursor-pointer w-7 h-7 rounded-full hover:bg-playerFocus flex items-center justify-center ',
+                'relative flex h-7 w-7 cursor-pointer items-center justify-center rounded-full hover:bg-playerFocus'
               )}
-              onClick={(e) => (e.stopPropagation(), action.onClick())}
+              onClick={(e) => {
+                e.stopPropagation();
+                action.onClick();
+              }}
             >
               <action.icon
                 size={action.size}
-                title={
-                  action.label.charAt(0).toUpperCase() + action.label.slice(1)
-                }
+                title={action.label.charAt(0).toUpperCase() + action.label.slice(1)}
               />
               {action.label === 'repeat' && typeRepeat === 1 && (
-                <span className="text-[8px] absolute w-full flex items-center justify-center">
+                <span className="absolute flex w-full items-center justify-center text-[8px]">
                   1
                 </span>
               )}
             </div>
-          ),
-        )}
+          );
+        })}
       </div>
       {/* Range */}
       <div className="leading-none">
@@ -142,7 +176,7 @@ const PlayerAction = () => {
           onError={(e) => console.log(e)}
           onReady={() => {
             setLoad(false);
-            !isFirst && setFirst(true);
+            if (!isFirst) setFirst(true);
           }}
           onEnded={() => {
             if (!loop) setContinue(false);
@@ -151,23 +185,19 @@ const PlayerAction = () => {
           config={{ file: { forceAudio: true } }}
           style={{ display: 'none' }}
         />
-        <div className="flex items-center gap-2 text-xx text-contentDesc font-semibold tracking-wide">
-          <span>
-            {ref?.current
-              ? getDuration(ref?.current?.getCurrentTime())
-              : '00:00'}
-          </span>
+        <div className="flex items-center gap-2 text-xx font-semibold tracking-wide text-contentDesc">
+          <span>{ref?.current ? getDuration(ref?.current?.getCurrentTime()) : '00:00'}</span>
           <input
             id="player"
             type="range"
-            step={'any'}
+            step="any"
             min={0}
             max={1}
             value={seconds}
             onMouseDown={() => setSeeking(true)}
             onChange={(e) => ref?.current?.seekTo(parseFloat(e.target.value))}
             onMouseUp={() => setSeeking(false)}
-            className="w-full h-[3px] transition bg-contentDesc cursor-pointer "
+            className="h-[3px] w-full cursor-pointer bg-contentDesc transition"
             style={getBackgroundSize()}
           />
           <span className={cn(currentSong && 'text-white')}>
@@ -178,44 +208,5 @@ const PlayerAction = () => {
     </div>
   );
 };
-export default PlayerAction;
 
-const options = ({
-  onPrev,
-  onNext,
-  onPlay,
-  onRepeat,
-  onRandom,
-}: OptionsProps) => [
-  {
-    icon: LiaRandomSolid,
-    label: 'random',
-    onClick: onRandom,
-    size: 22,
-  },
-  {
-    icon: BsFillSkipStartFill,
-    label: 'prev',
-    onClick: onPrev,
-    size: 25,
-  },
-  {
-    icon: LiaRandomSolid,
-    play: Play,
-    label: 'play',
-    onClick: onPlay,
-    size: 27,
-  },
-  {
-    icon: BsFillSkipEndFill,
-    label: 'next',
-    onClick: onNext,
-    size: 25,
-  },
-  {
-    icon: BsRepeat,
-    label: 'repeat',
-    onClick: onRepeat,
-    size: 22,
-  },
-];
+export default PlayerAction;

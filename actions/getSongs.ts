@@ -17,8 +17,8 @@ export async function getSongsByType(type: string, limit?: number) {
     .get(baseURL, {
       params: {
         _limit: limit || songsLimit,
-        _page: Math.round(Math.random() * 10),
-      },
+        _page: Math.round(Math.random() * 10)
+      }
     })
     .then((res) => {
       if (res.data.data.length === 0) {
@@ -37,8 +37,8 @@ export async function getSongsByType(type: string, limit?: number) {
             item.favorite < 999
               ? item.favorite
               : item.favorite < 1000000
-              ? Math.floor(item.favorite / 1000) + 'K'
-              : Math.floor(item.favorite / 1000000) + 'M',
+                ? Math.floor(item.favorite / 1000) + 'K'
+                : Math.floor(item.favorite / 1000000) + 'M'
         };
       });
       return data;
@@ -55,15 +55,13 @@ export async function getSongsByWordSearch(query: string) {
     .get(baseURL, {
       params: {
         query,
-        _limit: 10,
-      },
+        _limit: 10
+      }
     })
     .then((res) => {
       const data: Song = res.data.data.map((item: any) => {
         return {
-          singers: item.name_singer
-            .split(/,|ft.| x /)
-            .map((name: string) => name.trim()),
+          singers: item.name_singer.split(/,|ft.| x /).map((name: string) => name.trim()),
           songName: item.name_music,
           category: item.category,
           src: item.src_music,
@@ -74,8 +72,8 @@ export async function getSongsByWordSearch(query: string) {
             item.favorite < 999
               ? item.favorite
               : item.favorite < 1000000
-              ? Math.floor(item.favorite / 1000) + 'K'
-              : Math.floor(item.favorite / 1000000) + 'M',
+                ? Math.floor(item.favorite / 1000) + 'K'
+                : Math.floor(item.favorite / 1000000) + 'M'
         };
       });
       return data;
@@ -103,8 +101,8 @@ const getInfiniteSongs = async ({ pageParam = 1, slug }: getSongsProps) => {
     .get(url, {
       params: {
         _limit: LIMIT,
-        _page: pageParam,
-      },
+        _page: pageParam
+      }
     })
     .then((res) => {
       if (res.data.data.length === 0) {
@@ -123,8 +121,8 @@ const getInfiniteSongs = async ({ pageParam = 1, slug }: getSongsProps) => {
             item.favorite < 999
               ? item.favorite
               : item.favorite < 1000000
-              ? Math.floor(item.favorite / 1000) + 'K'
-              : Math.floor(item.favorite / 1000000) + 'M',
+                ? Math.floor(item.favorite / 1000) + 'K'
+                : Math.floor(item.favorite / 1000000) + 'M'
         };
       });
       return data;

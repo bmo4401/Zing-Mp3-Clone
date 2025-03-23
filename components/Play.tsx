@@ -1,10 +1,12 @@
 'use client';
 
+import { BiLoader } from 'react-icons/bi';
+import { BsPauseFill, BsPlayFill } from 'react-icons/bs';
+
 import usePlayer from '@/hooks/(player)/usePlayer';
 import { cn } from '@/libs/utils';
 import { BtnPlay } from '@/types';
-import { BiLoader } from 'react-icons/bi';
-import { BsPauseFill, BsPlayFill } from 'react-icons/bs';
+
 interface PlayProps {
   btnPlay: BtnPlay;
   className?: string;
@@ -14,10 +16,10 @@ const Play: React.FC<PlayProps> = ({ btnPlay, className }) => {
   return (
     <div
       className={cn(
-        'relative h-9 w-9   rounded-full  bg-transparent border  flex items-center justify-center cursor-pointer ',
+        'relative flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border bg-transparent',
         btnPlay.circle ? 'border-white' : 'border-transparent',
         btnPlay.circle ? 'hover:bg-slate-100/40' : '',
-        className,
+        className
       )}
     >
       {btnPlay.isPlay ? (
@@ -28,7 +30,7 @@ const Play: React.FC<PlayProps> = ({ btnPlay, className }) => {
       ) : isLoad ? (
         <BiLoader
           size={btnPlay.size ? btnPlay.size : 35}
-          className="animate-spin  duration-300 cursor-pointer hover:opacity-80"
+          className="animate-spin cursor-pointer duration-300 hover:opacity-80"
         />
       ) : (
         <BsPlayFill
@@ -39,4 +41,5 @@ const Play: React.FC<PlayProps> = ({ btnPlay, className }) => {
     </div>
   );
 };
+
 export default Play;

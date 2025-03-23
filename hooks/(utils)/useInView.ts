@@ -1,11 +1,4 @@
-import {
-  ElementRef,
-  MutableRefObject,
-  RefObject,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { ElementRef, MutableRefObject, RefObject, useEffect, useRef, useState } from 'react';
 
 type Options = {
   root?: HTMLDivElement;

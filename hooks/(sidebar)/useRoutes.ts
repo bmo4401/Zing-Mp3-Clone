@@ -1,82 +1,72 @@
 import { useMemo } from 'react';
-import { usePathname } from 'next/navigation';
-import Home from '@/public/images/sidebar/home.svg';
-import ZingChart from '@/public/images/sidebar/zingchart.svg';
-import Library from '@/public/images/sidebar/library.svg';
-import Radio from '@/public/images/sidebar/radio.svg';
-import Rankings from '@/public/images/sidebar/rankings.svg';
-import Hub from '@/public/images/sidebar/hub.svg';
-import Top from '@/public/images/sidebar/top100.svg';
-import Upload from '@/public/images/sidebar/upload.svg';
-import Playlist from '@/public/images/sidebar/playlist.svg';
-import Live from '@/public/images/sidebar/live.svg';
-import { MdPlayCircleOutline } from 'react-icons/md';
-import Plus from '@/public/images/sidebar/plus.svg';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
+import { MdPlayCircleOutline } from 'react-icons/md';
+import { usePathname } from 'next/navigation';
+
 const useRoutes = () => {
   const pathname = usePathname();
   const routes = useMemo(
     () => [
       {
-        icon: Home,
+        icon: '/images/sidebar/home.svg',
         label: 'Khám Phá',
         active: pathname === '/',
-        href: '/',
+        href: '/'
       },
       {
-        icon: ZingChart,
+        icon: '/images/sidebar/zingchart.svg',
         label: '#zingchart',
         active: pathname === '/zingchart',
         href: '/zingchart',
-        play: MdPlayCircleOutline,
+        play: MdPlayCircleOutline
       },
       {
-        icon: Radio,
+        icon: '/images/sidebar/radio.svg',
         label: 'Radio',
         active: pathname === '/#radio',
         href: '#radio',
-        secondary: Live,
-        play: MdPlayCircleOutline,
+        secondary: '/images/sidebar/live.svg',
+        play: MdPlayCircleOutline
       },
       {
-        icon: Library,
+        icon: '/images/sidebar/library.svg',
         label: 'Thư Viện',
         active: pathname === '/library',
         href: '/library',
-        play: MdPlayCircleOutline,
+        play: MdPlayCircleOutline
       },
       {
-        icon: Rankings,
+        icon: '/images/sidebar/rankings.svg',
         label: 'BXH Nhạc Mới',
         active: pathname === '/ranking',
         href: '/ranking',
-        play: MdPlayCircleOutline,
+        play: MdPlayCircleOutline
       },
       {
-        icon: Hub,
+        icon: '/images/sidebar/hub.svg',
         label: 'Chủ Đề & Thể Loại',
         active: pathname === '/album/1',
-        href: '/album/1',
+        href: '/album/1'
       },
       {
-        icon: Upload,
+        icon: '/images/sidebar/upload.svg',
         label: 'Cá nhân',
         active: pathname === '/mymusic/uploaded',
-        href: '/mymusic/uploaded',
+        href: '/mymusic/uploaded'
       },
-
       {
-        icon: Plus,
+        icon: '/images/sidebar/plus.svg',
         label: 'Tạo playlist mới',
         active: pathname === '/playlist',
         href: '/',
         right: BsChevronRight,
         left: BsChevronLeft,
-        disabled: true,
-      },
+        disabled: true
+      }
     ],
-    [pathname],
+    [pathname]
   );
   return routes;
 };
+
 export default useRoutes;

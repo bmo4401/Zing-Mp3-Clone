@@ -1,18 +1,17 @@
 interface InActiveAvatarProps {
-   setShowLoginModal: (value: boolean) => void;
+  setShowLoginModal: (value: boolean) => void;
 }
-const InActiveAvatar: React.FC<InActiveAvatarProps> = ({
-   setShowLoginModal,
-}) => {
-   return (
-      <div className="w-full py-2 flex justify-center items-center">
-         <div
-            onClick={() => setShowLoginModal(true)}
-            className="w-50 sm:w-64 h-8 sm:h-10 font-bold  text-white text-xds bg-login rounded-full flex justify-center items-center cursor-pointer hover:opacity-90 "
-         >
-            Đăng nhập
-         </div>
+const InActiveAvatar: React.FC<InActiveAvatarProps> = ({ setShowLoginModal }) => {
+  return (
+    <div className="flex w-full items-center justify-center py-2">
+      <div
+        onClick={() => setShowLoginModal(true)}
+        className="flex h-8 w-50 cursor-pointer items-center justify-center rounded-full bg-login text-xds font-bold text-white hover:opacity-90 sm:h-10 sm:w-64"
+      >
+        Đăng nhập
       </div>
-   );
+    </div>
+  );
 };
+
 export default InActiveAvatar;

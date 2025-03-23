@@ -4,22 +4,14 @@ import { Fragment } from 'react';
 
 const LoadingModal = ({
   show = true,
-  setShow,
+  setShow
 }: {
   show?: boolean;
   setShow?: (value: boolean) => void;
 }) => {
   return (
-    <Transition
-      appear
-      show={show}
-      as={Fragment}
-    >
-      <Dialog
-        as="div"
-        className="relative z-10"
-        onClose={() => setShow && setShow(false)}
-      >
+    <Transition appear show={show} as={Fragment}>
+      <Dialog as="div" className="relative z-10" onClose={() => setShow && setShow(false)}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -43,9 +35,9 @@ const LoadingModal = ({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="fixed inset-0 bg-gray-700 opacity-70 overflow-hidden z-50 flex justify-center items-center ">
+              <Dialog.Panel className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-gray-700 opacity-70">
                 {/* // Heading */}
-                <div className="h-12 w-12 border-4 border-t-4 border-gray-200 border-t-fuchsia-500 animate-spin m-auto rounded-full" />
+                <div className="m-auto h-12 w-12 animate-spin rounded-full border-4 border-t-4 border-gray-200 border-t-fuchsia-500" />
               </Dialog.Panel>
             </Transition.Child>
           </div>

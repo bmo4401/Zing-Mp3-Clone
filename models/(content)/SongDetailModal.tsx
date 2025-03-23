@@ -27,13 +27,13 @@ function SongDetailModal({ children }: SongDetailModalProps) {
   const size = useWindowSize();
   const [position, setPosition] = useState<PositionProps>({
     height: 0,
-    width: 0,
+    width: 0
   });
 
   const className = getPosition(position);
 
   return (
-    <Popover className="w-full focus:outline-none ">
+    <Popover className="w-full focus:outline-none">
       {({ open, close }) => (
         <div className="relative w-full">
           <Popover.Button
@@ -47,7 +47,7 @@ function SongDetailModal({ children }: SongDetailModalProps) {
             onMouseLeave={() => {
               onClose(open, close);
             }}
-            className="w-full relative  hover:bg-contentFocus focus:outline-none rounded-t-md"
+            className="relative w-full rounded-t-md hover:bg-contentFocus focus:outline-none"
           >
             {children}
           </Popover.Button>
@@ -70,21 +70,16 @@ function SongDetailModal({ children }: SongDetailModalProps) {
                 onClose(open, close);
               }}
               className={cn(
-                className && 'absolute z-10 w-48  bg-searchFocus rounded-md',
-                className && className,
+                className && 'absolute z-10 w-48 rounded-md bg-searchFocus',
+                className && className
               )}
             >
               <div className="flex flex-col gap-2 py-2">
                 {/* Social Share */}
-                <div className="flex flex-col  items-start text-searchText gap-2">
+                <div className="flex flex-col items-start gap-2 text-searchText">
                   {infos.map((info) => (
-                    <div
-                      key={info.label}
-                      className="flex flex-col  px-3 "
-                    >
-                      <span className="uppercase text-contentDesc text-xx">
-                        {info.label}
-                      </span>
+                    <div key={info.label} className="flex flex-col px-3">
+                      <span className="text-xx uppercase text-contentDesc">{info.label}</span>
                       <span className="text-xds text-white">{info.detail}</span>
                     </div>
                   ))}
@@ -101,24 +96,24 @@ function SongDetailModal({ children }: SongDetailModalProps) {
 const getInfo = () => [
   {
     label: 'Nghệ sĩ',
-    detail: 'Artist',
+    detail: 'Artist'
   },
   {
     label: 'Album',
-    detail: 'Album',
+    detail: 'Album'
   },
   {
     label: 'Sáng tác',
-    detail: 'composer',
+    detail: 'composer'
   },
   {
     label: 'Thể loại',
-    detail: 'Music',
+    detail: 'Music'
   },
   {
     label: 'Cung cấp bởi',
-    detail: 'Source',
-  },
+    detail: 'Source'
+  }
 ];
 
 export default SongDetailModal;

@@ -1,25 +1,24 @@
 {
-   "cSpell.language": "en,vi",
-   "cSpell.words": [
-      "BTTTT",
-      "Crossfade",
-      "fseehawer",
-      "FUGA",
-      "Gapless",
-      "headlessui",
-      "kbps",
-      "mailgen",
-      "mymusic",
-      "nocheck",
-      "Roboto",
-      "swiper",
-      "tanstack",
-      "Thỏa",
-      "toastify",
-      "trendings",
-      "Zalo",
-      "zingchart",
-      "zustand"
-   ],
-   "nuxt.isNuxtApp": false
+  "cSpell.language": "en,vi",
+  "cSpell.words": [
+    "BTTTT",
+    "Crossfade",
+    "fseehawer",
+    "FUGA",
+    "Gapless",
+    "headlessui",
+    "kbps",
+    "mailgen",
+    "mymusic",
+    "nocheck",
+    "Roboto",
+    "swiper",
+    "tanstack",
+    "Thỏa",
+    "toastify",
+    "trendings",
+    "Zalo",
+    "zingchart",
+    "zustand"
+  ]
 }

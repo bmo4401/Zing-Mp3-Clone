@@ -1,27 +1,28 @@
 'use client';
-import ActiveAvatar from '@/app/(site)/components/(header)/ActiveAvatar';
-import InActiveAvatar from '@/app/(site)/components/(header)/InActiveAvatar';
-import useLoginModal from '@/hooks/(header)/useLoginModal';
-import Placeholder from '@/public/images/placeholder.png';
+
+import { Fragment } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import { User } from '@prisma/client';
 import Image from 'next/image';
 
-import { Fragment } from 'react';
+import ActiveAvatar from '@/app/(site)/components/(header)/ActiveAvatar';
+import InActiveAvatar from '@/app/(site)/components/(header)/InActiveAvatar';
+import useLoginModal from '@/hooks/(header)/useLoginModal';
+
 interface AvatarProps {
   currentUser: User | undefined;
 }
 const Avatar: React.FC<AvatarProps> = ({ currentUser }) => {
   const { setShowLoginModal } = useLoginModal();
   return (
-    <Popover className=" relative">
-      {({ open }) => (
+    <Popover className="relative">
+      {() => (
         <>
-          <Popover.Button className="h-9 w-9 flex  justify-center items-center bg-search  rounded-full gap-1 cursor-pointer overflow-hidden outline-none hover:opacity-90 ">
+          <Popover.Button className="flex h-9 w-9 cursor-pointer items-center justify-center gap-1 overflow-hidden rounded-full bg-search outline-none hover:opacity-90">
             <Image
               className=""
               alt="Avatar"
-              src={currentUser?.image || Placeholder}
+              src={currentUser?.image || '@/public/images/placeholder.png'}
               width={41}
               height={41}
               title="Người dùng"
@@ -36,9 +37,9 @@ const Avatar: React.FC<AvatarProps> = ({ currentUser }) => {
             leaveFrom="opacity-100 translate-y-0"
             leaveTo="opacity-0 translate-y-1"
           >
-            <Popover.Panel className="absolute left-10 z-10 mt-3 w-64 sm:w-[350px]   -translate-x-full transform ">
-              <div className="  overflow-hidden  rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
-                <div className="relative  bg-searchFocus p-[6px] ">
+            <Popover.Panel className="absolute left-10 z-10 mt-3 w-64 -translate-x-full transform sm:w-[350px]">
+              <div className="overflow-hidden rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
+                <div className="relative bg-searchFocus p-[6px]">
                   {currentUser ? (
                     <ActiveAvatar currentUser={currentUser} />
                   ) : (
@@ -53,4 +54,5 @@ const Avatar: React.FC<AvatarProps> = ({ currentUser }) => {
     </Popover>
   );
 };
+
 export default Avatar;

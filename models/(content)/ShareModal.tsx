@@ -34,13 +34,13 @@ function ShareModal({ children }: ShareModalProps) {
   const size = useWindowSize();
   const [position, setPosition] = useState<PositionProps>({
     height: 0,
-    width: 0,
+    width: 0
   });
 
   const className = getPosition(position);
 
   return (
-    <Popover className="w-full focus:outline-none ">
+    <Popover className="w-full focus:outline-none">
       {({ open, close }) => (
         <div className="relative w-full">
           <Popover.Button
@@ -54,7 +54,7 @@ function ShareModal({ children }: ShareModalProps) {
             onMouseLeave={() => {
               onClose(open, close);
             }}
-            className="w-full relative  focus:outline-none cursor-pointer hover:bg-contentFocus"
+            className="relative w-full cursor-pointer hover:bg-contentFocus focus:outline-none"
           >
             {children}
           </Popover.Button>
@@ -77,23 +77,23 @@ function ShareModal({ children }: ShareModalProps) {
                 onClose(open, close);
               }}
               className={cn(
-                className && 'absolute z-10 w-48  bg-searchFocus rounded-md',
-                className && className,
+                className && 'absolute z-10 w-48 rounded-md bg-searchFocus',
+                className && className
               )}
             >
               <div className="flex flex-col gap-2 py-2">
                 {/* Social Share */}
-                <div className="flex flex-col  items-start text-searchText ">
+                <div className="flex flex-col items-start text-searchText">
                   {options.map((option) => (
                     <div
                       key={option.label}
-                      className="flex gap-2  px-3 py-2 w-full hover:bg-contentFocus cursor-pointer"
+                      className="flex w-full cursor-pointer gap-2 px-3 py-2 hover:bg-contentFocus"
                     >
-                      <div className="w-4 h-4 rounded-full ">
+                      <div className="h-4 w-4 rounded-full">
                         <Image
                           alt="Social Icon"
                           src={option.icon || bmw}
-                          className="w-4 h-4 bg-white rounded-full"
+                          className="h-4 w-4 rounded-full bg-white"
                         />
                       </div>
                       <span className="text-xds">{option.label}</span>
@@ -112,16 +112,16 @@ function ShareModal({ children }: ShareModalProps) {
 const getOptions = () => [
   {
     icon: facebook,
-    label: 'Facebook',
+    label: 'Facebook'
   },
   {
     icon: zalo,
-    label: 'Zalo',
+    label: 'Zalo'
   },
   {
     icon: div,
-    label: 'Mã nhúng',
-  },
+    label: 'Mã nhúng'
+  }
 ];
 
 export default ShareModal;

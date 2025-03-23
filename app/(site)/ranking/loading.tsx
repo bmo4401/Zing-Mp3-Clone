@@ -1,9 +1,11 @@
 import LoadingModal from '@/models/(content)/LoadingModal';
 
-export default function Loading() {
+const Loading = () => {
   return (
-    <div className="w-screen h-screen">
+    <div className="h-screen w-screen">
       <LoadingModal />{' '}
     </div>
   );
-}
+};
+
+export default Loading;

@@ -1,4 +1,12 @@
+/* eslint-disable react/jsx-curly-newline */
+/* eslint-disable implicit-arrow-linebreak */
+
 'use client';
+
+import { Tab } from '@headlessui/react';
+import { User } from '@prisma/client';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 import EmptyState from '@/components/EmptyState';
 import ListSongs from '@/components/ListSongs';
@@ -6,10 +14,7 @@ import useUploadModal from '@/hooks/(header)/useUploadModal';
 import usePlayer from '@/hooks/(player)/usePlayer';
 import { cn } from '@/libs/utils';
 import LoadingModal from '@/models/(content)/LoadingModal';
-import { Tab } from '@headlessui/react';
-import { User } from '@prisma/client';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+
 interface UploadedProps {
   currentUser: User | undefined;
 }
@@ -19,15 +24,15 @@ const Uploaded: React.FC<UploadedProps> = ({ currentUser }) => {
 
   const { isLoading, data } = useQuery({
     queryKey: ['user', isUploading],
-    queryFn: async () => await axios.get(`/api/song/updated`),
+    queryFn: async () => axios.get('/api/song/updated'),
     enabled: !!isUploading || !!currentUser?.liked,
-    refetchOnMount: true,
+    refetchOnMount: true
   });
   const result = useQuery({
     queryKey: ['user', isLike],
-    queryFn: async () => await axios.get(`/api/song/liked`),
+    queryFn: async () => axios.get('/api/song/liked'),
     enabled: false || !!isLike,
-    refetchOnMount: true,
+    refetchOnMount: true
   });
   /* // Handle search */
   const { showPlayer } = usePlayer();
@@ -35,69 +40,62 @@ const Uploaded: React.FC<UploadedProps> = ({ currentUser }) => {
   return (
     <>
       <LoadingModal show={isLoading} />
-      <section className="h-screen bg-content mt-sidebarHeight overflow-hidden ">
+      <section className="mt-sidebarHeight h-screen overflow-hidden bg-content">
         {!isLoading && (!data?.data || data?.data?.length === 0) ? (
-          <EmptyState
-            text={'Không có bài hát.'}
-            upload={true}
-          />
+          <EmptyState text="Không có bài hát." upload />
         ) : (
           <div
             className={cn(
-              ' overflow-hidden overflow-y-auto pt-8  px-12',
+              'overflow-hidden overflow-y-auto px-12 pt-8',
               showPlayer ? 'h-[calc(100vh-70px)]' : 'h-[calc(100vh)]',
-              showPlayer ? 'pb-24' : 'pb-20',
+              showPlayer ? 'pb-24' : 'pb-20'
             )}
           >
             <div className="flex flex-col gap-5">
               <h1 className="text-4xl font-bold text-white">Đã tải lên</h1>
               <Tab.Group>
-                <Tab.List className="w-full flex space-x-2  bg-transparent  text-white">
-                  <div className="w-full flex justify-between">
+                <Tab.List className="flex w-full space-x-2 bg-transparent text-white">
+                  <div className="flex w-full justify-between">
                     <div className="flex gap-4">
                       <Tab
                         className={({ selected }) =>
                           cn(
-                            `w-20 h-6 flex items-center justify-center border border-slate-100/10 rounded-full font-medium`,
-                            selected && active,
+                            'flex h-6 w-20 items-center justify-center rounded-full border border-slate-100/10 font-medium',
+                            selected && active
                           )
                         }
                       >
-                        <span className="uppercase text-xs leading-6">
-                          Đã tải lên
-                        </span>
+                        <span className="text-xs uppercase leading-6">Đã tải lên</span>
                       </Tab>
                       <Tab
                         onClick={() => result?.refetch()}
                         className={({ selected }) =>
                           cn(
-                            `w-20 h-6 flex items-center justify-center border border-slate-100/10 rounded-full font-medium`,
-                            selected && active,
+                            'flex h-6 w-20 items-center justify-center rounded-full border border-slate-100/10 font-medium',
+                            selected && active
                           )
                         }
                       >
-                        <span className="uppercase text-xs leading-6">
-                          Yêu thích
-                        </span>
+                        <span className="text-xs uppercase leading-6">Yêu thích</span>
                       </Tab>
                     </div>
                   </div>
                 </Tab.List>
                 <Tab.Panels>
-                  <Tab.Panel className={cn('py-4 ')}>
+                  <Tab.Panel className={cn('py-4')}>
                     <ListSongs
                       currentUser={currentUser}
                       data={data?.data}
                       className="w-full"
-                      like={true}
+                      like
                     />
                   </Tab.Panel>
-                  <Tab.Panel className={cn('py-4 ')}>
+                  <Tab.Panel className={cn('py-4')}>
                     <ListSongs
                       currentUser={currentUser}
                       data={result?.data?.data}
                       className="w-full"
-                      like={true}
+                      like
                     />
                   </Tab.Panel>
                 </Tab.Panels>

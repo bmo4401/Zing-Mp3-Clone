@@ -1,6 +1,8 @@
 import { redirect } from 'next/navigation';
 
-export default async function SignIn() {
+const SignIn = async () => {
   redirect('/');
   return null;
-}
+};
+
+export default SignIn;

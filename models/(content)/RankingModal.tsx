@@ -42,30 +42,29 @@ function RankingModal({ children, image, like, song }: RankingModalProps) {
   const size = useWindowSize();
   const [position, setPosition] = useState<PositionProps>({
     height: 0,
-    width: 0,
+    width: 0
   });
   const className = getPosition(position);
-  const { setPlayNext, setPlaylist, setPlaying, setContinue, currentSong } =
-    usePlayer();
+  const { setPlayNext, setPlaylist, setPlaying, setContinue, currentSong } = usePlayer();
   const options: OptionsProps[] = getOptions({
     setPlayNext,
     setPlaylist,
     setPlaying,
-    setContinue,
+    setContinue
   });
   const ref = useRef();
   return (
     /* Z-index */
-    <Popover className="w-fit focus:outline-none relative z-30">
+    <Popover className="relative z-30 w-fit focus:outline-none">
       {({ open, close }) => (
-        <div className="relative w-fit z-20">
+        <div className="relative z-20 w-fit">
           <Popover.Button
             onMouseEnter={(e) => {
               const width = (e.clientX * 100) / size.width;
               const height = (e.clientY * 100) / size.height;
               setPosition({ width, height });
             }}
-            className="w-fit relative  focus:outline-none hover:underline hover:opacity-80"
+            className="relative w-fit hover:underline hover:opacity-80 focus:outline-none"
           >
             {children}
           </Popover.Button>
@@ -81,32 +80,29 @@ function RankingModal({ children, image, like, song }: RankingModalProps) {
           >
             <Popover.Panel
               static
-              className={cn(
-                'absolute  w-64  bg-searchFocus rounded-md z-30 ',
-                className,
-              )}
+              className={cn('absolute z-30 w-64 rounded-md bg-searchFocus', className)}
               onMouseLeave={() => close()}
             >
-              <div className="  flex flex-col  ">
-                <div className="  flex flex-col gap-2 ">
+              <div className="flex flex-col">
+                <div className="flex flex-col gap-2">
                   {/* Image */}
                   <SongDetailModal>
-                    <div className="flex gap-2  p-3 ">
-                      <div className="w-9 h-9 rounded-lg">
+                    <div className="flex gap-2 p-3">
+                      <div className="h-9 w-9 rounded-lg">
                         <Image
                           alt="Avatar"
                           width={0}
                           height={0}
                           sizes="100vw"
                           src={image || bmw}
-                          className="object-contain w-9 h-9 rounded-lg"
+                          className="h-9 w-9 rounded-lg object-contain"
                         />
                       </div>
                       <div className="flex flex-col items-start justify-center gap-1">
-                        <h2 className="text-xds font-medium text-white cursor-pointer hover:text-login whitespace-nowrap overflow-hidden">
+                        <h2 className="cursor-pointer overflow-hidden whitespace-nowrap text-xds font-medium text-white hover:text-login">
                           {song?.songName}
                         </h2>
-                        <div className="flex gap-3 text-contentDesc text-xx">
+                        <div className="flex gap-3 text-xx text-contentDesc">
                           <div className="flex gap-1">
                             <div>
                               {' '}
@@ -127,12 +123,12 @@ function RankingModal({ children, image, like, song }: RankingModalProps) {
                   </SongDetailModal>
                   {/* Action */}
                   <div className="px-3">
-                    <div className="bg-settingsFocus rounded-lg">
+                    <div className="rounded-lg bg-settingsFocus">
                       <div className="grid grid-cols-3">
                         <Link
                           href={song?.src as string}
                           target="_blank"
-                          className="flex flex-col justify-center items-center text-white p-2 opacity-100 hover:opacity-90 hover:bg-contentFocus rounded-lg cursor-pointer"
+                          className="flex cursor-pointer flex-col items-center justify-center rounded-lg p-2 text-white opacity-100 hover:bg-contentFocus hover:opacity-90"
                         >
                           <div>
                             <BsDownload size={18} />
@@ -141,7 +137,7 @@ function RankingModal({ children, image, like, song }: RankingModalProps) {
                         </Link>
                         <div
                           onClick={() => toast.warning(text)}
-                          className="flex flex-col justify-center items-center text-white p-2 opacity-100 hover:opacity-90 hover:bg-contentFocus rounded-lg cursor-not-allowed"
+                          className="flex cursor-not-allowed flex-col items-center justify-center rounded-lg p-2 text-white opacity-100 hover:bg-contentFocus hover:opacity-90"
                         >
                           <div>
                             <BsMic size={18} />
@@ -150,7 +146,7 @@ function RankingModal({ children, image, like, song }: RankingModalProps) {
                         </div>
                         <div
                           onClick={() => toast.warning(text)}
-                          className="flex flex-col justify-center items-center text-white p-2 opacity-100 hover:opacity-90 hover:bg-contentFocus rounded-lg cursor-not-allowed"
+                          className="flex cursor-not-allowed flex-col items-center justify-center rounded-lg p-2 text-white opacity-100 hover:bg-contentFocus hover:opacity-90"
                         >
                           <div>
                             <BiBlock size={18} />
@@ -161,21 +157,19 @@ function RankingModal({ children, image, like, song }: RankingModalProps) {
                     </div>
                   </div>
                   {/* Options */}
-                  <div className="flex flex-col  items-start text-searchText">
+                  <div className="flex flex-col items-start text-searchText">
                     {options.map((option) =>
                       option.copy ? (
                         <CopyToClipboard
                           key={option.label}
-                          text={
-                            currentSong?.src || "This song doesn't existing"
-                          }
+                          text={currentSong?.src || "This song doesn't existing"}
                           onCopy={() => {
                             toast.success('Copied');
                             close();
                           }}
                         >
-                          <button className='className="flex w-full justify-between items-center hover:bg-contentFocus px-3 py-2 "'>
-                            <div className="flex gap-2 items-center">
+                          <button className='className="flex " w-full items-center justify-between px-3 py-2 hover:bg-contentFocus'>
+                            <div className="flex items-center gap-2">
                               <div>
                                 <option.icon size={16} />
                               </div>
@@ -188,24 +182,23 @@ function RankingModal({ children, image, like, song }: RankingModalProps) {
                           key={option.label}
                           onClick={(e) => {
                             e.stopPropagation();
-                            option?.action &&
-                              option?.action(song as Song, currentSong as Song);
+                            option?.action && option?.action(song as Song, currentSong as Song);
                             close();
                           }}
-                          className="flex w-full justify-between items-center hover:bg-contentFocus px-3 py-2 cursor-pointer"
+                          className="flex w-full cursor-pointer items-center justify-between px-3 py-2 hover:bg-contentFocus"
                         >
-                          <div className="flex gap-2 items-center">
+                          <div className="flex items-center gap-2">
                             <div>
                               <option.icon size={16} />
                             </div>
                             <span className="text-xds">{option.label}</span>
                           </div>
                         </div>
-                      ),
+                      )
                     )}
                   </div>
                 </div>
-                <div className="flex justify-center text-contentDesc text-xds pt-1 pb-2 font-medium">
+                <div className="flex justify-center pb-2 pt-1 text-xds font-medium text-contentDesc">
                   Cung cấp bởi FUGA
                 </div>
               </div>
@@ -222,36 +215,31 @@ interface getOptionsProps {
   setPlaying: (song: Song) => void;
   setContinue: () => void;
 }
-const getOptions = ({
-  setPlaylist,
-  setPlayNext,
-  setPlaying,
-  setContinue,
-}: getOptionsProps) => [
+const getOptions = ({ setPlaylist, setPlayNext, setPlaying, setContinue }: getOptionsProps) => [
   {
     icon: AiOutlineHeart,
     label: 'Trình phát nhạc',
     action: (song?: Song, currentSong?: Song) =>
       song?.src === currentSong?.src
         ? setContinue()
-        : (setPlaying(song as Song), song && setPlaylist(song)),
+        : (setPlaying(song as Song), song && setPlaylist(song))
   },
   {
     icon: RiPlayListAddLine,
     label: 'Thêm vào danh sách phát',
-    action: setPlaylist,
+    action: setPlaylist
   },
   {
     icon: RiPlayListFill,
     label: 'Phát tiếp theo',
-    action: setPlayNext,
+    action: setPlayNext
   },
 
   {
     icon: RiLinksLine,
     label: 'Sao chép link',
-    copy: true,
-  },
+    copy: true
+  }
 ];
 
 export default RankingModal;

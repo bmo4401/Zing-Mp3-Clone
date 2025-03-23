@@ -9,7 +9,7 @@ const UseQueryScroll = ({ slug }: { slug: Slug }) => {
     queryFn: ({ pageParam }) => getInfiniteSongs({ pageParam, slug }),
     getNextPageParam: (lastPage, pages) => {
       return lastPage?.length === LIMIT ? pages.length + 1 : undefined;
-    },
+    }
   });
 };
 export default UseQueryScroll;
